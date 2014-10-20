@@ -1,0 +1,8 @@
+G:\WaterAnalytics\WaterAnalyticsService\WaterAnalyticsService\bin\WaterAnalyticsService.dll
+G:\WaterAnalytics\WaterAnalyticsService\WaterAnalyticsService\bin\WaterAnalyticsService.pdb
+G:\WaterAnalytics\WaterAnalyticsService\WaterAnalyticsService\obj\Debug\WaterAnalyticsService.dll
+G:\WaterAnalytics\WaterAnalyticsService\WaterAnalyticsService\obj\Debug\WaterAnalyticsService.pdb
+C:\GitHubFolder\WaterAnalytics\WaterAnalyticsRepository\WaterAnalyticsService\WaterAnalyticsService\bin\WaterAnalyticsService.dll
+C:\GitHubFolder\WaterAnalytics\WaterAnalyticsRepository\WaterAnalyticsService\WaterAnalyticsService\bin\WaterAnalyticsService.pdb
+C:\GitHubFolder\WaterAnalytics\WaterAnalyticsRepository\WaterAnalyticsService\WaterAnalyticsService\obj\Debug\WaterAnalyticsService.dll
+C:\GitHubFolder\WaterAnalytics\WaterAnalyticsRepository\WaterAnalyticsService\WaterAnalyticsService\obj\Debug\WaterAnalyticsService.pdb
