@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.DataVisualization.Charting;
+using System.Drawing;
 
 namespace WaterAnalyticsSolution
 {
@@ -15,6 +16,7 @@ namespace WaterAnalyticsSolution
             filterQuant.btnFetchClickHandler += new EventHandler(btnQuantVsTimeFetch_Click);
             filterQuantPerPeron.btnFetchClickHandler += new EventHandler(btnQuantPerPersonVsTimeFetch_Click);
             chartQntyVsTime.Width = Unit.Pixel(600);
+            chartQuantPerPersonVsTime.Width = Unit.Pixel(600);
         }
 
         protected void Page_LoadComplete(object sender, EventArgs e)
@@ -23,8 +25,30 @@ namespace WaterAnalyticsSolution
             {
                 Chart quantvsTime = (Chart)chartQntyVsTime.FindControl("chrtAnalytics");
                 quantvsTime.Series.Add(ChartDataGenerator());
-            
+                quantvsTime.Series[0].ChartType = SeriesChartType.Line;
+                quantvsTime.Titles.Add("Half Yearly Water Consumption Data");
+
+                quantvsTime.Series[0].ChartType = System.Web.UI.DataVisualization.Charting.SeriesChartType.Line;
+                quantvsTime.ChartAreas[0].AxisX.Title = "Date";
+                quantvsTime.ChartAreas[0].AxisX.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
+                quantvsTime.ChartAreas[0].AxisX.TitleAlignment = StringAlignment.Center;
+                quantvsTime.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+
+
+                quantvsTime.ChartAreas[0].AxisY.Title = "Quantity (Lts)";
+                quantvsTime.ChartAreas[0].AxisY.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
+                quantvsTime.ChartAreas[0].AxisY.TitleAlignment = StringAlignment.Center;
+                quantvsTime.ChartAreas[0].AxisY.TextOrientation = TextOrientation.Rotated270;
+                quantvsTime.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
+
             }
+            if (chartQuantPerPersonVsTime.FindControl("chrtAnalytics") != null)
+            {
+                Chart quantvsTime = (Chart)chartQuantPerPersonVsTime.FindControl("chrtAnalytics");
+               quantvsTime.Series.Add(ChartDataGenerator());
+
+            }
+              
         }
         protected void btnQuantVsTimeFetch_Click(object sender, EventArgs e)
         { 

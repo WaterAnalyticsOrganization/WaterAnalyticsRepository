@@ -13,7 +13,20 @@ namespace WaterAnalyticsSolution
     {
         public event EventHandler  ChartBindingHandler;
         public Unit Width;
+        public Chart chartControl
+        {
         
+        get{
+        
+         return this.chrtAnalytics;
+        }
+            set
+            {
+             this.chrtAnalytics = value;
+            
+            }
+        
+        }
         Dictionary<DateTime, int> testData = new Dictionary<DateTime, int>();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -40,21 +53,21 @@ namespace WaterAnalyticsSolution
             tstSeries.MarkerSize = 7;
 
 
-            chrtAnalytics.Series.Add(tstSeries);
-            chrtAnalytics.Titles.Add("Half Yearly Water Consumption Data");
+            //chrtAnalytics.Series.Add(tstSeries);
+            //chrtAnalytics.Titles.Add("Half Yearly Water Consumption Data");
 
-            chrtAnalytics.Series[0].ChartType = System.Web.UI.DataVisualization.Charting.SeriesChartType.Line;
-            chrtAnalytics.ChartAreas[0].AxisX.Title = "Date";
-            chrtAnalytics.ChartAreas[0].AxisX.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
-            chrtAnalytics.ChartAreas[0].AxisX.TitleAlignment = StringAlignment.Center;
-            chrtAnalytics.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+            //chrtAnalytics.Series[0].ChartType = System.Web.UI.DataVisualization.Charting.SeriesChartType.Line;
+            //chrtAnalytics.ChartAreas[0].AxisX.Title = "Date";
+            //chrtAnalytics.ChartAreas[0].AxisX.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
+            //chrtAnalytics.ChartAreas[0].AxisX.TitleAlignment = StringAlignment.Center;
+            //chrtAnalytics.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
 
 
-            chrtAnalytics.ChartAreas[0].AxisY.Title = "Quantity (Lts)";
-            chrtAnalytics.ChartAreas[0].AxisY.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
-            chrtAnalytics.ChartAreas[0].AxisY.TitleAlignment = StringAlignment.Center;
-            chrtAnalytics.ChartAreas[0].AxisY.TextOrientation = TextOrientation.Rotated270;
-            chrtAnalytics.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
+            //chrtAnalytics.ChartAreas[0].AxisY.Title = "Quantity (Lts)";
+            //chrtAnalytics.ChartAreas[0].AxisY.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
+            //chrtAnalytics.ChartAreas[0].AxisY.TitleAlignment = StringAlignment.Center;
+            //chrtAnalytics.ChartAreas[0].AxisY.TextOrientation = TextOrientation.Rotated270;
+            //chrtAnalytics.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
            
 
             

@@ -74,7 +74,7 @@
 </td>
 </tr>
 <tr>
-<td>
+<td align="left">
 <chartcontrol:chart runat="server" ID="chartQuantPerPersonVsTime" />
 </td>
 </tr>

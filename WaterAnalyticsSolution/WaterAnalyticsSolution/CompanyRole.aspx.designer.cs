@@ -29,5 +29,68 @@ namespace WaterAnalyticsSolution {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::WaterAnalyticsSolution.ChartFilter filterQuantTimeLocation;
+        
+        /// <summary>
+        /// chartQuantVsTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::WaterAnalyticsSolution.ChartControl chartQuantVsTime;
+        
+        /// <summary>
+        /// chartQuantVsTimeLocs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::WaterAnalyticsSolution.ChartControl chartQuantVsTimeLocs;
+        
+        /// <summary>
+        /// filterGroundVsUsage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::WaterAnalyticsSolution.ChartFilter filterGroundVsUsage;
+        
+        /// <summary>
+        /// ddlYear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlYear;
+        
+        /// <summary>
+        /// btnFetchRegionVsTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnFetchRegionVsTime;
+        
+        /// <summary>
+        /// chartGroundVsUsage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::WaterAnalyticsSolution.ChartControl chartGroundVsUsage;
+        
+        /// <summary>
+        /// regionChart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::WaterAnalyticsSolution.ChartControl regionChart;
     }
 }
