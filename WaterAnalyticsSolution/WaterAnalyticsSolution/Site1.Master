@@ -1,0 +1,29 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="WaterAnalyticsSolution.Site1" %>
+<%@ Register Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" tagPrefix="ajax"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+   
+    
+     <asp:ContentPlaceHolder ID="head" runat="server">
+    
+     </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+     <ajax:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" >
+       </ajax:ToolkitScriptManager>
+     <center>
+    <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Banner - Copy.png" Width="980px">
+    </asp:Image>
+     </center>
+       
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" >
+        
+        </asp:ContentPlaceHolder>
+  
+    </form>
+</body>
+</html>

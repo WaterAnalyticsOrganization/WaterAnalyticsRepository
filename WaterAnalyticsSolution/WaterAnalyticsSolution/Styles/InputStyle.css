@@ -1,0 +1,86 @@
+﻿body 
+{
+    font-family: "Trebuchet MS", Verdana, sans-serif;
+    font-size: 16px;
+    height:100%;
+    width:980px;
+    text-align:center;
+    margin:0 auto;
+    background-color: #E0E4CC;
+  
+}
+
+input[type="text"]
+{
+    
+    
+    border: 1px solid #A4A4A4; 
+    padding: 4px 8px 4px 4px !important;
+    line-height: 1; 
+    width: 275px; 
+    
+}
+
+ .accordionContent
+ {
+            background-color: #D3DEEF;
+            border-color: -moz-use-text-color #2F4F4F #2F4F4F;
+            border-right: 1px solid #2F4F4F;
+            border-style: none solid solid;
+            border-width: medium 1px 1px;
+           padding: 5px;
+            width : inherit;
+}
+ .accordionHeaderSelected
+ {
+            background-color: #0066CC;
+            border: 1px solid #2F4F4F;
+            color: white;
+            cursor: pointer;
+            font-family: Arial,Sans-Serif;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 5px;
+            padding: 5px;
+            width : 550px;
+}
+.accordionHeader
+{
+            background-color: #6699FF ;
+            border: 1px solid #2F4F4F;
+            color: white;
+            cursor: pointer;
+            font-family: Arial,Sans-Serif;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 5px;
+            padding: 5px;
+            width : 550px ;
+
+}
+h1
+{
+        background-color: #6699FF ;
+            border: 1px solid #2F4F4F;
+            color: white;
+            font-family: Arial,Sans-Serif;
+            font-size: 12px;
+            font-weight: bold;
+             width : 100% ;
+
+    
+ }
+.rounded_edges {
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+        border: 1px solid black;
+      }
+
+
+        
+
+      
+  
+  
+  
+

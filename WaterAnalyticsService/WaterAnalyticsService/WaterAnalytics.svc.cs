@@ -93,7 +93,7 @@ namespace WaterAnalyticsService
             return myList;
         }
 
-        public List<WaterQuantLocation> getWaterQuantByLocation(string Location, int ind, DateTime from, DateTime to)
+        public List<WaterQuantLocation> getWaterQuantByLocation( string Location,int ind, DateTime from, DateTime to)
         {
             DataTable dt = new DataTable();
             IndAddress obj = new IndAddress();

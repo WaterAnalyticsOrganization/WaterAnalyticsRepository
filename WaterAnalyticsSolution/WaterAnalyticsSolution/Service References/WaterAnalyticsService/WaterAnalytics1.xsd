@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WaterAnalyticsService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WaterAnalyticsService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfWaterQuant">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="WaterQuant" nillable="true" type="tns:WaterQuant" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfWaterQuant" nillable="true" type="tns:ArrayOfWaterQuant" />
+  <xs:complexType name="WaterQuant">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Quantity" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Stime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UserId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WaterQuant" nillable="true" type="tns:WaterQuant" />
+  <xs:complexType name="ArrayOfWaterQuantLocation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="WaterQuantLocation" nillable="true" type="tns:WaterQuantLocation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfWaterQuantLocation" nillable="true" type="tns:ArrayOfWaterQuantLocation" />
+  <xs:complexType name="WaterQuantLocation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="LocationName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Stime" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WaterQuantLocation" nillable="true" type="tns:WaterQuantLocation" />
+  <xs:complexType name="IndAddress">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LocationName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NoOfPeople" type="xs:int" />
+      <xs:element minOccurs="0" name="SensorID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="IndAddress" nillable="true" type="tns:IndAddress" />
+</xs:schema>

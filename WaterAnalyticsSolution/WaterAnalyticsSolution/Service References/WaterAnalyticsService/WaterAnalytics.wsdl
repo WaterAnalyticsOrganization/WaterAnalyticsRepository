@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WaterAnalytics" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:49449/WaterAnalytics.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:49449/WaterAnalytics.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:49449/WaterAnalytics.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WaterAnalyticsService" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IWaterAnalytics_isAuthenticated_InputMessage">
+    <wsdl:part name="parameters" element="tns:isAuthenticated" />
+  </wsdl:message>
+  <wsdl:message name="IWaterAnalytics_isAuthenticated_OutputMessage">
+    <wsdl:part name="parameters" element="tns:isAuthenticatedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWaterAnalytics_getWaterQuantByUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:getWaterQuantByUserId" />
+  </wsdl:message>
+  <wsdl:message name="IWaterAnalytics_getWaterQuantByUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getWaterQuantByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWaterAnalytics_getWaterQuantByLocation_InputMessage">
+    <wsdl:part name="parameters" element="tns:getWaterQuantByLocation" />
+  </wsdl:message>
+  <wsdl:message name="IWaterAnalytics_getWaterQuantByLocation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getWaterQuantByLocationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWaterAnalytics_getWaterQuantPerPerson_InputMessage">
+    <wsdl:part name="parameters" element="tns:getWaterQuantPerPerson" />
+  </wsdl:message>
+  <wsdl:message name="IWaterAnalytics_getWaterQuantPerPerson_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getWaterQuantPerPersonResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWaterAnalytics_UpdateDetails_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDetails" />
+  </wsdl:message>
+  <wsdl:message name="IWaterAnalytics_UpdateDetails_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWaterAnalytics_getDetails_InputMessage">
+    <wsdl:part name="parameters" element="tns:getDetails" />
+  </wsdl:message>
+  <wsdl:message name="IWaterAnalytics_getDetails_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getDetailsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IWaterAnalytics">
+    <wsdl:operation name="isAuthenticated">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWaterAnalytics/isAuthenticated" message="tns:IWaterAnalytics_isAuthenticated_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWaterAnalytics/isAuthenticatedResponse" message="tns:IWaterAnalytics_isAuthenticated_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getWaterQuantByUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWaterAnalytics/getWaterQuantByUserId" message="tns:IWaterAnalytics_getWaterQuantByUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWaterAnalytics/getWaterQuantByUserIdResponse" message="tns:IWaterAnalytics_getWaterQuantByUserId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getWaterQuantByLocation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWaterAnalytics/getWaterQuantByLocation" message="tns:IWaterAnalytics_getWaterQuantByLocation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWaterAnalytics/getWaterQuantByLocationResponse" message="tns:IWaterAnalytics_getWaterQuantByLocation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getWaterQuantPerPerson">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWaterAnalytics/getWaterQuantPerPerson" message="tns:IWaterAnalytics_getWaterQuantPerPerson_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWaterAnalytics/getWaterQuantPerPersonResponse" message="tns:IWaterAnalytics_getWaterQuantPerPerson_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDetails">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWaterAnalytics/UpdateDetails" message="tns:IWaterAnalytics_UpdateDetails_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWaterAnalytics/UpdateDetailsResponse" message="tns:IWaterAnalytics_UpdateDetails_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getDetails">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWaterAnalytics/getDetails" message="tns:IWaterAnalytics_getDetails_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWaterAnalytics/getDetailsResponse" message="tns:IWaterAnalytics_getDetails_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IWaterAnalytics" type="tns:IWaterAnalytics">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="isAuthenticated">
+      <soap:operation soapAction="http://tempuri.org/IWaterAnalytics/isAuthenticated" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getWaterQuantByUserId">
+      <soap:operation soapAction="http://tempuri.org/IWaterAnalytics/getWaterQuantByUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getWaterQuantByLocation">
+      <soap:operation soapAction="http://tempuri.org/IWaterAnalytics/getWaterQuantByLocation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getWaterQuantPerPerson">
+      <soap:operation soapAction="http://tempuri.org/IWaterAnalytics/getWaterQuantPerPerson" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDetails">
+      <soap:operation soapAction="http://tempuri.org/IWaterAnalytics/UpdateDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDetails">
+      <soap:operation soapAction="http://tempuri.org/IWaterAnalytics/getDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WaterAnalytics">
+    <wsdl:port name="BasicHttpBinding_IWaterAnalytics" binding="tns:BasicHttpBinding_IWaterAnalytics">
+      <soap:address location="http://localhost:49449/WaterAnalytics.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

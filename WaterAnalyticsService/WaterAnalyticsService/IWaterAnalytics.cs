@@ -23,16 +23,16 @@ namespace WaterAnalyticsService
         List<WaterQuant> getWaterQuantByUserId(int UserID, int ind, DateTime from, DateTime to);
 
         [OperationContract]
-        WaterQuant getWaterQuantByLocation(string Location, int ind, DateTime from, DateTime to);
+        List<WaterQuantLocation> getWaterQuantByLocation(string Location, int ind, DateTime from, DateTime to);
 
         [OperationContract]
-        WaterQuant getWaterQuantPerPerson(int UserID, int ind, DateTime from, DateTime to);
+        List<WaterQuant> getWaterQuantPerPerson(int UserID, int ind, DateTime from, DateTime to);
 
         //[OperationContract]
         //WaterQuant getWaterQuantPerPersonArea(string Area, string stime, DateTime from, DateTime to);
-        
+
         [OperationContract]
-        int UpdateDetails(int UserID,string Name,string email,int noOfPeople)
+        int UpdateDetails(int UserID, string Name, string email, int noOfPeople);
 
         [OperationContract]
         IndAddress getDetails(int sensorId);
