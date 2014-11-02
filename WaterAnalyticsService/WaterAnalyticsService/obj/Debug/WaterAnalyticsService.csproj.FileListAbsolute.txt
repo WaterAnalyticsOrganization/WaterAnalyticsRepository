@@ -11,8 +11,16 @@ C:\Users\hp\Desktop\WaterAnalyticsRepository-master\WaterAnalyticsRepository-mas
 C:\Users\hp\Desktop\WaterAnalyticsRepository-master\WaterAnalyticsRepository-master\WaterAnalyticsService\WaterAnalyticsService\obj\Debug\WaterAnalyticsService.dll
 C:\Users\hp\Desktop\WaterAnalyticsRepository-master\WaterAnalyticsRepository-master\WaterAnalyticsService\WaterAnalyticsService\obj\Debug\WaterAnalyticsService.pdb
 C:\Users\hp\Desktop\WaterAnalyticsRepository-master\WaterAnalyticsRepository-master\WaterAnalyticsService\WaterAnalyticsService\obj\Debug\WaterAnalyticsService.csprojResolveAssemblyReference.cache
+<<<<<<< HEAD
+C:\Users\hp\Documents\GitHub\WaterAnalyticsRepository\WaterAnalyticsService\WaterAnalyticsService\obj\Debug\WaterAnalyticsService.csprojResolveAssemblyReference.cache
+C:\Users\hp\Documents\GitHub\WaterAnalyticsRepository\WaterAnalyticsService\WaterAnalyticsService\obj\Debug\WaterAnalyticsService.dll
+C:\Users\hp\Documents\GitHub\WaterAnalyticsRepository\WaterAnalyticsService\WaterAnalyticsService\obj\Debug\WaterAnalyticsService.pdb
+C:\Users\hp\Documents\GitHub\WaterAnalyticsRepository\WaterAnalyticsService\WaterAnalyticsService\bin\WaterAnalyticsService.dll
+C:\Users\hp\Documents\GitHub\WaterAnalyticsRepository\WaterAnalyticsService\WaterAnalyticsService\bin\WaterAnalyticsService.pdb
+=======
 C:\Users\Mohanan\Documents\1112014_anz\WaterAnalyticsRepository\WaterAnalyticsService\WaterAnalyticsService\obj\Debug\WaterAnalyticsService.csprojResolveAssemblyReference.cache
 C:\Users\Mohanan\Documents\1112014_anz\WaterAnalyticsRepository\WaterAnalyticsService\WaterAnalyticsService\obj\Debug\WaterAnalyticsService.dll
 C:\Users\Mohanan\Documents\1112014_anz\WaterAnalyticsRepository\WaterAnalyticsService\WaterAnalyticsService\obj\Debug\WaterAnalyticsService.pdb
 C:\Users\Mohanan\Documents\1112014_anz\WaterAnalyticsRepository\WaterAnalyticsService\WaterAnalyticsService\bin\WaterAnalyticsService.dll
 C:\Users\Mohanan\Documents\1112014_anz\WaterAnalyticsRepository\WaterAnalyticsService\WaterAnalyticsService\bin\WaterAnalyticsService.pdb
+>>>>>>> origin/master

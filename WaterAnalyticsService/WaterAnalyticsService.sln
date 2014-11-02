@@ -1,7 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Web Developer Express 2010
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaterAnalyticsService", "WaterAnalyticsService\WaterAnalyticsService.csproj", "{D9BA131D-2660-4C3D-832F-11EAE87F5E4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaterAnalyticsSolution", "..\..\..\..\Desktop\WaterAnalyticsRepository-master\WaterAnalyticsRepository-master\WaterAnalyticsSolution\WaterAnalyticsSolution\WaterAnalyticsSolution.csproj", "{CF741E4E-ECB0-408D-A06B-DC0893D5DDE0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D9BA131D-2660-4C3D-832F-11EAE87F5E4E} = {D9BA131D-2660-4C3D-832F-11EAE87F5E4E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +18,10 @@ Global
 		{D9BA131D-2660-4C3D-832F-11EAE87F5E4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9BA131D-2660-4C3D-832F-11EAE87F5E4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9BA131D-2660-4C3D-832F-11EAE87F5E4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF741E4E-ECB0-408D-A06B-DC0893D5DDE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF741E4E-ECB0-408D-A06B-DC0893D5DDE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF741E4E-ECB0-408D-A06B-DC0893D5DDE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF741E4E-ECB0-408D-A06B-DC0893D5DDE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -28,6 +28,9 @@ namespace WaterAnalyticsService
         [OperationContract]
         List<WaterQuant> getWaterQuantPerPerson(int UserID, int ind, DateTime from, DateTime to);
 
+        [OperationContract]
+        List<LocationDetails> getAllLocation();
+        
         //[OperationContract]
         //WaterQuant getWaterQuantPerPersonArea(string Area, string stime, DateTime from, DateTime to);
 
@@ -151,5 +154,26 @@ namespace WaterAnalyticsService
             set { quantity = value; }
         }
     }
+
+    [DataContract]
+    public class LocationDetails
+    {
+       int locationid;
+       string locationName;
+
+        [DataMember]
+        public int Location_Id
+        {
+            get { return locationid; }
+            set { locationid = value; }
+        }
+
+        [DataMember]
+        public string Location_name
+        {
+            get { return locationName; }
+            set { locationName = value; }
+        }
+     }
 
 }

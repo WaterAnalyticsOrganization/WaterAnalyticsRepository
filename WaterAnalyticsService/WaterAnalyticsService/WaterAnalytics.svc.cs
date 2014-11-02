@@ -19,7 +19,7 @@ namespace WaterAnalyticsService
         SqlConnection connection = new SqlConnection(connectionStr);
 
         public int isAuthenticated(int UserId, string password)
-        {
+        {   //Returns 1 for Individual, 2 for Govt and 0 if its not Authenticated
             int isAuth;
             SqlCommand command = new SqlCommand("AuthenticateUser", connection);
             command.CommandType = CommandType.StoredProcedure;
@@ -60,7 +60,6 @@ namespace WaterAnalyticsService
         {
             int result;
             DataTable dt = new DataTable();
-            IndAddress obj = new IndAddress();
             SqlCommand command = new SqlCommand("UpdateDetails", connection);
             command.CommandType = CommandType.StoredProcedure;
             command.Parameters.AddWithValue("@UserID", UserID);
@@ -76,7 +75,6 @@ namespace WaterAnalyticsService
         public List<WaterQuant> getWaterQuantByUserId(int UserID, int ind, DateTime from, DateTime to)
         {
             DataTable dt = new DataTable();
-            IndAddress obj = new IndAddress();
             SqlCommand command = new SqlCommand("GetWaterQuantByUser", connection);
             command.CommandType = CommandType.StoredProcedure;
             command.Parameters.AddWithValue("@UserID", UserID);
@@ -96,7 +94,6 @@ namespace WaterAnalyticsService
         public List<WaterQuantLocation> getWaterQuantByLocation( string Location,int ind, DateTime from, DateTime to)
         {
             DataTable dt = new DataTable();
-            IndAddress obj = new IndAddress();
             SqlCommand command = new SqlCommand("GetWaterQuantByLocation", connection);
             command.CommandType = CommandType.StoredProcedure;
             command.Parameters.AddWithValue("@Location", Location);
@@ -117,7 +114,6 @@ namespace WaterAnalyticsService
         public List<WaterQuant> getWaterQuantPerPerson(int UserId, int ind, DateTime from, DateTime to)
         {
             DataTable dt = new DataTable();
-            IndAddress obj = new IndAddress();
             SqlCommand command = new SqlCommand("GetWaterQuantperPersonByUser", connection);
             command.CommandType = CommandType.StoredProcedure;
             command.Parameters.AddWithValue("@UserID", UserId);
@@ -133,7 +129,21 @@ namespace WaterAnalyticsService
 
             return myList;
         }
-       
+
+       public List<LocationDetails> getAllLocation()
+        {
+            DataTable dt = new DataTable();
+            IndAddress obj = new IndAddress();
+            SqlCommand command = new SqlCommand("GetAllLocation", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            connection.Open();
+            SqlDataAdapter daDetails = new SqlDataAdapter(command);
+            daDetails.Fill(dt);
+
+            List<LocationDetails> myList = (List<LocationDetails>)DataFiller.ConvertTo<LocationDetails>(dt);
+
+            return myList;
+        }
        
     }
 }
