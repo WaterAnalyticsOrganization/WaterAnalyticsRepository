@@ -69,6 +69,7 @@
     <Content Include="Images\Banner - Copy.png" />
     <Content Include="Images\calendar.png" />
     <Content Include="Home.aspx" />
+    <Content Include="Login.ascx" />
     <Content Include="MyProfile.aspx" />
     <Content Include="Styles\InputStyle.css" />
     <Content Include="Global.asax" />
@@ -109,12 +110,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper.cs" />
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.ascx.cs">
+      <DependentUpon>Login.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.ascx.designer.cs">
+      <DependentUpon>Login.ascx</DependentUpon>
     </Compile>
     <Compile Include="MyProfile.aspx.cs">
       <DependentUpon>MyProfile.aspx</DependentUpon>

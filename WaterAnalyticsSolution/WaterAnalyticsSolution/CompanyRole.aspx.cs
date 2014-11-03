@@ -14,8 +14,12 @@ namespace WaterAnalyticsSolution
         {
 
             chartGroundVsUsage.Width = Unit.Pixel(480);
+            
+                 
             chartQuantVsTime.Width = Unit.Pixel(480);
+            filterQuantByTime.isLocationVisible = true;
             chartQuantVsTimeLocs.Width = Unit.Pixel(480);
+            filterQuantTimeLocation.isLocationVisible = true;
             regionChart.Width = Unit.Pixel(480);
         }
         protected void Page_LoadComplete(object sender, EventArgs e)
@@ -35,8 +39,7 @@ namespace WaterAnalyticsSolution
                 chartQuantVsTime1.Series[0].ChartType = SeriesChartType.Line;
             
             }
- 
-    
+           
         }
         private Series ChartDataGenerator()
         {

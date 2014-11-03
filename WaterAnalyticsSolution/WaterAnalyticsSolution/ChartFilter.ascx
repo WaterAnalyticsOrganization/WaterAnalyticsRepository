@@ -7,7 +7,7 @@
 <asp:Label runat="server" id="lblStartDate" Text="Start Date :" Width="100px" ></asp:Label>
 </td>
 <td>
-<asp:TextBox ID="txtStartDate" runat="server" ReadOnly="true" Width="100px" ></asp:TextBox>
+<asp:TextBox ID="txtStartDate" runat="server" ReadOnly="true" Width="100px"></asp:TextBox>
 </td>
 <td>
 <asp:ImageButton id="imgStartDatePopUp"  ImageUrl="~/Images/calendar.png" ImageAlign="Middle" runat="server" />   
@@ -35,5 +35,11 @@
 <asp:Button runat="server" ID="btnFetch" Text="Go" OnClick="btnFetch_Click"/>
 </td>
 </tr>
-
+<tr id="LocationRow">
+<td colspan="6" rowspan="2">
+<asp:CheckBoxList runat="server" ID="chkList" RepeatDirection="Horizontal" RepeatLayout="Table" RepeatColumns="4"></asp:CheckBoxList>
+</td>
+</tr>
+<tr>
+</tr>
 </table>

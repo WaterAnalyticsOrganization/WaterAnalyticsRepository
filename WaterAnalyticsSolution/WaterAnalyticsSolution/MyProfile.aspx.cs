@@ -11,16 +11,24 @@ namespace WaterAnalyticsSolution
 {
     public partial class MyProfile : System.Web.UI.Page
     {
+        WaterAnalyticsService.WaterAnalyticsClient client = new WaterAnalyticsService.WaterAnalyticsClient();
         protected void Page_Load(object sender, EventArgs e)
         {
-            filterQuant.btnFetchClickHandler += new EventHandler(btnQuantVsTimeFetch_Click);
-            filterQuantPerPeron.btnFetchClickHandler += new EventHandler(btnQuantPerPersonVsTimeFetch_Click);
-            chartQntyVsTime.Width = Unit.Pixel(600);
-            chartQuantPerPersonVsTime.Width = Unit.Pixel(600);
+            if (!IsPostBack)
+            {
+                filterQuant.btnFetchClickHandler += new EventHandler(btnQuantVsTimeFetch_Click);
+                filterQuantPerPeron.btnFetchClickHandler += new EventHandler(btnQuantPerPersonVsTimeFetch_Click);
+                chartQntyVsTime.Width = Unit.Pixel(600);
+                chartQuantPerPersonVsTime.Width = Unit.Pixel(600);
+                filterQuant.isLocationVisible = false;
+                filterQuantPerPeron.isLocationVisible = false;
+            }
         }
 
         protected void Page_LoadComplete(object sender, EventArgs e)
         {
+
+          
             if (chartQntyVsTime.FindControl("chrtAnalytics") != null)
             {
                 Chart quantvsTime = (Chart)chartQntyVsTime.FindControl("chrtAnalytics");
@@ -52,8 +60,8 @@ namespace WaterAnalyticsSolution
         }
         protected void btnQuantVsTimeFetch_Click(object sender, EventArgs e)
         { 
-        
-        
+           
+          
         
         }
 

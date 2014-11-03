@@ -22,6 +22,15 @@ namespace WaterAnalyticsSolution {
         protected global::AjaxControlToolkit.ToolkitScriptManager toolkit1;
         
         /// <summary>
+        /// Panel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel1;
+        
+        /// <summary>
         /// Accordion1 control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,24 @@ namespace WaterAnalyticsSolution {
         protected global::AjaxControlToolkit.AccordionPane AccPaneLogin;
         
         /// <summary>
+        /// login control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::WaterAnalyticsSolution.Login1 login;
+        
+        /// <summary>
+        /// Accordion2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.Accordion Accordion2;
+        
+        /// <summary>
         /// AccPanelSignUp control.
         /// </summary>
         /// <remarks>
@@ -47,5 +74,14 @@ namespace WaterAnalyticsSolution {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.AccordionPane AccPanelSignUp;
+        
+        /// <summary>
+        /// signup control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::WaterAnalyticsSolution.UserRegisteration signup;
     }
 }

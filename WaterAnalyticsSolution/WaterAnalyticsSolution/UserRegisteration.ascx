@@ -1,21 +1,14 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UserRegisteration.ascx.cs" Inherits="WaterAnalyticsSolution.UserRegisteration" %>
 <asp:PlaceHolder ID="phForm" runat="server">
+<br />
 <table align="left">
 <tr>
 <td></td>
-<td align="right" >
-</td>
-<td align="center">
-<b>User Registration Form</b>
-</td>
-</tr>
-<tr>
-<td></td>
 <td align="right">
-<asp:Label ID="lblSensorId" runat="server" Text="Sensor ID"></asp:Label>
+<asp:Label ID="lblSensorId" runat="server" Text="Sensor ID :"></asp:Label>
 </td>
-<td>
-<asp:TextBox ID="txtSensorId" runat="server" CssClass="InpuUsertRegister"></asp:TextBox>
+<td align="left">
+<asp:TextBox ID="txtSensorId" runat="server"  ></asp:TextBox>
 </td>
 </tr>
 <%--<tr>
@@ -30,45 +23,45 @@
 <tr>
 <td></td>
 <td align="right" >
-<asp:Label ID="lblpwd" runat="server" Text="Password"></asp:Label>
+<asp:Label ID="lblpwd" runat="server" Text="Password :"></asp:Label>
 </td>
-<td>
+<td  align="left">
 <asp:TextBox ID="txtpwd" runat="server" TextMode="Password"></asp:TextBox>
 </td>
 </tr>
 <tr>
 <td></td>
 <td align="right" >
-<asp:Label ID="lblcnfmpwd" runat="server" Text="Confirm Password"></asp:Label>
+<asp:Label ID="lblcnfmpwd" runat="server" Text="Confirm Password :"></asp:Label>
 </td>
-<td>
+<td  align="left">
 <asp:TextBox ID="txtcnmpwd" runat="server" TextMode="Password"></asp:TextBox>
 </td>
 </tr>
 <tr>
 <td></td>
 <td align="right">
-<asp:Label ID="lblfname" runat="server" Text="FirstName"></asp:Label>
+<asp:Label ID="lblfname" runat="server" Text="FirstName :"></asp:Label>
 </td>
-<td>
+<td  align="left">
 <asp:TextBox ID="txtfname" runat="server"></asp:TextBox>
 </td>
 </tr>
 <tr>
 <td></td>
 <td align="right">
-<asp:Label ID="lbllname" runat="server" Text="LastName"></asp:Label>
+<asp:Label ID="lbllname" runat="server" Text="LastName :"></asp:Label>
 </td>
-<td>
+<td  align="left">
 <asp:TextBox ID="txtlname" runat="server"></asp:TextBox>
 </td>
 </tr>
 <tr>
 <td></td>
 <td align="right">
-<asp:Label ID="lblemail" runat="server" Text="Email"></asp:Label>
+<asp:Label ID="lblemail" runat="server" Text="Email :"></asp:Label>
 </td>
-<td>
+<td  align="left">
 <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
 </td>
 </tr>
@@ -92,7 +85,7 @@
 </tr>--%>
 <tr>
 
-<td align="left"><asp:Button ID="btnsubmit" runat="server" Text="Submit"/>
+<td align="center" colspan="3"><asp:Button ID="btnsubmit" runat="server" Text="Submit"/>
 </td>
 </tr>
 <tr>

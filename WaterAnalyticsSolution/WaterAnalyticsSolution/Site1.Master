@@ -13,9 +13,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-     <ajax:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" >
-       </ajax:ToolkitScriptManager>
-     <center>
+      <center>
     <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Banner - Copy.png" Width="980px">
     </asp:Image>
      </center>

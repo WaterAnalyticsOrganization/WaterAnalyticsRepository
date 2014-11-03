@@ -1,12 +1,14 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MyProfile.aspx.cs" Inherits="WaterAnalyticsSolution.MyProfile" MasterPageFile="~/Site1.Master" %>
 <%@ Register Src="~/ChartFilter.ascx" TagName="chartfilter" TagPrefix="filter" %>
 <%@ Register Src="~/AnalyticsChart.ascx" TagName="chart" TagPrefix="chartcontrol" %>
+<%@ Register Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" tagPrefix="ajax" %>
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <link rel="Stylesheet" href="Styles/InputStyle.css" type="text/css" media="screen" />
 </asp:Content>
 
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder1" runat="server" >
+<ajax:toolkitscriptmanager ID="toolkit1" runat="server"></ajax:toolkitscriptmanager>
     <table style="width:980px; background-color:#F4FFFF;">
 <tr>
 <td valign="top" style ="width:40%;" >
