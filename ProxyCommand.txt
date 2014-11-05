@@ -1,0 +1,6 @@
+
+Run cmd
+
+Navigate to project path and run below command
+
+"C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin\svcutil.exe" /language:cs /out:generatedProxy.cs /config: output.config http://localhost:49449/WaterAnalytics.svc?wsdl /a /tcv:Version35
