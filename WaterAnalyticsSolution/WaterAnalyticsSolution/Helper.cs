@@ -9,7 +9,7 @@ namespace WaterAnalyticsSolution
     public static class Helper
      {
 
-        public static List<ListItem> XValues()
+        public static List<ListItem> GetXValues()
         {
             List<ListItem> lstValues = new List<ListItem>();
             lstValues.Add(new ListItem() { Text = "Hourly", Value = "0" });
@@ -19,6 +19,14 @@ namespace WaterAnalyticsSolution
             lstValues.Add(new ListItem() { Text = "Yearly", Value = "4" });
 
             return lstValues;
+        }
+
+        public static List<Int32> GetYear()
+        {
+            int year = DateTime.Today.Year;
+            List<Int32> lstYears = Enumerable.Range(1998, DateTime.Today.Year - 1998).ToList<Int32>();
+            return lstYears;
+
         }
     }
 

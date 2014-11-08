@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CompanyRole.aspx.cs" Inherits="WaterAnalyticsSolution.CompanyRole"  MasterPageFile="~/Site1.Master" %>
+﻿<%@ Page Language="C#" Async="true" AutoEventWireup="true" CodeBehind="CompanyRole.aspx.cs" Inherits="WaterAnalyticsSolution.CompanyRole"  MasterPageFile="~/Site1.Master" %>
 <%@ Register Src="~/ChartFilter.ascx" TagName="chartfilter" TagPrefix="filter" %>
 <%@ Register Src="~/AnalyticsChart.ascx" TagName="chart" TagPrefix="chartcontrol" %>
 <%@ Register Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" tagPrefix="ajax" %>
@@ -26,14 +26,58 @@
 </tr>
 <tr>
 <td>
-<filter:chartfilter ID="filterGroundVsUsage" runat="server" />
+<table  class="rounded_edges" width="480px"  style="text-align:left; background:#C9EAF3;">
+<tr>
+<td align="right">
+<asp:Label ID="lblStartYear" runat="server" text="From :"></asp:Label>
+</td>   
+<td align="left">
+<asp:DropDownList ID="ddlStartYear" runat="server" Width="170px" Height="25px"></asp:DropDownList>
 </td>
-<td align="left" class="rounded_edges" style="text-align:left; background:#C9EAF3;">
-<h1 style=" vertical-align:top;">
-Select An Year to View the Total Usage
-</h1>
-<asp:DropDownList ID="ddlYear" runat="server" Width="150px"></asp:DropDownList>
-<asp:Button ID="btnFetchRegionVsTime" runat="server" Width="50px" Height="25px" Text="Go" />
+<td>
+<asp:Label ID="lblEndYear" runat="server" text="To :"></asp:Label>
+</td>
+<td>
+<asp:DropDownList ID="ddlEndYear" runat="server" Width="170px" Height="25px"></asp:DropDownList>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<asp:Button runat="server" ID="btnGrndVsUsageFetch" Text="Go" OnClick="btnGround_Click"/>
+</td>
+</tr>
+</table>
+</td>
+<td align="left">
+<table class="rounded_edges" width="480px"  style="text-align:left; background:#C9EAF3;">
+<tr>
+<td align="right">
+<asp:Label runat="server" id="lblStartDate" Text="Start Date :" Width="100px" ></asp:Label>
+</td>
+<td>
+<asp:TextBox ID="txtStartDate" runat="server" Width="100px"></asp:TextBox>
+</td>
+<td>
+<asp:ImageButton id="imgStartDatePopUp"  ImageUrl="~/Images/calendar.png" ImageAlign="Middle" runat="server" />   
+<ajax:CalendarExtender ID="calStartDate" PopupButtonID="imgStartDatePopUp" runat="server" TargetControlID="txtStartDate" Format="dd/MM/yyyy"></ajax:CalendarExtender>
+</td>
+<td align="right">
+<asp:Label runat="server" id="lblEndDate" Text="End Date :" Width="75px" align="right"></asp:Label>
+</td>
+<td>
+<asp:TextBox ID="txtEndDate" runat="server" Width="100px" ></asp:TextBox>
+</td>
+<td>
+<asp:ImageButton id="imgEndDatePopUp" ImageUrl="~/Images/calendar.png" ImageAlign="Middle" runat="server" />
+<ajax:CalendarExtender ID="calEndDate" PopupButtonID="imgEndDatePopUp" runat="server" TargetControlID="txtEndDate" Format="dd/MM/yyyy"></ajax:CalendarExtender>
+</td>
+</tr>
+<tr>
+<td colspan="2" >
+<asp:Button runat="server" ID="btnFetchRegion" Text="Go" OnClick="btnFetchRegion_Click"/>
+</td>
+</tr>
+</table>
 </td>
 </tr>
 <tr>

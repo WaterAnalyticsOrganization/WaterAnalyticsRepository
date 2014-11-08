@@ -17,7 +17,7 @@ namespace WaterAnalyticsSolution
         {
             txtStartDate.Text = DateTime.Today.ToShortDateString();
             txtEndDate.Text = DateTime.Today.ToShortDateString();
-        
+
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -25,28 +25,46 @@ namespace WaterAnalyticsSolution
             {
                 if (chkList != null && chkList.Items.Count == 0)
                 {
+
                     chkList.Visible = isLocationVisible;
-                    chkList.Items.Add("Bellandur");
-                    ddlXValue.DataSource = Helper.XValues();
-                    ddlXValue.DataTextField = "Text";
-                    ddlXValue.DataValueField = "Value";
-                   
-                    ddlXValue.DataBind();
-                } 
-                
+                    if (isLocationVisible)
+                    {
+                        WaterAnalyticsClient client = new WaterAnalyticsClient();
+                        chkList.DataSource = client.getAllLocation();
+                        if (chkList.DataSource != null)
+                        {
+                            chkList.DataTextField = "Location_name";
+                            chkList.DataValueField = "Location_Id";
+                            chkList.SelectedIndex = 0;
+                            chkList.DataBind();
+                        
+                        }
 
 
+                    }
 
+                }
+
+                ddlXValue.DataSource = Helper.GetXValues();
+                ddlXValue.DataTextField = "Text";
+                ddlXValue.DataValueField = "Value";
+                ddlXValue.SelectedIndex = 0;
+                ddlXValue.DataBind();
             }
-            
-            
         }
        
+
+
+
+
+
+
+
         protected void btnFetch_Click(object sender, EventArgs e)
         {
-          
+
             btnFetchClickHandler(sender, e);
-        
+
         }
     }
 }
