@@ -32,14 +32,19 @@ namespace WaterAnalyticsService
         List<LocationDetails> getAllLocation();
 
         [OperationContract]
-        WaterQuant getWaterQuantPerPersonArea(string Area, int ind, DateTime from, DateTime to);
+        List<WaterQuantLocation> getWaterQuantPerPersonArea(string Area, int ind, DateTime from, DateTime to);
 
         [OperationContract]
         int UpdateDetails(int UserID, string Name, string email, int noOfPeople);
 
         [OperationContract]
         IndAddress getDetails(int sensorId);
-        
+
+         [OperationContract]
+        List<ZoneDetails> getDataByZone(DateTime from, DateTime to);
+
+         [OperationContract]
+         List<GroundWaterDetail> getGroundWaterByLocation(string Location, int from, int to);
     }
 
 
