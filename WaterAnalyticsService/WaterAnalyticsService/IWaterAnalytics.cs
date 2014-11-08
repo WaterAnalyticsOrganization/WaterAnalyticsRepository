@@ -30,9 +30,9 @@ namespace WaterAnalyticsService
 
         [OperationContract]
         List<LocationDetails> getAllLocation();
-        
-        //[OperationContract]
-        //WaterQuant getWaterQuantPerPersonArea(string Area, string stime, DateTime from, DateTime to);
+
+        [OperationContract]
+        WaterQuant getWaterQuantPerPersonArea(string Area, int ind, DateTime from, DateTime to);
 
         [OperationContract]
         int UpdateDetails(int UserID, string Name, string email, int noOfPeople);
@@ -175,5 +175,56 @@ namespace WaterAnalyticsService
             set { locationName = value; }
         }
      }
+
+    [DataContract]
+    public class GroundWaterDetail
+    {
+
+        int stime;
+        string locationName;
+        decimal quantity;
+
+        [DataMember]
+        public int Stime
+        {
+            get { return stime; }
+            set { stime = value; }
+        }
+
+        [DataMember]
+        public string LocationName
+        {
+            get { return locationName; }
+            set { locationName = value; }
+        }
+
+        [DataMember]
+        public decimal Quantity
+        {
+            get { return quantity; }
+            set { quantity = value; }
+        }
+    }
+
+    [DataContract]
+    public class ZoneDetails
+    {
+        string zone;
+        decimal quantity;
+
+        [DataMember]
+        public string Zone
+        {
+            get { return zone; }
+            set { zone = value; }
+        }
+       
+        [DataMember]
+        public decimal Quantity
+        {
+            get { return quantity; }
+            set { quantity = value; }
+        }
+    }
 
 }

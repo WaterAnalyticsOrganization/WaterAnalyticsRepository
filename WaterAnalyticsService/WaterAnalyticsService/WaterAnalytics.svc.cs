@@ -144,6 +144,61 @@ namespace WaterAnalyticsService
 
             return myList;
         }
+
+       public List<WaterQuantLocation> getWaterQuantPerPersonArea(string Location, int ind, DateTime from, DateTime to)
+       {
+           DataTable dt = new DataTable();
+           SqlCommand command = new SqlCommand("GetWaterQuantByLocationPerPerson", connection);
+           command.CommandType = CommandType.StoredProcedure;
+           command.Parameters.AddWithValue("@Location", Location);
+           command.Parameters.AddWithValue("@indicator", ind);
+           command.Parameters.AddWithValue("@starttime", from);
+           command.Parameters.AddWithValue("@endtime", to);
+
+           connection.Open();
+           SqlDataAdapter daDetails = new SqlDataAdapter(command);
+           daDetails.Fill(dt);
+
+           List<WaterQuantLocation> myList = (List<WaterQuantLocation>)DataFiller.ConvertTo<WaterQuantLocation>(dt);
+
+           return myList;
+       }
+
+       public List<GroundWaterDetail> getGroundWaterByLocation(string Location, int from, int to)
+       {
+           DataTable dt = new DataTable();
+           SqlCommand command = new SqlCommand("GetGroundWaterByLocation", connection);
+           command.CommandType = CommandType.StoredProcedure;
+           command.Parameters.AddWithValue("@Location", Location);
+           command.Parameters.AddWithValue("@starttime", from);
+           command.Parameters.AddWithValue("@endtime", to);
+
+           connection.Open();
+           SqlDataAdapter daDetails = new SqlDataAdapter(command);
+           daDetails.Fill(dt);
+
+           List<GroundWaterDetail> myList = (List<GroundWaterDetail>)DataFiller.ConvertTo<GroundWaterDetail>(dt);
+
+           return myList;
+       }
+
+
+       public List<ZoneDetails> getDataByZone(DateTime from, DateTime to)
+       {
+           DataTable dt = new DataTable();
+           SqlCommand command = new SqlCommand("GetDataByZone", connection);
+           command.CommandType = CommandType.StoredProcedure;
+           command.Parameters.AddWithValue("@stime", from);
+           command.Parameters.AddWithValue("@etime", to);
+
+           connection.Open();
+           SqlDataAdapter daDetails = new SqlDataAdapter(command);
+           daDetails.Fill(dt);
+
+           List<ZoneDetails> myList = (List<ZoneDetails>)DataFiller.ConvertTo<ZoneDetails>(dt);
+
+           return myList;
+       }
        
     }
 }
