@@ -54,6 +54,9 @@
 
 </td>
 <td  style ="width:60%;">
+
+<asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <ContentTemplate>
 <table style="width:100%;vertical-align:top; text-align:left;">
 <tr>
 <td>
@@ -71,6 +74,23 @@
 </td>
 </tr>
 <tr>
+<td align="left">
+<asp:UpdateProgress ID="UpdateProgress1"  runat="server" AssociatedUpdatePanelID="UpdatePanel1">
+     <ProgressTemplate>
+                Processing...
+            </ProgressTemplate>
+    </asp:UpdateProgress>
+    </td>
+    </tr>
+</table>
+</ContentTemplate>
+</asp:UpdatePanel>
+    
+    
+<asp:UpdatePanel ID="UpdatePanel2" runat="server">
+<ContentTemplate>
+<table style="width:100%;vertical-align:top; text-align:left;">
+<tr>
 <td>
 <filter:chartfilter ID="filterQuantPerPeron" runat="server" />
 </td>
@@ -80,7 +100,19 @@
 <chartcontrol:chart runat="server" ID="chartQuantPerPersonVsTime" />
 </td>
 </tr>
+<tr>
+<td>
+ <asp:UpdateProgress ID="UpdateProgress2"  runat="server" AssociatedUpdatePanelID="UpdatePanel2">
+  <ProgressTemplate>
+                Processing...
+            </ProgressTemplate>
+    </asp:UpdateProgress>
+</td>
+</tr>
 </table>
+</ContentTemplate>
+</asp:UpdatePanel>
+
 </td>
 </tr>
 </table>
