@@ -15,6 +15,7 @@ namespace WaterAnalyticsSolution
 
         private WaterQuant[] quantVsTime = null;
         private WaterQuant[] quantPerPersonVsTime = null;
+        WaterAnalyticsClient client = null;
 
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -25,11 +26,16 @@ namespace WaterAnalyticsSolution
 
         }
         protected void Page_Load(object sender, EventArgs e)
-        {        
+        {
+            if (Session["userid"] == null)
+                Response.Redirect("Home.aspx");
+            else
+            {
                 chartQntyVsTime.Width = Unit.Pixel(600);
                 chartQuantPerPersonVsTime.Width = Unit.Pixel(600);
                 filterQuant.isLocationVisible = false;
-                filterQuantPerPeron.isLocationVisible = false;            
+                filterQuantPerPeron.isLocationVisible = false;
+            }
         }
 
         protected void Page_LoadComplete(object sender, EventArgs e)
@@ -38,6 +44,7 @@ namespace WaterAnalyticsSolution
             {
                 GetQuantVsTime();
                 GetQuantPerPersonVsTime();
+                BindProfileData();
             }      
         }
         protected void btnQuantVsTimeFetch_Click(object sender, EventArgs e)
@@ -62,7 +69,7 @@ namespace WaterAnalyticsSolution
                 if (filterQuant.FindControl("ddlXValue") != null)
                     Xvalue = Convert.ToInt32(((DropDownList)filterQuant.FindControl("ddlXValue")).SelectedValue);
 
-                WaterAnalyticsClient client = new WaterAnalyticsClient();
+                client = new WaterAnalyticsClient();
                 client.getWaterQuantByUserIdCompleted += new EventHandler<getWaterQuantByUserIdCompletedEventArgs>(client_getWaterQuantByUserIdCompleted);
                 if ((userId != null) && (Xvalue != -1) && (dtFrom != DateTime.MinValue) && (dtTo != DateTime.MinValue))
                 {
@@ -74,6 +81,31 @@ namespace WaterAnalyticsSolution
             catch (Exception ex)
             {
 
+            }
+        }
+
+        private void BindProfileData()
+        {
+            try
+            {
+                if (Session["userid"] != null)
+                {
+                    client.getDetailsAsync(Convert.ToInt32(Session["userid"]));
+                    client.getDetailsCompleted += new EventHandler<getDetailsCompletedEventArgs>(client_getDetailsCompleted);
+                }
+            }
+            catch { }
+        }
+
+        void client_getDetailsCompleted(object sender, getDetailsCompletedEventArgs e)
+        {
+            if(e.Result!=null)
+            {
+                IndAddress profileData = e.Result as IndAddress;
+                lblName.Text = profileData.Name;
+                lblEmailId.Text = profileData.Email;
+                lblNoOfPeople.Text =Convert.ToString(profileData.NoOfPeople);
+                lblAddress.Text = profileData.LocationName;
             }
         }
 
@@ -158,7 +190,7 @@ namespace WaterAnalyticsSolution
                     dtTo = Convert.ToDateTime(((TextBox)filterQuantPerPeron.FindControl("txtEndDate")).Text);
                 if (filterQuantPerPeron.FindControl("ddlXValue") != null)
                     Xvalue = Convert.ToInt32(((DropDownList)filterQuantPerPeron.FindControl("ddlXValue")).SelectedValue);
-                WaterAnalyticsClient client = new WaterAnalyticsClient();
+                client = new WaterAnalyticsClient();
                 client.getWaterQuantPerPersonCompleted += new EventHandler<getWaterQuantPerPersonCompletedEventArgs>(client_getWaterQuantPerPersonCompleted);
                 if ((userId != null) && (Xvalue != -1) && (dtFrom != DateTime.MinValue) && (dtTo != DateTime.MinValue))
                 {

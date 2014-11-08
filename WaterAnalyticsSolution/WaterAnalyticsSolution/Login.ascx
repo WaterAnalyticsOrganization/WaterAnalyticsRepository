@@ -1,7 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Login.ascx.cs" Inherits="WaterAnalyticsSolution.Login1" %>
 <br />
 <br />
-
+<asp:UpdatePanel ID="UpdatePanel1" runat="server">
+<ContentTemplate>
 <table>
 <tr>
 <td align="right">
@@ -31,6 +32,8 @@
 </tr>
 
 </table>
+</ContentTemplate>
+</asp:UpdatePanel>
 <br />
 <br />
 <br />
