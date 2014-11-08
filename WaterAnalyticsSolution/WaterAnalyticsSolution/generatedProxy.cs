@@ -147,6 +147,57 @@ namespace WaterAnalyticsService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="LocationDetails", Namespace="http://schemas.datacontract.org/2004/07/WaterAnalyticsService")]
+    public partial class LocationDetails : object, System.Runtime.Serialization.IExtensibleDataObject
+    {
+        
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private int Location_IdField;
+        
+        private string Location_nameField;
+        
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
+                return this.extensionDataField;
+            }
+            set
+            {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Location_Id
+        {
+            get
+            {
+                return this.Location_IdField;
+            }
+            set
+            {
+                this.Location_IdField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Location_name
+        {
+            get
+            {
+                return this.Location_nameField;
+            }
+            set
+            {
+                this.Location_nameField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="IndAddress", Namespace="http://schemas.datacontract.org/2004/07/WaterAnalyticsService")]
     public partial class IndAddress : object, System.Runtime.Serialization.IExtensibleDataObject
     {
@@ -255,6 +306,123 @@ namespace WaterAnalyticsService
             }
         }
     }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ZoneDetails", Namespace="http://schemas.datacontract.org/2004/07/WaterAnalyticsService")]
+    public partial class ZoneDetails : object, System.Runtime.Serialization.IExtensibleDataObject
+    {
+        
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private decimal QuantityField;
+        
+        private string ZoneField;
+        
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
+                return this.extensionDataField;
+            }
+            set
+            {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Quantity
+        {
+            get
+            {
+                return this.QuantityField;
+            }
+            set
+            {
+                this.QuantityField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Zone
+        {
+            get
+            {
+                return this.ZoneField;
+            }
+            set
+            {
+                this.ZoneField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GroundWaterDetail", Namespace="http://schemas.datacontract.org/2004/07/WaterAnalyticsService")]
+    public partial class GroundWaterDetail : object, System.Runtime.Serialization.IExtensibleDataObject
+    {
+        
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private string LocationNameField;
+        
+        private decimal QuantityField;
+        
+        private int StimeField;
+        
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
+                return this.extensionDataField;
+            }
+            set
+            {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LocationName
+        {
+            get
+            {
+                return this.LocationNameField;
+            }
+            set
+            {
+                this.LocationNameField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Quantity
+        {
+            get
+            {
+                return this.QuantityField;
+            }
+            set
+            {
+                this.QuantityField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Stime
+        {
+            get
+            {
+                return this.StimeField;
+            }
+            set
+            {
+                this.StimeField = value;
+            }
+        }
+    }
 }
 
 
@@ -295,6 +463,22 @@ public interface IWaterAnalytics
     
     WaterAnalyticsService.WaterQuant[] EndgetWaterQuantPerPerson(System.IAsyncResult result);
     
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWaterAnalytics/getAllLocation", ReplyAction="http://tempuri.org/IWaterAnalytics/getAllLocationResponse")]
+    WaterAnalyticsService.LocationDetails[] getAllLocation();
+    
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IWaterAnalytics/getAllLocation", ReplyAction="http://tempuri.org/IWaterAnalytics/getAllLocationResponse")]
+    System.IAsyncResult BegingetAllLocation(System.AsyncCallback callback, object asyncState);
+    
+    WaterAnalyticsService.LocationDetails[] EndgetAllLocation(System.IAsyncResult result);
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWaterAnalytics/getWaterQuantPerPersonArea", ReplyAction="http://tempuri.org/IWaterAnalytics/getWaterQuantPerPersonAreaResponse")]
+    WaterAnalyticsService.WaterQuantLocation[] getWaterQuantPerPersonArea(string Area, int ind, System.DateTime from, System.DateTime to);
+    
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IWaterAnalytics/getWaterQuantPerPersonArea", ReplyAction="http://tempuri.org/IWaterAnalytics/getWaterQuantPerPersonAreaResponse")]
+    System.IAsyncResult BegingetWaterQuantPerPersonArea(string Area, int ind, System.DateTime from, System.DateTime to, System.AsyncCallback callback, object asyncState);
+    
+    WaterAnalyticsService.WaterQuantLocation[] EndgetWaterQuantPerPersonArea(System.IAsyncResult result);
+    
     [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWaterAnalytics/UpdateDetails", ReplyAction="http://tempuri.org/IWaterAnalytics/UpdateDetailsResponse")]
     int UpdateDetails(int UserID, string Name, string email, int noOfPeople);
     
@@ -310,6 +494,22 @@ public interface IWaterAnalytics
     System.IAsyncResult BegingetDetails(int sensorId, System.AsyncCallback callback, object asyncState);
     
     WaterAnalyticsService.IndAddress EndgetDetails(System.IAsyncResult result);
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWaterAnalytics/getDataByZone", ReplyAction="http://tempuri.org/IWaterAnalytics/getDataByZoneResponse")]
+    WaterAnalyticsService.ZoneDetails[] getDataByZone(System.DateTime from, System.DateTime to);
+    
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IWaterAnalytics/getDataByZone", ReplyAction="http://tempuri.org/IWaterAnalytics/getDataByZoneResponse")]
+    System.IAsyncResult BegingetDataByZone(System.DateTime from, System.DateTime to, System.AsyncCallback callback, object asyncState);
+    
+    WaterAnalyticsService.ZoneDetails[] EndgetDataByZone(System.IAsyncResult result);
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWaterAnalytics/getGroundWaterByLocation", ReplyAction="http://tempuri.org/IWaterAnalytics/getGroundWaterByLocationResponse")]
+    WaterAnalyticsService.GroundWaterDetail[] getGroundWaterByLocation(string Location, int from, int to);
+    
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IWaterAnalytics/getGroundWaterByLocation", ReplyAction="http://tempuri.org/IWaterAnalytics/getGroundWaterByLocationResponse")]
+    System.IAsyncResult BegingetGroundWaterByLocation(string Location, int from, int to, System.AsyncCallback callback, object asyncState);
+    
+    WaterAnalyticsService.GroundWaterDetail[] EndgetGroundWaterByLocation(System.IAsyncResult result);
 }
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -411,6 +611,52 @@ public partial class getWaterQuantPerPersonCompletedEventArgs : System.Component
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+public partial class getAllLocationCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+    
+    private object[] results;
+    
+    public getAllLocationCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+            base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+    
+    public WaterAnalyticsService.LocationDetails[] Result
+    {
+        get
+        {
+            base.RaiseExceptionIfNecessary();
+            return ((WaterAnalyticsService.LocationDetails[])(this.results[0]));
+        }
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+public partial class getWaterQuantPerPersonAreaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+    
+    private object[] results;
+    
+    public getWaterQuantPerPersonAreaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+            base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+    
+    public WaterAnalyticsService.WaterQuantLocation[] Result
+    {
+        get
+        {
+            base.RaiseExceptionIfNecessary();
+            return ((WaterAnalyticsService.WaterQuantLocation[])(this.results[0]));
+        }
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
 public partial class UpdateDetailsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
 {
     
@@ -457,6 +703,52 @@ public partial class getDetailsCompletedEventArgs : System.ComponentModel.AsyncC
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+public partial class getDataByZoneCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+    
+    private object[] results;
+    
+    public getDataByZoneCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+            base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+    
+    public WaterAnalyticsService.ZoneDetails[] Result
+    {
+        get
+        {
+            base.RaiseExceptionIfNecessary();
+            return ((WaterAnalyticsService.ZoneDetails[])(this.results[0]));
+        }
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+public partial class getGroundWaterByLocationCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+    
+    private object[] results;
+    
+    public getGroundWaterByLocationCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+            base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+    
+    public WaterAnalyticsService.GroundWaterDetail[] Result
+    {
+        get
+        {
+            base.RaiseExceptionIfNecessary();
+            return ((WaterAnalyticsService.GroundWaterDetail[])(this.results[0]));
+        }
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
 public partial class WaterAnalyticsClient : System.ServiceModel.ClientBase<IWaterAnalytics>, IWaterAnalytics
 {
     
@@ -484,6 +776,18 @@ public partial class WaterAnalyticsClient : System.ServiceModel.ClientBase<IWate
     
     private System.Threading.SendOrPostCallback ongetWaterQuantPerPersonCompletedDelegate;
     
+    private BeginOperationDelegate onBegingetAllLocationDelegate;
+    
+    private EndOperationDelegate onEndgetAllLocationDelegate;
+    
+    private System.Threading.SendOrPostCallback ongetAllLocationCompletedDelegate;
+    
+    private BeginOperationDelegate onBegingetWaterQuantPerPersonAreaDelegate;
+    
+    private EndOperationDelegate onEndgetWaterQuantPerPersonAreaDelegate;
+    
+    private System.Threading.SendOrPostCallback ongetWaterQuantPerPersonAreaCompletedDelegate;
+    
     private BeginOperationDelegate onBeginUpdateDetailsDelegate;
     
     private EndOperationDelegate onEndUpdateDetailsDelegate;
@@ -495,6 +799,18 @@ public partial class WaterAnalyticsClient : System.ServiceModel.ClientBase<IWate
     private EndOperationDelegate onEndgetDetailsDelegate;
     
     private System.Threading.SendOrPostCallback ongetDetailsCompletedDelegate;
+    
+    private BeginOperationDelegate onBegingetDataByZoneDelegate;
+    
+    private EndOperationDelegate onEndgetDataByZoneDelegate;
+    
+    private System.Threading.SendOrPostCallback ongetDataByZoneCompletedDelegate;
+    
+    private BeginOperationDelegate onBegingetGroundWaterByLocationDelegate;
+    
+    private EndOperationDelegate onEndgetGroundWaterByLocationDelegate;
+    
+    private System.Threading.SendOrPostCallback ongetGroundWaterByLocationCompletedDelegate;
     
     public WaterAnalyticsClient()
     {
@@ -528,9 +844,17 @@ public partial class WaterAnalyticsClient : System.ServiceModel.ClientBase<IWate
     
     public event System.EventHandler<getWaterQuantPerPersonCompletedEventArgs> getWaterQuantPerPersonCompleted;
     
+    public event System.EventHandler<getAllLocationCompletedEventArgs> getAllLocationCompleted;
+    
+    public event System.EventHandler<getWaterQuantPerPersonAreaCompletedEventArgs> getWaterQuantPerPersonAreaCompleted;
+    
     public event System.EventHandler<UpdateDetailsCompletedEventArgs> UpdateDetailsCompleted;
     
     public event System.EventHandler<getDetailsCompletedEventArgs> getDetailsCompleted;
+    
+    public event System.EventHandler<getDataByZoneCompletedEventArgs> getDataByZoneCompleted;
+    
+    public event System.EventHandler<getGroundWaterByLocationCompletedEventArgs> getGroundWaterByLocationCompleted;
     
     public int isAuthenticated(int userId, string password)
     {
@@ -800,6 +1124,134 @@ public partial class WaterAnalyticsClient : System.ServiceModel.ClientBase<IWate
                     to}, this.onEndgetWaterQuantPerPersonDelegate, this.ongetWaterQuantPerPersonCompletedDelegate, userState);
     }
     
+    public WaterAnalyticsService.LocationDetails[] getAllLocation()
+    {
+        return base.Channel.getAllLocation();
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    public System.IAsyncResult BegingetAllLocation(System.AsyncCallback callback, object asyncState)
+    {
+        return base.Channel.BegingetAllLocation(callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    public WaterAnalyticsService.LocationDetails[] EndgetAllLocation(System.IAsyncResult result)
+    {
+        return base.Channel.EndgetAllLocation(result);
+    }
+    
+    private System.IAsyncResult OnBegingetAllLocation(object[] inValues, System.AsyncCallback callback, object asyncState)
+    {
+        return this.BegingetAllLocation(callback, asyncState);
+    }
+    
+    private object[] OnEndgetAllLocation(System.IAsyncResult result)
+    {
+        WaterAnalyticsService.LocationDetails[] retVal = this.EndgetAllLocation(result);
+        return new object[] {
+                retVal};
+    }
+    
+    private void OngetAllLocationCompleted(object state)
+    {
+        if ((this.getAllLocationCompleted != null))
+        {
+            InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+            this.getAllLocationCompleted(this, new getAllLocationCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+        }
+    }
+    
+    public void getAllLocationAsync()
+    {
+        this.getAllLocationAsync(null);
+    }
+    
+    public void getAllLocationAsync(object userState)
+    {
+        if ((this.onBegingetAllLocationDelegate == null))
+        {
+            this.onBegingetAllLocationDelegate = new BeginOperationDelegate(this.OnBegingetAllLocation);
+        }
+        if ((this.onEndgetAllLocationDelegate == null))
+        {
+            this.onEndgetAllLocationDelegate = new EndOperationDelegate(this.OnEndgetAllLocation);
+        }
+        if ((this.ongetAllLocationCompletedDelegate == null))
+        {
+            this.ongetAllLocationCompletedDelegate = new System.Threading.SendOrPostCallback(this.OngetAllLocationCompleted);
+        }
+        base.InvokeAsync(this.onBegingetAllLocationDelegate, null, this.onEndgetAllLocationDelegate, this.ongetAllLocationCompletedDelegate, userState);
+    }
+    
+    public WaterAnalyticsService.WaterQuantLocation[] getWaterQuantPerPersonArea(string Area, int ind, System.DateTime from, System.DateTime to)
+    {
+        return base.Channel.getWaterQuantPerPersonArea(Area, ind, from, to);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    public System.IAsyncResult BegingetWaterQuantPerPersonArea(string Area, int ind, System.DateTime from, System.DateTime to, System.AsyncCallback callback, object asyncState)
+    {
+        return base.Channel.BegingetWaterQuantPerPersonArea(Area, ind, from, to, callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    public WaterAnalyticsService.WaterQuantLocation[] EndgetWaterQuantPerPersonArea(System.IAsyncResult result)
+    {
+        return base.Channel.EndgetWaterQuantPerPersonArea(result);
+    }
+    
+    private System.IAsyncResult OnBegingetWaterQuantPerPersonArea(object[] inValues, System.AsyncCallback callback, object asyncState)
+    {
+        string Area = ((string)(inValues[0]));
+        int ind = ((int)(inValues[1]));
+        System.DateTime from = ((System.DateTime)(inValues[2]));
+        System.DateTime to = ((System.DateTime)(inValues[3]));
+        return this.BegingetWaterQuantPerPersonArea(Area, ind, from, to, callback, asyncState);
+    }
+    
+    private object[] OnEndgetWaterQuantPerPersonArea(System.IAsyncResult result)
+    {
+        WaterAnalyticsService.WaterQuantLocation[] retVal = this.EndgetWaterQuantPerPersonArea(result);
+        return new object[] {
+                retVal};
+    }
+    
+    private void OngetWaterQuantPerPersonAreaCompleted(object state)
+    {
+        if ((this.getWaterQuantPerPersonAreaCompleted != null))
+        {
+            InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+            this.getWaterQuantPerPersonAreaCompleted(this, new getWaterQuantPerPersonAreaCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+        }
+    }
+    
+    public void getWaterQuantPerPersonAreaAsync(string Area, int ind, System.DateTime from, System.DateTime to)
+    {
+        this.getWaterQuantPerPersonAreaAsync(Area, ind, from, to, null);
+    }
+    
+    public void getWaterQuantPerPersonAreaAsync(string Area, int ind, System.DateTime from, System.DateTime to, object userState)
+    {
+        if ((this.onBegingetWaterQuantPerPersonAreaDelegate == null))
+        {
+            this.onBegingetWaterQuantPerPersonAreaDelegate = new BeginOperationDelegate(this.OnBegingetWaterQuantPerPersonArea);
+        }
+        if ((this.onEndgetWaterQuantPerPersonAreaDelegate == null))
+        {
+            this.onEndgetWaterQuantPerPersonAreaDelegate = new EndOperationDelegate(this.OnEndgetWaterQuantPerPersonArea);
+        }
+        if ((this.ongetWaterQuantPerPersonAreaCompletedDelegate == null))
+        {
+            this.ongetWaterQuantPerPersonAreaCompletedDelegate = new System.Threading.SendOrPostCallback(this.OngetWaterQuantPerPersonAreaCompleted);
+        }
+        base.InvokeAsync(this.onBegingetWaterQuantPerPersonAreaDelegate, new object[] {
+                    Area,
+                    ind,
+                    from,
+                    to}, this.onEndgetWaterQuantPerPersonAreaDelegate, this.ongetWaterQuantPerPersonAreaCompletedDelegate, userState);
+    }
+    
     public int UpdateDetails(int UserID, string Name, string email, int noOfPeople)
     {
         return base.Channel.UpdateDetails(UserID, Name, email, noOfPeople);
@@ -928,5 +1380,135 @@ public partial class WaterAnalyticsClient : System.ServiceModel.ClientBase<IWate
         }
         base.InvokeAsync(this.onBegingetDetailsDelegate, new object[] {
                     sensorId}, this.onEndgetDetailsDelegate, this.ongetDetailsCompletedDelegate, userState);
+    }
+    
+    public WaterAnalyticsService.ZoneDetails[] getDataByZone(System.DateTime from, System.DateTime to)
+    {
+        return base.Channel.getDataByZone(from, to);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    public System.IAsyncResult BegingetDataByZone(System.DateTime from, System.DateTime to, System.AsyncCallback callback, object asyncState)
+    {
+        return base.Channel.BegingetDataByZone(from, to, callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    public WaterAnalyticsService.ZoneDetails[] EndgetDataByZone(System.IAsyncResult result)
+    {
+        return base.Channel.EndgetDataByZone(result);
+    }
+    
+    private System.IAsyncResult OnBegingetDataByZone(object[] inValues, System.AsyncCallback callback, object asyncState)
+    {
+        System.DateTime from = ((System.DateTime)(inValues[0]));
+        System.DateTime to = ((System.DateTime)(inValues[1]));
+        return this.BegingetDataByZone(from, to, callback, asyncState);
+    }
+    
+    private object[] OnEndgetDataByZone(System.IAsyncResult result)
+    {
+        WaterAnalyticsService.ZoneDetails[] retVal = this.EndgetDataByZone(result);
+        return new object[] {
+                retVal};
+    }
+    
+    private void OngetDataByZoneCompleted(object state)
+    {
+        if ((this.getDataByZoneCompleted != null))
+        {
+            InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+            this.getDataByZoneCompleted(this, new getDataByZoneCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+        }
+    }
+    
+    public void getDataByZoneAsync(System.DateTime from, System.DateTime to)
+    {
+        this.getDataByZoneAsync(from, to, null);
+    }
+    
+    public void getDataByZoneAsync(System.DateTime from, System.DateTime to, object userState)
+    {
+        if ((this.onBegingetDataByZoneDelegate == null))
+        {
+            this.onBegingetDataByZoneDelegate = new BeginOperationDelegate(this.OnBegingetDataByZone);
+        }
+        if ((this.onEndgetDataByZoneDelegate == null))
+        {
+            this.onEndgetDataByZoneDelegate = new EndOperationDelegate(this.OnEndgetDataByZone);
+        }
+        if ((this.ongetDataByZoneCompletedDelegate == null))
+        {
+            this.ongetDataByZoneCompletedDelegate = new System.Threading.SendOrPostCallback(this.OngetDataByZoneCompleted);
+        }
+        base.InvokeAsync(this.onBegingetDataByZoneDelegate, new object[] {
+                    from,
+                    to}, this.onEndgetDataByZoneDelegate, this.ongetDataByZoneCompletedDelegate, userState);
+    }
+    
+    public WaterAnalyticsService.GroundWaterDetail[] getGroundWaterByLocation(string Location, int from, int to)
+    {
+        return base.Channel.getGroundWaterByLocation(Location, from, to);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    public System.IAsyncResult BegingetGroundWaterByLocation(string Location, int from, int to, System.AsyncCallback callback, object asyncState)
+    {
+        return base.Channel.BegingetGroundWaterByLocation(Location, from, to, callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    public WaterAnalyticsService.GroundWaterDetail[] EndgetGroundWaterByLocation(System.IAsyncResult result)
+    {
+        return base.Channel.EndgetGroundWaterByLocation(result);
+    }
+    
+    private System.IAsyncResult OnBegingetGroundWaterByLocation(object[] inValues, System.AsyncCallback callback, object asyncState)
+    {
+        string Location = ((string)(inValues[0]));
+        int from = ((int)(inValues[1]));
+        int to = ((int)(inValues[2]));
+        return this.BegingetGroundWaterByLocation(Location, from, to, callback, asyncState);
+    }
+    
+    private object[] OnEndgetGroundWaterByLocation(System.IAsyncResult result)
+    {
+        WaterAnalyticsService.GroundWaterDetail[] retVal = this.EndgetGroundWaterByLocation(result);
+        return new object[] {
+                retVal};
+    }
+    
+    private void OngetGroundWaterByLocationCompleted(object state)
+    {
+        if ((this.getGroundWaterByLocationCompleted != null))
+        {
+            InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+            this.getGroundWaterByLocationCompleted(this, new getGroundWaterByLocationCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+        }
+    }
+    
+    public void getGroundWaterByLocationAsync(string Location, int from, int to)
+    {
+        this.getGroundWaterByLocationAsync(Location, from, to, null);
+    }
+    
+    public void getGroundWaterByLocationAsync(string Location, int from, int to, object userState)
+    {
+        if ((this.onBegingetGroundWaterByLocationDelegate == null))
+        {
+            this.onBegingetGroundWaterByLocationDelegate = new BeginOperationDelegate(this.OnBegingetGroundWaterByLocation);
+        }
+        if ((this.onEndgetGroundWaterByLocationDelegate == null))
+        {
+            this.onEndgetGroundWaterByLocationDelegate = new EndOperationDelegate(this.OnEndgetGroundWaterByLocation);
+        }
+        if ((this.ongetGroundWaterByLocationCompletedDelegate == null))
+        {
+            this.ongetGroundWaterByLocationCompletedDelegate = new System.Threading.SendOrPostCallback(this.OngetGroundWaterByLocationCompleted);
+        }
+        base.InvokeAsync(this.onBegingetGroundWaterByLocationDelegate, new object[] {
+                    Location,
+                    from,
+                    to}, this.onEndgetGroundWaterByLocationDelegate, this.ongetGroundWaterByLocationCompletedDelegate, userState);
     }
 }
