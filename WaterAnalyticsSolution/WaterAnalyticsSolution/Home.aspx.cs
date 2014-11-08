@@ -11,7 +11,8 @@ namespace WaterAnalyticsSolution
     public partial class Login : System.Web.UI.Page
     {
 
-        
+
+        WaterAnalyticsClient client = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,16 +29,44 @@ namespace WaterAnalyticsSolution
         }
         protected void btnSignIn_Clicked(object sender, EventArgs e)
         {
-            int isAuthenticated;
-            TextBox txtSensorId = (TextBox)login.FindControl("txtSensorId");
-            TextBox txtPassword = (TextBox)login.FindControl("txtPassword");
-            if (txtSensorId != null && txtPassword != null)
-            {
-               // isAuthenticated = client.isAuthenticated(Convert.ToInt32(txtSensorId.Text), txtPassword.Text);
-            }
+            try
+            {             
+                int isAuthenticated = 0;
+                client = new WaterAnalyticsClient();               
+                TextBox txtSensorId = (TextBox)login.FindControl("txtSensorId");
+                TextBox txtPassword = (TextBox)login.FindControl("txtPassword");
+                if (string.IsNullOrEmpty(txtSensorId.Text) || string.IsNullOrEmpty(txtPassword.Text))
+                {
+                    ((Label)login.FindControl("lblErrorMessage")).Text = "Invalid Credentials!!!";
+                    return;
+                }
+                Session["userid"] = null;
+                if (txtSensorId != null && txtPassword != null)
+                {
+                    isAuthenticated = client.isAuthenticated(Convert.ToInt32(txtSensorId.Text), txtPassword.Text);
+                }
+                if (isAuthenticated == 1)
+                {
+                    Session["userid"] = isAuthenticated;
+                    Response.Redirect("MyProfile.aspx");
+                }
+                else if (isAuthenticated == 2)
+                {
+                    Session["userid"] = isAuthenticated;
+                    Response.Redirect("CompanyRole.aspx");
+                }
+                else
+                {
+                    Session["userid"] = null;
+                    ((Label)login.FindControl("lblErrorMessage")).Text = "Invalid Credentials!!!";
+                }
 
-            
-           
+            }
+            catch { }
         }
+
+       
+
+        
     }
 }

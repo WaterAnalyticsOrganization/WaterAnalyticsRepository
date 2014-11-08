@@ -25,6 +25,8 @@
 <tr>
 <td colspan="2" align="center">
 <asp:Button ID="btnSignIn" runat="server" text="Sign In" OnClick="btnSignIn_Click"/>
+<br />
+    <asp:Label ID="lblErrorMessage" runat="server" Text=""></asp:Label>
 </td>
 </tr>
 
