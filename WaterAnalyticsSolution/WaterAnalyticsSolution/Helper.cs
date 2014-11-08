@@ -13,10 +13,10 @@ namespace WaterAnalyticsSolution
         {
             List<ListItem> lstValues = new List<ListItem>();
             lstValues.Add(new ListItem() { Text = "Hourly", Value = "0" });
-            lstValues.Add(new ListItem() { Text = "Daily", Value = "0" });
-            lstValues.Add(new ListItem() { Text = "Weekly", Value = "0" });
-            lstValues.Add(new ListItem() { Text = "Monthly", Value = "0" });
-            lstValues.Add(new ListItem() { Text = "Yearly", Value = "0" });
+            lstValues.Add(new ListItem() { Text = "Daily", Value = "1" });
+            lstValues.Add(new ListItem() { Text = "Weekly", Value = "2" });
+            lstValues.Add(new ListItem() { Text = "Monthly", Value = "3" });
+            lstValues.Add(new ListItem() { Text = "Yearly", Value = "4" });
 
             return lstValues;
         }

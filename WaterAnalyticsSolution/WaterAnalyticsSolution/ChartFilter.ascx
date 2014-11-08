@@ -7,7 +7,7 @@
 <asp:Label runat="server" id="lblStartDate" Text="Start Date :" Width="100px" ></asp:Label>
 </td>
 <td>
-<asp:TextBox ID="txtStartDate" runat="server" ReadOnly="true" Width="100px"></asp:TextBox>
+<asp:TextBox ID="txtStartDate" runat="server" Width="100px"></asp:TextBox>
 </td>
 <td>
 <asp:ImageButton id="imgStartDatePopUp"  ImageUrl="~/Images/calendar.png" ImageAlign="Middle" runat="server" />   
@@ -17,7 +17,7 @@
 <asp:Label runat="server" id="lblEndDate" Text="End Date :" Width="75px" align="right"></asp:Label>
 </td>
 <td>
-<asp:TextBox ID="txtEndDate" runat="server" ReadOnly="true" Width="100px" ></asp:TextBox>
+<asp:TextBox ID="txtEndDate" runat="server" Width="100px" ></asp:TextBox>
 </td>
 <td>
 <asp:ImageButton id="imgEndDatePopUp" ImageUrl="~/Images/calendar.png" ImageAlign="Middle" runat="server" />

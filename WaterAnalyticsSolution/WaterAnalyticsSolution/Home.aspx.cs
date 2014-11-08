@@ -10,7 +10,8 @@ namespace WaterAnalyticsSolution
 {
     public partial class Login : System.Web.UI.Page
     {
-        WaterAnalyticsService.WaterAnalyticsClient client = new WaterAnalyticsService.WaterAnalyticsClient();
+
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -32,7 +33,7 @@ namespace WaterAnalyticsSolution
             TextBox txtPassword = (TextBox)login.FindControl("txtPassword");
             if (txtSensorId != null && txtPassword != null)
             {
-                isAuthenticated = client.isAuthenticated(Convert.ToInt32(txtSensorId.Text), txtPassword.Text);
+               // isAuthenticated = client.isAuthenticated(Convert.ToInt32(txtSensorId.Text), txtPassword.Text);
             }
 
             
