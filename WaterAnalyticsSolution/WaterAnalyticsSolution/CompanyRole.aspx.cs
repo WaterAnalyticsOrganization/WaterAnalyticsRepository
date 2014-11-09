@@ -14,6 +14,7 @@ namespace WaterAnalyticsSolution
     {
         private WaterQuantLocation[] quantVsTime = null;
         private WaterQuantLocation[] quantPerPersonVsTime = null;
+        private ZoneDetails[] quantRegion = null;
 
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -94,14 +95,14 @@ namespace WaterAnalyticsSolution
                     dtToQuantPerPerson = Convert.ToDateTime(((TextBox)filterQuantTimeLocation.FindControl("txtEndDate")).Text);
                 if (filterQuantTimeLocation.FindControl("ddlXValue") != null)
                     ind2 = Convert.ToInt32(((DropDownList)filterQuantTimeLocation.FindControl("ddlXValue")).SelectedValue);
-             //Data returned incorrectly - Priya
+            
             client.getWaterQuantByLocationAsync(strLocationQuant, ind1, dtFromQuant, dtToQuant);
-            //Commented out below as service failing -Priya
-            //client.getWaterQuantPerPersonAreaAsync(strLocationQuantPerPerson, ind2, dtFromQuantPerPerson, dtToQuantPerPerson);
+            
+            client.getWaterQuantPerPersonAreaAsync(strLocationQuantPerPerson, ind2, dtFromQuantPerPerson, dtToQuantPerPerson);
             
             //client.getGroundWaterByLocationAsync();
-            //commented out below as error in service method - Priya
-            //client.getDataByZoneAsync(dtFromRegion,dtToRegion);
+            
+            client.getDataByZoneAsync(dtFromRegion,dtToRegion);
             }
             #endregion
     
@@ -144,7 +145,7 @@ namespace WaterAnalyticsSolution
                 quantvsTime.Series[0].XValueMember = "STime";
                 quantvsTime.Series[0].YValueMembers = "Quantity";
 
-                quantvsTime.Series[0].ToolTip = "Data Point Y Value: #VALY{C0}";
+                quantvsTime.Series[0].ToolTip = "Water Usage : #VALY{C0}";
                 quantvsTime.Series[0].ChartType = SeriesChartType.Line;
 
                 quantvsTime.Titles.Clear();
@@ -194,7 +195,7 @@ namespace WaterAnalyticsSolution
                 chartQuantvsTimeLocs.Series[0].XValueMember = "STime";
                 chartQuantvsTimeLocs.Series[0].YValueMembers = "Quantity";
 
-                chartQuantvsTimeLocs.Series[0].ToolTip = "Data Point Y Value: #VALY{C0}";
+                chartQuantvsTimeLocs.Series[0].ToolTip = "Water Usage : #VALY{C0}";
                 chartQuantvsTimeLocs.Series[0].ChartType = SeriesChartType.Line;
 
                 chartQuantvsTimeLocs.Titles.Clear();
@@ -226,6 +227,41 @@ namespace WaterAnalyticsSolution
         {
 
 
+            if (e.Result != null)
+            {
+                Session["quantRegion"] = e.Result;
+                quantRegion = e.Result;
+                BindQuantPerRegion(quantRegion);
+                if (Page.IsPostBack && Session["quantPerPersonVsTime"] != null)
+                {
+                    quantPerPersonVsTime = Session["quantPerPersonVsTime"] as WaterQuantLocation[];
+                    BindQuantPerPersonVsTime(quantPerPersonVsTime);
+                }
+            }
+        }
+
+        protected void BindQuantPerRegion(ZoneDetails[] quantRegion)
+        {
+            if (regionChart.FindControl("chrtAnalytics") != null)
+            {
+                Chart quantvsTime = (Chart)regionChart.FindControl("chrtAnalytics");
+                quantvsTime.DataSource = quantRegion;
+                quantvsTime.Series.Add(new Series());
+
+              
+                quantvsTime.Series[0].Points.DataBindXY(quantRegion, "Region", quantRegion, "Quantity");
+                quantvsTime.Series[0].ToolTip = "Water Usage : #VALY{C0}";
+                quantvsTime.Series[0].ChartType = SeriesChartType.Pie;
+                quantvsTime.ChartAreas[0].BackColor = Color.Transparent;
+                quantvsTime.Titles.Clear();
+                quantvsTime.Titles.Add("Regional Water Consumption Data");
+                
+
+                
+
+            }
+          
+        
         }
         protected void btnQuantVsTime_Click(object sender, EventArgs e)
         { 
