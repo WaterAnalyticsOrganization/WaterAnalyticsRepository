@@ -197,7 +197,7 @@ namespace WaterAnalyticsService
         }
 
         [DataMember]
-        public string LocationName
+        public string Location_name
         {
             get { return locationName; }
             set { locationName = value; }
@@ -214,14 +214,14 @@ namespace WaterAnalyticsService
     [DataContract]
     public class ZoneDetails
     {
-        string zone;
+        string region;
         decimal quantity;
 
         [DataMember]
-        public string Zone
+        public string Region
         {
-            get { return zone; }
-            set { zone = value; }
+            get { return region; }
+            set { region = value; }
         }
        
         [DataMember]
