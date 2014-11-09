@@ -317,7 +317,7 @@ namespace WaterAnalyticsService
         
         private decimal QuantityField;
         
-        private string ZoneField;
+        private string RegionField;
         
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData
         {
@@ -345,15 +345,15 @@ namespace WaterAnalyticsService
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Zone
+        public string Region
         {
             get
             {
-                return this.ZoneField;
+                return this.RegionField;
             }
             set
             {
-                this.ZoneField = value;
+                this.RegionField = value;
             }
         }
     }
@@ -366,7 +366,7 @@ namespace WaterAnalyticsService
         
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        private string LocationNameField;
+        private string Location_nameField;
         
         private decimal QuantityField;
         
@@ -385,15 +385,15 @@ namespace WaterAnalyticsService
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string LocationName
+        public string Location_name
         {
             get
             {
-                return this.LocationNameField;
+                return this.Location_nameField;
             }
             set
             {
-                this.LocationNameField = value;
+                this.Location_nameField = value;
             }
         }
         
