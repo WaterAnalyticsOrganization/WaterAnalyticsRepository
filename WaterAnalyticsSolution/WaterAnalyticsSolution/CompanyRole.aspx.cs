@@ -12,19 +12,23 @@ namespace WaterAnalyticsSolution
 {
     public partial class CompanyRole : System.Web.UI.Page
     {
-        private WaterQuantLocation[] quantVsTime = null;
-        private WaterQuantLocation[] quantPerPersonVsTime = null;
-        private ZoneDetails[] quantRegion = null;
+        #region Declare Variables
+        //private WaterQuantLocation[] quantVsTime = null;
+        //private WaterQuantLocation[] quantPerPersonVsTime = null;
+       // private ZoneDetails[] quantRegion = null;
+        private Int32 quantVsTimeItems = 0;
+        private Int32 quantPerPersonVsTimeItems = 0;
+        private Int32 quantGroundVsTimeItems = 0;
+        private List<Series> lstSeriesChart1 = new List<Series>();
+        private List<Series> lstSeriesChart2 = new List<Series>();
+        #endregion
 
         protected void Page_Init(object sender, EventArgs e)
         {
+            #region Add Handler
             filterQuantByTime.btnFetchClickHandler+= new EventHandler(btnQuantVsTime_Click);
             filterQuantTimeLocation.btnFetchClickHandler += new EventHandler(btnQuantPerPerson_Click);
-
-        
-        }
-        protected void Page_Load(object sender, EventArgs e)
-        {
+            #endregion
             #region Initialiaze controls
             chartGroundVsUsage.Width = Unit.Pixel(480);
             chartQuantVsTime.Width = Unit.Pixel(480);
@@ -34,95 +38,158 @@ namespace WaterAnalyticsSolution
             regionChart.Width = Unit.Pixel(480);
             ddlStartYear.DataSource = Helper.GetYear();
             ddlStartYear.DataBind();
-            ddlStartYear.SelectedIndex = Helper.GetYear().Count-1;
+            ddlStartYear.SelectedIndex = Helper.GetYear().Count - 1;
             ddlEndYear.DataSource = Helper.GetYear();
             ddlEndYear.DataBind();
-            ddlEndYear.SelectedIndex = Helper.GetYear().Count-1;
+            ddlEndYear.SelectedIndex = Helper.GetYear().Count - 1;
             txtStartDate.Text = DateTime.Today.ToShortDateString();
             txtEndDate.Text = DateTime.Today.ToShortDateString();
             #endregion
-
-          
-
+        }
+        protected void Page_Load(object sender, EventArgs e)
+        {
+           
         }
         protected void Page_LoadComplete(object sender, EventArgs e)
          { 
             #region DataBind
             if(!IsPostBack)
             {
-            WaterAnalyticsClient client = new WaterAnalyticsClient();
-            client.getWaterQuantByLocationCompleted += new EventHandler<getWaterQuantByLocationCompletedEventArgs>(client_getWaterQuantByLocationCompleted); 
-            client.getWaterQuantPerPersonAreaCompleted +=new EventHandler<getWaterQuantPerPersonAreaCompletedEventArgs>(client_getWaterQuantPerPersonAreaCompleted);
-            client.getGroundWaterByLocationCompleted +=new EventHandler<getGroundWaterByLocationCompletedEventArgs>(client_getGroundWaterByLocationCompleted);
-            client.getDataByZoneCompleted +=new EventHandler<getDataByZoneCompletedEventArgs>(client_getDataByZoneCompleted);
+                ChartWaterQuantUsageBinding();
+                ChartWaterQuantPerPersonUsageBinding();
+                ChartRegionBinding();
+                             
+             }
+           #endregion
 
-            string strLocationQuant = string.Empty;
-            string strLocationQuantPerPerson = string.Empty;
-           // string strLocationGround string.Empty;
-            DateTime dtFromQuant = DateTime.MinValue;
-            DateTime dtToQuant=DateTime.MinValue;
-            DateTime dtFromQuantPerPerson=DateTime.MinValue;
-            DateTime dtToQuantPerPerson=DateTime.MinValue;
-            DateTime dtFromRegion =Convert.ToDateTime(txtStartDate.Text);
-            DateTime dtToRegion = Convert.ToDateTime(txtStartDate.Text);
-            Int32 startYear = Convert.ToInt32(ddlStartYear.SelectedItem.Text);
-            Int32 endYear = Convert.ToInt32(ddlEndYear.SelectedItem.Text);
-            Int32 ind1 = 0;
-            Int32 ind2 = 0;
-             
-
-            if(filterQuantByTime.FindControl("chkList")!=null)
+         }
+        protected void ChartWaterQuantUsageBinding()
+        {
+            try
             {
-              strLocationQuant = ((CheckBoxList)filterQuantByTime.FindControl("chkList")).SelectedItem.Text;
-            }
-            if(filterQuantTimeLocation.FindControl("chkList")!=null)
-            {
-              strLocationQuantPerPerson = ((CheckBoxList)filterQuantTimeLocation.FindControl("chkList")).SelectedItem.Text;
-            }
-            
-                 if (filterQuantByTime.FindControl("txtStartDate") != null)
-                    dtFromQuant = Convert.ToDateTime(((TextBox)filterQuantByTime.FindControl("txtStartDate")).Text);
-                if (filterQuantByTime.FindControl("txtEndDate") != null)
-                    dtToQuant = Convert.ToDateTime(((TextBox)filterQuantByTime.FindControl("txtEndDate")).Text);
-                if (filterQuantByTime.FindControl("ddlXValue") != null)
-                    ind1 = Convert.ToInt32(((DropDownList)filterQuantByTime.FindControl("ddlXValue")).SelectedValue);
+                WaterAnalyticsClient client = new WaterAnalyticsClient();
+                client.getWaterQuantByLocationCompleted += new EventHandler<getWaterQuantByLocationCompletedEventArgs>(client_getWaterQuantByLocationCompleted);
+               
+                #region Get Parameters
+                List<ListItem> lstLocationQuant = new List<ListItem>();
+                 DateTime dtFromQuant = DateTime.MinValue;
+                 DateTime dtToQuant = DateTime.MinValue;
+                 Int32 ind1 = 0;
+                 foreach (ListItem item in ((CheckBoxList)filterQuantByTime.FindControl("chkList")).Items)
+                 {
+                     if (item.Selected == true)
+                     {
 
+                         lstLocationQuant.Add(item);
+                     }
+                 }
 
                 
-                 if (filterQuantTimeLocation.FindControl("txtStartDate") != null)
+                 if (filterQuantByTime.FindControl("txtStartDate") != null)
+                     dtFromQuant = Convert.ToDateTime(((TextBox)filterQuantByTime.FindControl("txtStartDate")).Text);
+                 if (filterQuantByTime.FindControl("txtEndDate") != null)
+                     dtToQuant = Convert.ToDateTime(((TextBox)filterQuantByTime.FindControl("txtEndDate")).Text);
+                 if (filterQuantByTime.FindControl("ddlXValue") != null)
+                     ind1 = Convert.ToInt32(((DropDownList)filterQuantByTime.FindControl("ddlXValue")).SelectedValue);
+
+                 quantVsTimeItems = lstLocationQuant.Count();
+                #endregion
+
+                 for (int i = 0; i < lstLocationQuant.Count; i++)
+                 {
+                     client.getWaterQuantByLocationAsync(lstLocationQuant[i].Text, ind1, dtFromQuant, dtToQuant);
+                 }
+                  
+            }
+            catch (Exception ex)
+            { 
+            
+            
+            }
+        }
+        protected void ChartWaterQuantPerPersonUsageBinding()
+        {
+            try
+            {
+                WaterAnalyticsClient client = new WaterAnalyticsClient();
+                client.getWaterQuantPerPersonAreaCompleted += new EventHandler<getWaterQuantPerPersonAreaCompletedEventArgs>(client_getWaterQuantPerPersonAreaCompleted);
+                #region Get Parameters
+
+                List<ListItem> lstLocationQuantPerPerson = new List<ListItem>();
+                DateTime dtFromQuantPerPerson = DateTime.MinValue;
+                DateTime dtToQuantPerPerson = DateTime.MinValue;
+                Int32 ind2 = 0;
+
+                if (filterQuantTimeLocation.FindControl("txtStartDate") != null)
                     dtFromQuantPerPerson = Convert.ToDateTime(((TextBox)filterQuantTimeLocation.FindControl("txtStartDate")).Text);
                 if (filterQuantTimeLocation.FindControl("txtEndDate") != null)
                     dtToQuantPerPerson = Convert.ToDateTime(((TextBox)filterQuantTimeLocation.FindControl("txtEndDate")).Text);
                 if (filterQuantTimeLocation.FindControl("ddlXValue") != null)
                     ind2 = Convert.ToInt32(((DropDownList)filterQuantTimeLocation.FindControl("ddlXValue")).SelectedValue);
-            
-            client.getWaterQuantByLocationAsync(strLocationQuant, ind1, dtFromQuant, dtToQuant);
-            
-            client.getWaterQuantPerPersonAreaAsync(strLocationQuantPerPerson, ind2, dtFromQuantPerPerson, dtToQuantPerPerson);
-            
-            //client.getGroundWaterByLocationAsync();
-            
-            client.getDataByZoneAsync(dtFromRegion,dtToRegion);
-            }
-            #endregion
-    
 
+                foreach (ListItem item in ((CheckBoxList)filterQuantTimeLocation.FindControl("chkList")).Items)
+                {
+                    if (item.Selected == true)
+                    {
+
+                        lstLocationQuantPerPerson.Add(item);
+                    }
+                }
+
+                quantPerPersonVsTimeItems = lstLocationQuantPerPerson.Count();
+                #endregion
+                for (int i = 0; i < lstLocationQuantPerPerson.Count; i++)
+                {
+                    client.getWaterQuantPerPersonAreaAsync(lstLocationQuantPerPerson[i].Text, ind2, dtFromQuantPerPerson, dtToQuantPerPerson);
+                }
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+
+        }
+        protected void ChartGroundWaterAndUsageBinding()
+        {
+            try
+            {
+                WaterAnalyticsClient client = new WaterAnalyticsClient();
+                client.getGroundWaterByLocationCompleted += new EventHandler<getGroundWaterByLocationCompletedEventArgs>(client_getGroundWaterByLocationCompleted);
+
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+        }
+        protected void ChartRegionBinding()
+        { try {
+
+                WaterAnalyticsClient client = new WaterAnalyticsClient();
+                client.getDataByZoneCompleted += new EventHandler<getDataByZoneCompletedEventArgs>(client_getDataByZoneCompleted);
+                client.getDataByZoneAsync(Convert.ToDateTime(txtStartDate.Text),  Convert.ToDateTime(txtEndDate.Text));
             
+            }
+
+            catch (Exception ex)
+            {
+
+
+            }
+
         }
         protected void client_getWaterQuantByLocationCompleted(object sender, getWaterQuantByLocationCompletedEventArgs e)
         {
             try
             {
+               
                 if (e.Result != null)
                 {
-                    Session["quantVsTime"] = e.Result;
-                    quantVsTime = e.Result;
-                    BindQuantVsTime(quantVsTime);
-                    if (Page.IsPostBack && Session["quantVsTime"] != null)
-                    {
-                        quantVsTime = Session["quantVsTime"] as WaterQuantLocation[];
-                        BindQuantVsTime(quantVsTime);
-                    }
+                   
+                    BindQuantVsTime(e.Result);
+                   
                 }
 
             }
@@ -135,35 +202,55 @@ namespace WaterAnalyticsSolution
         }
         protected void BindQuantVsTime(WaterQuantLocation[] quantVsTime)
         {
-            if (chartQuantVsTime.FindControl("chrtAnalytics") != null)
+            try
             {
-                Chart quantvsTime = (Chart)chartQuantVsTime.FindControl("chrtAnalytics");
-                quantvsTime.DataSource = quantVsTime.OrderBy(x => x.Stime);
-                quantvsTime.Series.Add(new Series());
-                quantvsTime.Series[0].MarkerStyle = MarkerStyle.Circle;
-                quantvsTime.Series[0].MarkerSize = 7;
-                quantvsTime.Series[0].XValueMember = "STime";
-                quantvsTime.Series[0].YValueMembers = "Quantity";
+                
+                    
+                    Series objSeries = new Series();
+                    objSeries.Points.DataBindXY(quantVsTime, "STime", quantVsTime, "Quantity");
+                    objSeries.MarkerStyle = MarkerStyle.Circle;
+                    objSeries.MarkerSize = 7;
+                    objSeries.ToolTip = "Water Usage : #VALY{C0}";
+                    objSeries.ChartType = SeriesChartType.Line;
+                    objSeries.LegendText = quantVsTime[0].LocationName;
+                    lstSeriesChart1.Add(objSeries);
 
-                quantvsTime.Series[0].ToolTip = "Water Usage : #VALY{C0}";
-                quantvsTime.Series[0].ChartType = SeriesChartType.Line;
+                    quantVsTimeItems--;
+                    if (quantVsTimeItems == 0)
+                    {
+                        Chart quantvsTime = (Chart)chartQuantVsTime.FindControl("chrtAnalytics");
+                        quantvsTime.Series.Clear();
+                        quantvsTime.Legends.Clear();
+                        foreach (Series s in lstSeriesChart1)
+                        {
+                            quantvsTime.Series.Add(s);
+                            Legend lg = new Legend();
+                            lg.Docking = Docking.Bottom;
+                            lg.LegendStyle = LegendStyle.Row;
+                            lg.Name = s.LegendText;
+                            quantvsTime.Legends.Add(lg);
+                            
+                          
+                        }
+                        quantvsTime.Titles.Clear();
+                        quantvsTime.Titles.Add("Water Consumption Data");
 
-                quantvsTime.Titles.Clear();
-                quantvsTime.Titles.Add("Water Consumption Data");
 
-                quantvsTime.Series[0].ChartType = System.Web.UI.DataVisualization.Charting.SeriesChartType.Line;
-                quantvsTime.ChartAreas[0].AxisX.Title = "Date";
-                quantvsTime.ChartAreas[0].AxisX.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
-                quantvsTime.ChartAreas[0].AxisX.TitleAlignment = StringAlignment.Center;
-                quantvsTime.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
-
-
-                quantvsTime.ChartAreas[0].AxisY.Title = "Quantity (Lts)";
-                quantvsTime.ChartAreas[0].AxisY.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
-                quantvsTime.ChartAreas[0].AxisY.TitleAlignment = StringAlignment.Center;
-                quantvsTime.ChartAreas[0].AxisY.TextOrientation = TextOrientation.Rotated270;
-                quantvsTime.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
-
+                        quantvsTime.ChartAreas[0].AxisX.Title = "Date";
+                        quantvsTime.ChartAreas[0].AxisX.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
+                        quantvsTime.ChartAreas[0].AxisX.TitleAlignment = StringAlignment.Center;
+                        quantvsTime.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+                        quantvsTime.ChartAreas[0].AxisY.Title = "Quantity (Lts)";
+                        quantvsTime.ChartAreas[0].AxisY.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
+                        quantvsTime.ChartAreas[0].AxisY.TitleAlignment = StringAlignment.Center;
+                        quantvsTime.ChartAreas[0].AxisY.TextOrientation = TextOrientation.Rotated270;
+                        quantvsTime.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
+                                            
+                }
+            }
+            catch (Exception ex)
+            { 
+              
             }
         
         }
@@ -171,53 +258,58 @@ namespace WaterAnalyticsSolution
         {
             if (e.Result != null)
             {
-                Session["quantPerPersonVsTime"] = e.Result;
-                quantPerPersonVsTime = e.Result;
-                BindQuantPerPersonVsTime(quantPerPersonVsTime);
-                if (Page.IsPostBack && Session["quantPerPersonVsTime"] != null)
-                {
-                    quantPerPersonVsTime = Session["quantPerPersonVsTime"] as WaterQuantLocation[];
-                    BindQuantPerPersonVsTime(quantPerPersonVsTime);
-                }
+               
+                BindQuantPerPersonVsTime(e.Result);
+               
             }
 
         }
         protected void BindQuantPerPersonVsTime(WaterQuantLocation[] quantVsTime)
         {
-            if (chartQuantVsTimeLocs.FindControl("chrtAnalytics") != null)
+            Series objSeries = new Series();
+            objSeries.Points.DataBindXY(quantVsTime, "STime", quantVsTime, "Quantity");
+            objSeries.MarkerStyle = MarkerStyle.Circle;
+            objSeries.MarkerSize = 7;
+            objSeries.ToolTip = "Water Usage : #VALY{C0}";
+            objSeries.ChartType = SeriesChartType.Line;
+            objSeries.LegendText = quantVsTime[0].LocationName;
+            lstSeriesChart2.Add(objSeries);
+            quantPerPersonVsTimeItems--;
+
+
+            if (quantPerPersonVsTimeItems == 0)
                 
             {
                 Chart chartQuantvsTimeLocs = (Chart)chartQuantVsTimeLocs.FindControl("chrtAnalytics");
-                chartQuantvsTimeLocs.DataSource = quantVsTime.OrderBy(x => x.Stime);
-                chartQuantvsTimeLocs.Series.Add(new Series());
-                chartQuantvsTimeLocs.Series[0].MarkerStyle = MarkerStyle.Circle;
-                chartQuantvsTimeLocs.Series[0].MarkerSize = 7;
-                chartQuantvsTimeLocs.Series[0].XValueMember = "STime";
-                chartQuantvsTimeLocs.Series[0].YValueMembers = "Quantity";
+                chartQuantvsTimeLocs.Series.Clear();
+                chartQuantvsTimeLocs.Legends.Clear();
+                foreach (Series s in lstSeriesChart2)
+                {
+                    chartQuantvsTimeLocs.Series.Add(s);
+                    Legend lg = new Legend();
+                    lg.Docking = Docking.Bottom;
+                    lg.LegendStyle = LegendStyle.Row;
+                    lg.Name = s.LegendText;
+                    chartQuantvsTimeLocs.Legends.Add(lg);
 
-                chartQuantvsTimeLocs.Series[0].ToolTip = "Water Usage : #VALY{C0}";
-                chartQuantvsTimeLocs.Series[0].ChartType = SeriesChartType.Line;
+
+                }
 
                 chartQuantvsTimeLocs.Titles.Clear();
                 chartQuantvsTimeLocs.Titles.Add("Water Consumption Data");
-
-                chartQuantvsTimeLocs.Series[0].ChartType = System.Web.UI.DataVisualization.Charting.SeriesChartType.Line;
                 chartQuantvsTimeLocs.ChartAreas[0].AxisX.Title = "Date";
                 chartQuantvsTimeLocs.ChartAreas[0].AxisX.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
                 chartQuantvsTimeLocs.ChartAreas[0].AxisX.TitleAlignment = StringAlignment.Center;
                 chartQuantvsTimeLocs.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
-
-
                 chartQuantvsTimeLocs.ChartAreas[0].AxisY.Title = "Quantity (Lts)";
                 chartQuantvsTimeLocs.ChartAreas[0].AxisY.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
                 chartQuantvsTimeLocs.ChartAreas[0].AxisY.TitleAlignment = StringAlignment.Center;
                 chartQuantvsTimeLocs.ChartAreas[0].AxisY.TextOrientation = TextOrientation.Rotated270;
                 chartQuantvsTimeLocs.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
-
+                        
             }
 
         }
-
         protected void client_getGroundWaterByLocationCompleted(object sender, getGroundWaterByLocationCompletedEventArgs e)
         {
 
@@ -225,26 +317,18 @@ namespace WaterAnalyticsSolution
         }
         protected void client_getDataByZoneCompleted(object sender, getDataByZoneCompletedEventArgs e)
         {
-
-
             if (e.Result != null)
             {
-                Session["quantRegion"] = e.Result;
-                quantRegion = e.Result;
-                BindQuantPerRegion(quantRegion);
-                if (Page.IsPostBack && Session["quantPerPersonVsTime"] != null)
-                {
-                    quantPerPersonVsTime = Session["quantPerPersonVsTime"] as WaterQuantLocation[];
-                    BindQuantPerPersonVsTime(quantPerPersonVsTime);
-                }
+                BindQuantPerRegion(e.Result);
+               
             }
         }
-
         protected void BindQuantPerRegion(ZoneDetails[] quantRegion)
         {
             if (regionChart.FindControl("chrtAnalytics") != null)
             {
                 Chart quantvsTime = (Chart)regionChart.FindControl("chrtAnalytics");
+                quantvsTime.Series.Clear();
                 quantvsTime.DataSource = quantRegion;
                 quantvsTime.Series.Add(new Series());
 
@@ -264,19 +348,29 @@ namespace WaterAnalyticsSolution
         
         }
         protected void btnQuantVsTime_Click(object sender, EventArgs e)
-        { 
-        
-        }
+        {
+            try
+            {
+                Session["quantVsTime"] = null;
+                lstSeriesChart1.Clear();
+                ChartWaterQuantUsageBinding();
 
+            }
+            catch (Exception ex)
+            { 
+            
+            
+            }
+        }
         protected void btnQuantPerPerson_Click(object sender, EventArgs e)
-        { 
-        
+        {
+            lstSeriesChart2.Clear();
+            ChartWaterQuantPerPersonUsageBinding();
         }
         protected void btnFetchRegion_Click(object sender, EventArgs e)
-        { 
-        
+        {
+            ChartRegionBinding();
         }
-
         protected void btnGround_Click(object sender, EventArgs e)
         { 
         
