@@ -24,7 +24,7 @@ namespace WaterAnalyticsSolution
         public static List<Int32> GetYear()
         {
             int year = DateTime.Today.Year;
-            List<Int32> lstYears = Enumerable.Range(1998, DateTime.Today.Year - 1998).ToList<Int32>();
+            List<Int32> lstYears = Enumerable.Range(1998, DateTime.Today.Year - 1998 + 1).ToList<Int32>();
             return lstYears;
 
         }

@@ -21,6 +21,9 @@ namespace WaterAnalyticsSolution
         private Int32 quantGroundVsTimeItems = 0;
         private List<Series> lstSeriesChart1 = new List<Series>();
         private List<Series> lstSeriesChart2 = new List<Series>();
+        private List<Series> lstSeriesChart3 = new List<Series>();
+        private bool isUsageFetch;
+        private bool isGroundFetch;
         #endregion
 
         protected void Page_Init(object sender, EventArgs e)
@@ -38,12 +41,17 @@ namespace WaterAnalyticsSolution
             regionChart.Width = Unit.Pixel(480);
             ddlStartYear.DataSource = Helper.GetYear();
             ddlStartYear.DataBind();
-            ddlStartYear.SelectedIndex = Helper.GetYear().Count - 1;
+            ddlStartYear.SelectedIndex = Helper.GetYear().Count - 2;
             ddlEndYear.DataSource = Helper.GetYear();
             ddlEndYear.DataBind();
-            ddlEndYear.SelectedIndex = Helper.GetYear().Count - 1;
+            ddlEndYear.SelectedIndex = Helper.GetYear().Count - 1 ;
             txtStartDate.Text = DateTime.Today.ToShortDateString();
             txtEndDate.Text = DateTime.Today.ToShortDateString();
+            WaterAnalyticsClient client = new WaterAnalyticsClient();
+            ddlLocation.DataSource = client.getAllLocation();
+            ddlLocation.DataTextField = "Location_name";
+            ddlLocation.SelectedIndex = 0;
+            ddlLocation.DataBind();
             #endregion
         }
         protected void Page_Load(object sender, EventArgs e)
@@ -58,6 +66,7 @@ namespace WaterAnalyticsSolution
                 ChartWaterQuantUsageBinding();
                 ChartWaterQuantPerPersonUsageBinding();
                 ChartRegionBinding();
+                ChartGroundWaterAndUsageBinding();
                              
              }
            #endregion
@@ -154,9 +163,12 @@ namespace WaterAnalyticsSolution
         {
             try
             {
+                
                 WaterAnalyticsClient client = new WaterAnalyticsClient();
                 client.getGroundWaterByLocationCompleted += new EventHandler<getGroundWaterByLocationCompletedEventArgs>(client_getGroundWaterByLocationCompleted);
-
+                client.getWaterQuantByLocationCompleted +=new EventHandler<getWaterQuantByLocationCompletedEventArgs>(client_YearlyWaterCompleted);
+                client.getGroundWaterByLocationAsync(ddlLocation.SelectedItem.Text, Convert.ToInt32(ddlStartYear.SelectedItem.Text), Convert.ToInt32(ddlEndYear.SelectedItem.Text));
+                client.getWaterQuantByLocationAsync(ddlLocation.SelectedItem.Text, 4, new DateTime(Convert.ToInt32(ddlStartYear.SelectedItem.Text), 1, 1), new DateTime(Convert.ToInt32(ddlEndYear.SelectedItem.Text), 1, 1));
             }
             catch (Exception ex)
             {
@@ -312,8 +324,91 @@ namespace WaterAnalyticsSolution
         }
         protected void client_getGroundWaterByLocationCompleted(object sender, getGroundWaterByLocationCompletedEventArgs e)
         {
+            if (e.Result != null)
+            {
+                Series objSeries = new Series();
+                objSeries.Points.DataBindXY(e.Result, "STime", e.Result, "Quantity");
+                objSeries.MarkerStyle = MarkerStyle.Circle;
+                objSeries.MarkerSize = 7;
+                objSeries.ToolTip = "Water Usage : #VALY{C0}";
+                objSeries.ChartType = SeriesChartType.Line;
+                objSeries.LegendText = "Ground Water Level ";
+                lstSeriesChart3.Add(objSeries);
+                isGroundFetch = true;
+            }
+            if ((isGroundFetch) && (isUsageFetch))
+            {
+                BindChartGroungVsUsage();
+            
+            }           
+
+        }
+        protected void BindChartGroungVsUsage()
+        {
+          try{
+
+                Chart chartGroundvsUsage = (Chart)chartGroundVsUsage.FindControl("chrtAnalytics");
+                chartGroundvsUsage.Series.Clear();
+                chartGroundvsUsage.Legends.Clear();
+                foreach (Series s in lstSeriesChart3)
+                {
+                    chartGroundvsUsage.Series.Add(s);
+                    Legend lg = new Legend();
+                    lg.Docking = Docking.Bottom;
+                    lg.LegendStyle = LegendStyle.Row;
+                    lg.Name = s.LegendText;
+                    chartGroundvsUsage.Legends.Add(lg);
 
 
+                }
+                chartGroundvsUsage.Titles.Clear();
+                chartGroundvsUsage.Titles.Add("Water Consumption Data");
+                chartGroundvsUsage.ChartAreas[0].AxisX.Title = "Date";
+                chartGroundvsUsage.ChartAreas[0].AxisX.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
+                chartGroundvsUsage.ChartAreas[0].AxisX.TitleAlignment = StringAlignment.Center;
+                chartGroundvsUsage.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+                chartGroundvsUsage.ChartAreas[0].AxisY.Title = "Quantity (Lts)";
+                chartGroundvsUsage.ChartAreas[0].AxisY.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
+                chartGroundvsUsage.ChartAreas[0].AxisY.TitleAlignment = StringAlignment.Center;
+                chartGroundvsUsage.ChartAreas[0].AxisY.TextOrientation = TextOrientation.Rotated270;
+                chartGroundvsUsage.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
+                        
+          
+          }
+            catch(Exception ex)
+           {
+
+            
+            }
+          }
+        protected void client_YearlyWaterCompleted(object sender, getWaterQuantByLocationCompletedEventArgs e)
+        {
+            try
+            {
+                if (e.Result != null)
+                {
+                    Series objSeries = new Series();
+                    objSeries.Points.DataBindXY(e.Result, "STime", e.Result, "Quantity");
+                    objSeries.MarkerStyle = MarkerStyle.Circle;
+                    objSeries.MarkerSize = 7;
+                    objSeries.ToolTip = "Water Usage : #VALY{C0}";
+                    objSeries.ChartType = SeriesChartType.Line;
+                    objSeries.LegendText = "Yearly water Consumption";
+                    lstSeriesChart3.Add(objSeries);
+                    isUsageFetch = true;
+                }
+                if ((isGroundFetch) && (isUsageFetch))
+                {
+                    BindChartGroungVsUsage();
+
+                }    
+
+            }
+            catch (Exception ex)
+            { 
+            
+            
+            }
         }
         protected void client_getDataByZoneCompleted(object sender, getDataByZoneCompletedEventArgs e)
         {
@@ -372,9 +467,12 @@ namespace WaterAnalyticsSolution
             ChartRegionBinding();
         }
         protected void btnGround_Click(object sender, EventArgs e)
-        { 
-        
-        
+        {
+
+            isUsageFetch = false;
+            isGroundFetch = false;
+            lstSeriesChart3.Clear();
+            ChartGroundWaterAndUsageBinding();
         }
 
 
