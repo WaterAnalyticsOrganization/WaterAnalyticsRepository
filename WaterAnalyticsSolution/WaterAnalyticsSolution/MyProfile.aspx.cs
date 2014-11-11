@@ -70,10 +70,10 @@ namespace WaterAnalyticsSolution
                     Xvalue = Convert.ToInt32(((DropDownList)filterQuant.FindControl("ddlXValue")).SelectedValue);
 
                 client = new WaterAnalyticsClient();
-                client.getWaterQuantByUserIdCompleted += new EventHandler<getWaterQuantByUserIdCompletedEventArgs>(client_getWaterQuantByUserIdCompleted);
+                client.GetWaterQuantByUserIdCompleted += new EventHandler<GetWaterQuantByUserIdCompletedEventArgs>(client_getWaterQuantByUserIdCompleted);
                 if ((userId != null) && (Xvalue != -1) && (dtFrom != DateTime.MinValue) && (dtTo != DateTime.MinValue))
                 {
-                    client.getWaterQuantByUserIdAsync(userId, Xvalue, dtFrom, dtTo);
+                    client.GetWaterQuantByUserIdAsync(userId, Xvalue, dtFrom, dtTo);
 
                 }
 
@@ -90,18 +90,18 @@ namespace WaterAnalyticsSolution
             {
                 if (Session["userid"] != null)
                 {
-                    client.getDetailsAsync(Convert.ToInt32(Session["userid"]));
-                    client.getDetailsCompleted += new EventHandler<getDetailsCompletedEventArgs>(client_getDetailsCompleted);
+                    client.GetDetailsAsync(Convert.ToInt32(Session["userid"]));
+                    client.GetDetailsCompleted += new EventHandler<GetDetailsCompletedEventArgs>(client_getDetailsCompleted);
                 }
             }
             catch { }
         }
 
-        void client_getDetailsCompleted(object sender, getDetailsCompletedEventArgs e)
+        void client_getDetailsCompleted(object sender, GetDetailsCompletedEventArgs e)
         {
             if(e.Result!=null)
             {
-                IndAddress profileData = e.Result as IndAddress;
+                IndividualAddress profileData = e.Result as IndividualAddress;
                 lblName.Text = profileData.Name;
                 lblEmailId.Text = profileData.Email;
                 lblNoOfPeople.Text =Convert.ToString(profileData.NoOfPeople);
@@ -109,7 +109,7 @@ namespace WaterAnalyticsSolution
             }
         }
 
-        void client_getWaterQuantByUserIdCompleted(object sender , getWaterQuantByUserIdCompletedEventArgs e)
+        void client_getWaterQuantByUserIdCompleted(object sender , GetWaterQuantByUserIdCompletedEventArgs e)
         {
             try
             {
@@ -191,10 +191,10 @@ namespace WaterAnalyticsSolution
                 if (filterQuantPerPeron.FindControl("ddlXValue") != null)
                     Xvalue = Convert.ToInt32(((DropDownList)filterQuantPerPeron.FindControl("ddlXValue")).SelectedValue);
                 client = new WaterAnalyticsClient();
-                client.getWaterQuantPerPersonCompleted += new EventHandler<getWaterQuantPerPersonCompletedEventArgs>(client_getWaterQuantPerPersonCompleted);
+                client.GetWaterQuantPerPersonCompleted += new EventHandler<GetWaterQuantPerPersonCompletedEventArgs>(client_getWaterQuantPerPersonCompleted);
                 if ((userId != null) && (Xvalue != -1) && (dtFrom != DateTime.MinValue) && (dtTo != DateTime.MinValue))
                 {
-                    client.getWaterQuantPerPersonAsync(userId, Xvalue, dtFrom, dtTo);
+                    client.GetWaterQuantPerPersonAsync(userId, Xvalue, dtFrom, dtTo);
                 }
 
             }
@@ -204,7 +204,7 @@ namespace WaterAnalyticsSolution
 
             }
         }
-        void client_getWaterQuantPerPersonCompleted(object sender, getWaterQuantPerPersonCompletedEventArgs e)
+        void client_getWaterQuantPerPersonCompleted(object sender, GetWaterQuantPerPersonCompletedEventArgs e)
         {
             try
             {

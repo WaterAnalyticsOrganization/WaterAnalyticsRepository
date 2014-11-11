@@ -390,11 +390,15 @@ namespace WaterAnalyticsService
         protected virtual void Dispose(bool disposing)
        {
            if (disposing)
-           {               
-               connection.Close();
-               daDetails.Dispose();
-               dt.Dispose();
-               command.Dispose();
+           {         
+               if(connection!=null)
+                connection.Close();
+               if(daDetails!=null)
+                daDetails.Dispose();
+               if(dt!=null)
+                dt.Dispose();
+               if(command!=null)
+                command.Dispose();
            }           
        }
 

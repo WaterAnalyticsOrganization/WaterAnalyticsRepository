@@ -30,7 +30,7 @@ namespace WaterAnalyticsSolution
                     if (isLocationVisible)
                     {
                         WaterAnalyticsClient client = new WaterAnalyticsClient();
-                        chkList.DataSource = client.getAllLocation();
+                        chkList.DataSource = client.GetAllLocation();
                         if (chkList.DataSource != null)
                         {
                             chkList.DataTextField = "Location_name";

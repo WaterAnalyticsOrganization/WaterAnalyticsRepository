@@ -43,7 +43,7 @@ namespace WaterAnalyticsSolution
                 Session["userid"] = null;
                 if (txtSensorId != null && txtPassword != null)
                 {
-                    isAuthenticated = client.isAuthenticated(Convert.ToInt32(txtSensorId.Text), txtPassword.Text);
+                    isAuthenticated = client.IsAuthenticated(Convert.ToInt32(txtSensorId.Text), txtPassword.Text);
                 }
                 if (isAuthenticated == 1)
                 {

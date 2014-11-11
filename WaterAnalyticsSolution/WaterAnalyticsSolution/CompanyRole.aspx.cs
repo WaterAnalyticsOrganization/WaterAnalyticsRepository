@@ -48,7 +48,7 @@ namespace WaterAnalyticsSolution
             txtStartDate.Text = DateTime.Today.ToShortDateString();
             txtEndDate.Text = DateTime.Today.ToShortDateString();
             WaterAnalyticsClient client = new WaterAnalyticsClient();
-            ddlLocation.DataSource = client.getAllLocation();
+            ddlLocation.DataSource = client.GetAllLocation();
             ddlLocation.DataTextField = "Location_name";
             ddlLocation.SelectedIndex = 0;
             ddlLocation.DataBind();
@@ -77,7 +77,7 @@ namespace WaterAnalyticsSolution
             try
             {
                 WaterAnalyticsClient client = new WaterAnalyticsClient();
-                client.getWaterQuantByLocationCompleted += new EventHandler<getWaterQuantByLocationCompletedEventArgs>(client_getWaterQuantByLocationCompleted);
+                client.GetWaterQuantByLocationCompleted += new EventHandler<GetWaterQuantByLocationCompletedEventArgs>(client_getWaterQuantByLocationCompleted);
                
                 #region Get Parameters
                 List<ListItem> lstLocationQuant = new List<ListItem>();
@@ -106,7 +106,7 @@ namespace WaterAnalyticsSolution
 
                  for (int i = 0; i < lstLocationQuant.Count; i++)
                  {
-                     client.getWaterQuantByLocationAsync(lstLocationQuant[i].Text, ind1, dtFromQuant, dtToQuant);
+                     client.GetWaterQuantByLocationAsync(lstLocationQuant[i].Text, ind1, dtFromQuant, dtToQuant);
                  }
                   
             }
@@ -121,7 +121,7 @@ namespace WaterAnalyticsSolution
             try
             {
                 WaterAnalyticsClient client = new WaterAnalyticsClient();
-                client.getWaterQuantPerPersonAreaCompleted += new EventHandler<getWaterQuantPerPersonAreaCompletedEventArgs>(client_getWaterQuantPerPersonAreaCompleted);
+                client.GetWaterQuantPerPersonAreaCompleted += new EventHandler<GetWaterQuantPerPersonAreaCompletedEventArgs>(client_getWaterQuantPerPersonAreaCompleted);
                 #region Get Parameters
 
                 List<ListItem> lstLocationQuantPerPerson = new List<ListItem>();
@@ -149,7 +149,7 @@ namespace WaterAnalyticsSolution
                 #endregion
                 for (int i = 0; i < lstLocationQuantPerPerson.Count; i++)
                 {
-                    client.getWaterQuantPerPersonAreaAsync(lstLocationQuantPerPerson[i].Text, ind2, dtFromQuantPerPerson, dtToQuantPerPerson);
+                    client.GetWaterQuantPerPersonAreaAsync(lstLocationQuantPerPerson[i].Text, ind2, dtFromQuantPerPerson, dtToQuantPerPerson);
                 }
             }
             catch (Exception ex)
@@ -165,10 +165,10 @@ namespace WaterAnalyticsSolution
             {
                 
                 WaterAnalyticsClient client = new WaterAnalyticsClient();
-                client.getGroundWaterByLocationCompleted += new EventHandler<getGroundWaterByLocationCompletedEventArgs>(client_getGroundWaterByLocationCompleted);
-                client.getWaterQuantByLocationCompleted +=new EventHandler<getWaterQuantByLocationCompletedEventArgs>(client_YearlyWaterCompleted);
-                client.getGroundWaterByLocationAsync(ddlLocation.SelectedItem.Text, Convert.ToInt32(ddlStartYear.SelectedItem.Text), Convert.ToInt32(ddlEndYear.SelectedItem.Text));
-                client.getWaterQuantByLocationAsync(ddlLocation.SelectedItem.Text, 4, new DateTime(Convert.ToInt32(ddlStartYear.SelectedItem.Text), 1, 1), new DateTime(Convert.ToInt32(ddlEndYear.SelectedItem.Text), 1, 1));
+                client.GetGroundWaterByLocationCompleted += new EventHandler<GetGroundWaterByLocationCompletedEventArgs>(client_getGroundWaterByLocationCompleted);
+                client.GetWaterQuantByLocationCompleted +=new EventHandler<GetWaterQuantByLocationCompletedEventArgs>(client_YearlyWaterCompleted);
+                client.GetGroundWaterByLocationAsync(ddlLocation.SelectedItem.Text, Convert.ToInt32(ddlStartYear.SelectedItem.Text), Convert.ToInt32(ddlEndYear.SelectedItem.Text));
+                client.GetWaterQuantByLocationAsync(ddlLocation.SelectedItem.Text, 4, new DateTime(Convert.ToInt32(ddlStartYear.SelectedItem.Text), 1, 1), new DateTime(Convert.ToInt32(ddlEndYear.SelectedItem.Text), 1, 1));
             }
             catch (Exception ex)
             {
@@ -180,8 +180,8 @@ namespace WaterAnalyticsSolution
         { try {
 
                 WaterAnalyticsClient client = new WaterAnalyticsClient();
-                client.getDataByZoneCompleted += new EventHandler<getDataByZoneCompletedEventArgs>(client_getDataByZoneCompleted);
-                client.getDataByZoneAsync(Convert.ToDateTime(txtStartDate.Text),  Convert.ToDateTime(txtEndDate.Text));
+                client.GetDataByZoneCompleted += new EventHandler<GetDataByZoneCompletedEventArgs>(client_getDataByZoneCompleted);
+                client.GetDataByZoneAsync(Convert.ToDateTime(txtStartDate.Text),  Convert.ToDateTime(txtEndDate.Text));
             
             }
 
@@ -192,7 +192,7 @@ namespace WaterAnalyticsSolution
             }
 
         }
-        protected void client_getWaterQuantByLocationCompleted(object sender, getWaterQuantByLocationCompletedEventArgs e)
+        protected void client_getWaterQuantByLocationCompleted(object sender, GetWaterQuantByLocationCompletedEventArgs e)
         {
             try
             {
@@ -266,7 +266,7 @@ namespace WaterAnalyticsSolution
             }
         
         }
-        protected void client_getWaterQuantPerPersonAreaCompleted(object sender, getWaterQuantPerPersonAreaCompletedEventArgs e)
+        protected void client_getWaterQuantPerPersonAreaCompleted(object sender, GetWaterQuantPerPersonAreaCompletedEventArgs e)
         {
             if (e.Result != null)
             {
@@ -322,7 +322,7 @@ namespace WaterAnalyticsSolution
             }
 
         }
-        protected void client_getGroundWaterByLocationCompleted(object sender, getGroundWaterByLocationCompletedEventArgs e)
+        protected void client_getGroundWaterByLocationCompleted(object sender, GetGroundWaterByLocationCompletedEventArgs e)
         {
             if (e.Result != null)
             {
@@ -381,7 +381,7 @@ namespace WaterAnalyticsSolution
             
             }
           }
-        protected void client_YearlyWaterCompleted(object sender, getWaterQuantByLocationCompletedEventArgs e)
+        protected void client_YearlyWaterCompleted(object sender, GetWaterQuantByLocationCompletedEventArgs e)
         {
             try
             {
@@ -410,7 +410,7 @@ namespace WaterAnalyticsSolution
             
             }
         }
-        protected void client_getDataByZoneCompleted(object sender, getDataByZoneCompletedEventArgs e)
+        protected void client_getDataByZoneCompleted(object sender, GetDataByZoneCompletedEventArgs e)
         {
             if (e.Result != null)
             {

@@ -13,7 +13,7 @@ namespace WaterAnalyticsSolution
         {
             //Sample Code for making async call       
         }
-        static void IsAuthCallback(object sender, isAuthenticatedCompletedEventArgs e)
+        static void IsAuthCallback(object sender, IsAuthenticatedCompletedEventArgs e)
         {
             //Sample Code for making async call
             // get code here from "e.Result"
