@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Collections.ObjectModel;
 
 namespace WaterAnalyticsService
 {
@@ -14,45 +15,42 @@ namespace WaterAnalyticsService
     {
 
         [OperationContract]
-        int isAuthenticated(int userId,string password);
-
-        //[OperationContract]
-        //WaterQuant getWaterQuant(string stime, DateTime from, DateTime to);
+        int IsAuthenticated(int userId,string password);       
 
         [OperationContract]
-        List<WaterQuant> getWaterQuantByUserId(int UserID, int ind, DateTime from, DateTime to);
+        Collection<WaterQuant> GetWaterQuantByUserId(int UserID, int ind, DateTime from, DateTime To);
 
         [OperationContract]
-        List<WaterQuantLocation> getWaterQuantByLocation(string Location, int ind, DateTime from, DateTime to);
+        Collection<WaterQuantLocation> GetWaterQuantByLocation(string Location, int ind, DateTime from, DateTime to);
 
         [OperationContract]
-        List<WaterQuant> getWaterQuantPerPerson(int UserID, int ind, DateTime from, DateTime to);
+        Collection<WaterQuant> GetWaterQuantPerPerson(int UserID, int ind, DateTime from, DateTime to);
 
         [OperationContract]
-        List<LocationDetails> getAllLocation();
+        Collection<LocationDetails> GetAllLocation();
 
         [OperationContract]
-        List<WaterQuantLocation> getWaterQuantPerPersonArea(string Area, int ind, DateTime from, DateTime to);
+        Collection<WaterQuantLocation> GetWaterQuantPerPersonArea(string Area, int ind, DateTime from, DateTime to);
 
         [OperationContract]
         int UpdateDetails(int UserID, string Name, string email, int noOfPeople);
 
         [OperationContract]
-        IndAddress getDetails(int sensorId);
+        IndividualAddress GetDetails(int sensorId);
 
          [OperationContract]
-        List<ZoneDetails> getDataByZone(DateTime from, DateTime to);
+        Collection<ZoneDetails> GetDataByZone(DateTime from, DateTime to);
 
          [OperationContract]
-         List<GroundWaterDetail> getGroundWaterByLocation(string Location, int from, int to);
+         Collection<GroundWaterDetail> GetGroundWaterByLocation(string Location, int from, int to);
     }
 
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
     [DataContract]
-    public class IndAddress
+    public class IndividualAddress
     {
-        string sensorID;
+        string sensorId;
         string name;
         string locationName;
         string localDesc;
@@ -60,10 +58,10 @@ namespace WaterAnalyticsService
         string email;
 
         [DataMember]
-        public string SensorID
+        public string SensorId
         {
-            get { return sensorID; }
-            set { sensorID = value; }
+            get { return sensorId; }
+            set { sensorId = value; }
         }
 
         [DataMember]

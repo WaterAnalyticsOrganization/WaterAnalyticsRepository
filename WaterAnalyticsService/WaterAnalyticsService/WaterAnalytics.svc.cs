@@ -8,197 +8,403 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
+using System.Collections.ObjectModel;
 
+[assembly: CLSCompliant(true)]
 namespace WaterAnalyticsService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
-    public class WaterAnalytics : IWaterAnalytics
+    public class WaterAnalytics : IWaterAnalytics,IDisposable
     {
 
-        static string connectionStr = ConfigurationManager.ConnectionStrings["WaterAnalytics"].ConnectionString;
-        SqlConnection connection = new SqlConnection(connectionStr);
+        #region Private Properties
 
-        public int isAuthenticated(int UserId, string password)
-        {   //Returns 1 for Individual, 2 for Govt and 0 if its not Authenticated
-            int isAuth;
-            SqlCommand command = new SqlCommand("AuthenticateUser", connection);
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@UserId", UserId);
-            command.Parameters.AddWithValue("@Passwrd", password);
-            connection.Open();
-            isAuth = Convert.ToInt32(command.ExecuteScalar());
-            connection.Close();
+        static string connectionStr = ConfigurationManager.ConnectionStrings["WaterAnalytics"].ConnectionString;
+        SqlConnection connection = null;
+        SqlCommand command = null;
+        int isAuth=0;
+        DataTable dt = null;
+        IndividualAddress obj = null;
+        SqlDataAdapter daDetails = null;
+        int result=0;
+        Collection<WaterQuant> myList = null;
+        Collection<WaterQuantLocation> waterQuantLocationList = null;
+        Collection<LocationDetails> locationDetailsList = null;
+        Collection<GroundWaterDetail> groundWaterList = null;
+        Collection<ZoneDetails> zoneDetailsList = null;
+
+        #endregion
+
+        #region Service Method Implementation
+
+        /// <summary>
+        /// Function to check if the user is authenticated
+        /// </summary>
+        /// <param name="UserId">User id entered in ui</param>
+        /// <param name="password">Password entered in ui</param>
+        /// <returns>Returns 1 for Individual, 2 for Govt and 0 if its not Authenticated</returns>
+        public int IsAuthenticated(int UserId, string password)
+        {             
+            try
+            {
+                connection = new SqlConnection(connectionStr);
+                command = new SqlCommand("AuthenticateUser", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@UserId", UserId);
+                command.Parameters.AddWithValue("@Passwrd", password);
+                connection.Open();
+                isAuth = Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch(Exception ex)
+            {
+                throw new FaultException("Error in authentication: "+ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
             return isAuth;
         }
 
-        public IndAddress getDetails(int sensorId)
+        /// <summary>
+        /// Function to get user profile data
+        /// </summary>
+        /// <param name="sensorId">sensor id for the logged in user</param>
+        /// <returns>User Profile data</returns>
+        public IndividualAddress GetDetails(int sensorId)
         {
+            try
+            {
+                dt = new DataTable();
+                obj = new IndividualAddress();
+                command = new SqlCommand("GetDetails", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@sensorid", sensorId);
+                connection.Open();
+                daDetails = new SqlDataAdapter(command);
+                daDetails.Fill(dt);
 
-            DataTable dt = new DataTable();
-            IndAddress obj = new IndAddress();
-            SqlCommand command = new SqlCommand("GetDetails", connection);
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@sensorid", sensorId);
-           connection.Open();
-           SqlDataAdapter daDetails = new SqlDataAdapter(command);
-            daDetails.Fill(dt);
-
-           if (dt.Rows.Count > 0)
-           {
-               obj.Name = Convert.ToString(dt.Rows[0]["Ind_Name"]);
-               obj.LocationName = Convert.ToString(dt.Rows[0]["Location_Name"]);
-               obj.Description = Convert.ToString(dt.Rows[0]["Local_Desc"]);
-               obj.Email = Convert.ToString(dt.Rows[0]["Email"]);
-               obj.NoOfPeople = Convert.ToInt16(dt.Rows[0]["NoOfPeople"]);
+                if (dt.Rows.Count > 0)
+                {
+                    obj.Name = Convert.ToString(dt.Rows[0]["Ind_Name"]);
+                    obj.LocationName = Convert.ToString(dt.Rows[0]["Location_Name"]);
+                    obj.Description = Convert.ToString(dt.Rows[0]["Local_Desc"]);
+                    obj.Email = Convert.ToString(dt.Rows[0]["Email"]);
+                    obj.NoOfPeople = Convert.ToInt16(dt.Rows[0]["NoOfPeople"]);
+                }
             }
-           
-            connection.Close();
+            catch (Exception ex)
+            {
+                throw new FaultException("Error in getting details: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
             return obj;
          }
 
+        /// <summary>
+        /// Function to update user profile data
+        /// </summary>
+        /// <param name="UserID">user id to be updated</param>
+        /// <param name="Name">name to be updated</param>
+        /// <param name="email">email to be updated</param>
+        /// <param name="noOfPeople">noOfPeople to be updated</param>
+        /// <returns></returns>
         public int UpdateDetails(int UserID,string Name,string email,int noOfPeople)
         {
-            int result;
-            DataTable dt = new DataTable();
-            SqlCommand command = new SqlCommand("UpdateDetails", connection);
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@UserID", UserID);
-            command.Parameters.AddWithValue("@IndName", Name);
-            command.Parameters.AddWithValue("@Email", email);
-            command.Parameters.AddWithValue("@NoOfPeople", noOfPeople);
-            connection.Open();
-            result = Convert.ToInt32(command.ExecuteScalar());
-            connection.Close();
+            try
+            {
+                dt = new DataTable();
+                command = new SqlCommand("UpdateDetails", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@UserID", UserID);
+                command.Parameters.AddWithValue("@IndName", Name);
+                command.Parameters.AddWithValue("@Email", email);
+                command.Parameters.AddWithValue("@NoOfPeople", noOfPeople);
+                connection.Open();
+                result = Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Error in updating details: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
             return result;                 
         }
 
-        public List<WaterQuant> getWaterQuantByUserId(int UserID, int ind, DateTime from, DateTime to)
+        /// <summary>
+        /// Function to get water quantity by user id
+        /// </summary>
+        /// <param name="UserID">user id for which water quantity is requested</param>
+        /// <param name="ind">0=Hourly, 1=Daily, 2=Weekly, 3=Monthly, 4=Yearly</param>
+        /// <param name="from">From Date</param>
+        /// <param name="to">To Date</param>
+        /// <returns></returns>
+        public Collection<WaterQuant> GetWaterQuantByUserId(int UserID, int ind, DateTime from, DateTime To)
         {
-            DataTable dt = new DataTable();
-            SqlCommand command = new SqlCommand("GetWaterQuantByUser", connection);
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@UserID", UserID);
-            command.Parameters.AddWithValue("@indicator", ind);
-            command.Parameters.AddWithValue("@starttime", from);
-            command.Parameters.AddWithValue("@endtime", to);
-
-            connection.Open();
-            SqlDataAdapter daDetails = new SqlDataAdapter(command);
-            daDetails.Fill(dt);
-
-            List<WaterQuant> myList = (List<WaterQuant>)DataFiller.ConvertTo<WaterQuant>(dt);
-
+            try
+            {
+                dt = new DataTable();
+                command = new SqlCommand("GetWaterQuantByUser", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@UserID", UserID);
+                command.Parameters.AddWithValue("@indicator", ind);
+                command.Parameters.AddWithValue("@starttime", from);
+                command.Parameters.AddWithValue("@endtime", To);
+                connection.Open();
+                daDetails = new SqlDataAdapter(command);
+                daDetails.Fill(dt);
+                myList = (Collection<WaterQuant>)DataFiller.ConvertTo<WaterQuant>(dt);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Error in getting water quantity by user id: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
             return myList;
         }
 
-        public List<WaterQuantLocation> getWaterQuantByLocation( string Location,int ind, DateTime from, DateTime to)
+        /// <summary>
+        /// Function to get water quantity by location
+        /// </summary>
+        /// <param name="Location">Selected location</param>
+        /// <param name="ind">0=Hourly, 1=Daily, 2=Weekly, 3=Monthly, 4=Yearly</param>
+        /// <param name="from">From Date</param>
+        /// <param name="to">To Date</param>
+        /// <returns></returns>
+        public Collection<WaterQuantLocation> GetWaterQuantByLocation(string Location, int ind, DateTime from, DateTime to)
         {
-            DataTable dt = new DataTable();
-            SqlCommand command = new SqlCommand("GetWaterQuantByLocation", connection);
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@Location", Location);
-            command.Parameters.AddWithValue("@indicator", ind);
-            command.Parameters.AddWithValue("@starttime", from);
-            command.Parameters.AddWithValue("@endtime", to);
+            try
+            {
+                dt = new DataTable();
+                command = new SqlCommand("GetWaterQuantByLocation", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Location", Location);
+                command.Parameters.AddWithValue("@indicator", ind);
+                command.Parameters.AddWithValue("@starttime", from);
+                command.Parameters.AddWithValue("@endtime", to);
 
-            connection.Open();
-            SqlDataAdapter daDetails = new SqlDataAdapter(command);
-            daDetails.Fill(dt);
+                connection.Open();
+                daDetails = new SqlDataAdapter(command);
+                daDetails.Fill(dt);
 
-            List<WaterQuantLocation> myList = (List<WaterQuantLocation>)DataFiller.ConvertTo<WaterQuantLocation>(dt);
+                waterQuantLocationList = (Collection<WaterQuantLocation>)DataFiller.ConvertTo<WaterQuantLocation>(dt);
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Error in getting water quantity by location: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return waterQuantLocationList;
+        }
 
+        /// <summary>
+        /// Function to get water quant per person
+        /// </summary>
+        /// <param name="UserId">user id selected</param>
+        /// <param name="ind">0=Hourly, 1=Daily, 2=Weekly, 3=Monthly, 4=Yearly</param>
+        /// <param name="from">From Date</param>
+        /// <param name="to">To Date</param>
+        /// <returns></returns>
+        public Collection<WaterQuant> GetWaterQuantPerPerson(int UserID, int ind, DateTime from, DateTime to)
+        {
+            try
+            {
+                dt = new DataTable();
+                command = new SqlCommand("GetWaterQuantperPersonByUser", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@UserID", UserID);
+                command.Parameters.AddWithValue("@indicator", ind);
+                command.Parameters.AddWithValue("@starttime", from);
+                command.Parameters.AddWithValue("@endtime", to);
+
+                connection.Open();
+                SqlDataAdapter daDetails = new SqlDataAdapter(command);
+                daDetails.Fill(dt);
+
+                myList = (Collection<WaterQuant>)DataFiller.ConvertTo<WaterQuant>(dt);
+
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Error in getting water quantity per person: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
             return myList;
         }
 
-
-        public List<WaterQuant> getWaterQuantPerPerson(int UserId, int ind, DateTime from, DateTime to)
+        /// <summary>
+        /// Function to get all locations
+        /// </summary>
+        /// <returns></returns>
+        public Collection<LocationDetails> GetAllLocation()
         {
-            DataTable dt = new DataTable();
-            SqlCommand command = new SqlCommand("GetWaterQuantperPersonByUser", connection);
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@UserID", UserId);
-            command.Parameters.AddWithValue("@indicator", ind);
-            command.Parameters.AddWithValue("@starttime", from);
-            command.Parameters.AddWithValue("@endtime", to);
+            try
+            {
+                dt = new DataTable();
+                obj = new IndividualAddress();
+                command = new SqlCommand("GetAllLocation", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                connection.Open();
+                daDetails = new SqlDataAdapter(command);
+                daDetails.Fill(dt);
 
-            connection.Open();
-            SqlDataAdapter daDetails = new SqlDataAdapter(command);
-            daDetails.Fill(dt);
+                locationDetailsList = (Collection<LocationDetails>)DataFiller.ConvertTo<LocationDetails>(dt);
 
-            List<WaterQuant> myList = (List<WaterQuant>)DataFiller.ConvertTo<WaterQuant>(dt);
-
-            return myList;
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Error in getting all locations: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return locationDetailsList;
         }
 
-       public List<LocationDetails> getAllLocation()
-        {
-            DataTable dt = new DataTable();
-            IndAddress obj = new IndAddress();
-            SqlCommand command = new SqlCommand("GetAllLocation", connection);
-            command.CommandType = CommandType.StoredProcedure;
-            connection.Open();
-            SqlDataAdapter daDetails = new SqlDataAdapter(command);
-            daDetails.Fill(dt);
-
-            List<LocationDetails> myList = (List<LocationDetails>)DataFiller.ConvertTo<LocationDetails>(dt);
-
-            return myList;
-        }
-
-       public List<WaterQuantLocation> getWaterQuantPerPersonArea(string Location, int ind, DateTime from, DateTime to)
+        /// <summary>
+        /// Fucntion to get water quantity per person for a specific location
+        /// </summary>
+        /// <param name="Location">Location selected</param>
+       /// <param name="ind">0=Hourly, 1=Daily, 2=Weekly, 3=Monthly, 4=Yearly</param>
+        /// <param name="from">From Date</param>
+        /// <param name="to">To Date</param>
+        /// <returns>Water quantity list</returns>
+        public Collection<WaterQuantLocation> GetWaterQuantPerPersonArea(string Location, int ind, DateTime from, DateTime to)
        {
-           DataTable dt = new DataTable();
-           SqlCommand command = new SqlCommand("GetWaterQuantByLocationPerPerson", connection);
-           command.CommandType = CommandType.StoredProcedure;
-           command.Parameters.AddWithValue("@Location", Location);
-           command.Parameters.AddWithValue("@indicator", ind);
-           command.Parameters.AddWithValue("@starttime", from);
-           command.Parameters.AddWithValue("@endtime", to);
+           try
+           {
+               dt = new DataTable();
+               command = new SqlCommand("GetWaterQuantByLocationPerPerson", connection);
+               command.CommandType = CommandType.StoredProcedure;
+               command.Parameters.AddWithValue("@Location", Location);
+               command.Parameters.AddWithValue("@indicator", ind);
+               command.Parameters.AddWithValue("@starttime", from);
+               command.Parameters.AddWithValue("@endtime", to);
 
-           connection.Open();
-           SqlDataAdapter daDetails = new SqlDataAdapter(command);
-           daDetails.Fill(dt);
+               connection.Open();
+               daDetails = new SqlDataAdapter(command);
+               daDetails.Fill(dt);
 
-           List<WaterQuantLocation> myList = (List<WaterQuantLocation>)DataFiller.ConvertTo<WaterQuantLocation>(dt);
-
-           return myList;
+               waterQuantLocationList = (Collection<WaterQuantLocation>)DataFiller.ConvertTo<WaterQuantLocation>(dt);
+           }
+           catch (Exception ex)
+           {
+               throw new FaultException("Error in getting water quantity per person for a specific location: " + ex.Message);
+           }
+           finally
+           {
+               connection.Close();
+           }
+           return waterQuantLocationList;
        }
 
-       public List<GroundWaterDetail> getGroundWaterByLocation(string Location, int from, int to)
+        /// <summary>
+        /// Function to get ground water by location
+        /// </summary>
+        /// <param name="Location">Location selected</param>
+        /// <param name="from">From Date</param>
+        /// <param name="to">To Date</param>
+        /// <returns></returns>
+        public Collection<GroundWaterDetail> GetGroundWaterByLocation(string Location, int from, int to)
        {
-           DataTable dt = new DataTable();
-           SqlCommand command = new SqlCommand("GetGroundWaterByLocation", connection);
-           command.CommandType = CommandType.StoredProcedure;
-           command.Parameters.AddWithValue("@Location", Location);
-           command.Parameters.AddWithValue("@starttime", from);
-           command.Parameters.AddWithValue("@endtime", to);
+           try
+           {
+               dt = new DataTable();
+               command = new SqlCommand("GetGroundWaterByLocation", connection);
+               command.CommandType = CommandType.StoredProcedure;
+               command.Parameters.AddWithValue("@Location", Location);
+               command.Parameters.AddWithValue("@starttime", from);
+               command.Parameters.AddWithValue("@endtime", to);
 
-           connection.Open();
-           SqlDataAdapter daDetails = new SqlDataAdapter(command);
-           daDetails.Fill(dt);
+               connection.Open();
+               daDetails = new SqlDataAdapter(command);
+               daDetails.Fill(dt);
 
-           List<GroundWaterDetail> myList = (List<GroundWaterDetail>)DataFiller.ConvertTo<GroundWaterDetail>(dt);
-
-           return myList;
+               groundWaterList = (Collection<GroundWaterDetail>)DataFiller.ConvertTo<GroundWaterDetail>(dt);
+           }
+           catch (Exception ex)
+           {
+               throw new FaultException("Error in getting ground water by location: " + ex.Message);
+           }
+           finally
+           {
+               connection.Close();
+           }
+           return groundWaterList;
        }
 
-
-       public List<ZoneDetails> getDataByZone(DateTime from, DateTime to)
+        /// <summary>
+        /// Function to get data by zone for pie chart
+        /// </summary>
+        /// <param name="from">From Date</param>
+        /// <param name="to">To Date</param>
+        /// <returns></returns>
+        public Collection<ZoneDetails> GetDataByZone(DateTime from, DateTime to)
        {
-           DataTable dt = new DataTable();
-           SqlCommand command = new SqlCommand("GetDataByZone", connection);
-           command.CommandType = CommandType.StoredProcedure;
-           command.Parameters.AddWithValue("@stime", from);
-           command.Parameters.AddWithValue("@etime", to);
+           try
+           {
+               dt = new DataTable();
+               command = new SqlCommand("GetDataByZone", connection);
+               command.CommandType = CommandType.StoredProcedure;
+               command.Parameters.AddWithValue("@stime", from);
+               command.Parameters.AddWithValue("@etime", to);
 
-           connection.Open();
-           SqlDataAdapter daDetails = new SqlDataAdapter(command);
-           daDetails.Fill(dt);
+               connection.Open();
+               daDetails = new SqlDataAdapter(command);
+               daDetails.Fill(dt);
 
-           List<ZoneDetails> myList = (List<ZoneDetails>)DataFiller.ConvertTo<ZoneDetails>(dt);
+               zoneDetailsList = (Collection<ZoneDetails>)DataFiller.ConvertTo<ZoneDetails>(dt);
 
-           return myList;
+           }
+           catch (Exception ex)
+           {
+               throw new FaultException("Error in getting data by zone for pie chart: " + ex.Message);
+           }
+           finally
+           {
+               connection.Close();
+           }
+           return zoneDetailsList;
        }
-       
+
+        #endregion
+
+        #region IDisposable Methods
+
+        protected virtual void Dispose(bool disposing)
+       {
+           if (disposing)
+           {               
+               connection.Close();
+               daDetails.Dispose();
+               dt.Dispose();
+               command.Dispose();
+           }           
+       }
+
+       public void Dispose()
+       {
+           Dispose(true);
+           GC.SuppressFinalize(this);
+       }
+
+        #endregion
+
     }
 }

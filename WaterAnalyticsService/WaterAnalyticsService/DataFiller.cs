@@ -9,8 +9,9 @@ using System.ComponentModel;
 
 namespace WaterAnalyticsService
 {
-    public class DataFiller
+    public static class DataFiller
     {
+       
        public static DataTable ConvertTo<T>(IList<T> list)
          {
              DataTable table = CreateTable<T>();
