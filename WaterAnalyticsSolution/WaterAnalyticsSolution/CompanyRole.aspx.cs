@@ -220,7 +220,7 @@ namespace WaterAnalyticsSolution
                     objSeries.Points.DataBindXY(quantVsTime, "STime", quantVsTime, "Quantity");
                     objSeries.MarkerStyle = MarkerStyle.Circle;
                     objSeries.MarkerSize = 7;
-                    objSeries.ToolTip = "Water Usage : #VALY{C0}";
+                    objSeries.ToolTip = "Water Usage : #VALY";
                     objSeries.ChartType = SeriesChartType.Line;
                     objSeries.LegendText = quantVsTime[0].LocationName;
                     lstSeriesChart1.Add(objSeries);
@@ -282,7 +282,7 @@ namespace WaterAnalyticsSolution
                 objSeries.Points.DataBindXY(quantVsTime, "STime", quantVsTime, "Quantity");
                 objSeries.MarkerStyle = MarkerStyle.Circle;
                 objSeries.MarkerSize = 7;
-                objSeries.ToolTip = "Water Usage : #VALY{C0}";
+                objSeries.ToolTip = "Water Usage : #VALY";
                 objSeries.ChartType = SeriesChartType.Line;
                 objSeries.LegendText = quantVsTime[0].LocationName;
                 lstSeriesChart2.Add(objSeries);
@@ -337,7 +337,7 @@ namespace WaterAnalyticsSolution
                     objSeries.Points.DataBindXY(e.Result, "STime", e.Result, "Quantity");
                     objSeries.MarkerStyle = MarkerStyle.Circle;
                     objSeries.MarkerSize = 7;
-                    objSeries.ToolTip = "Water Usage : #VALY{C0}";
+                    objSeries.ToolTip = "Water Usage : #VALY";
                     objSeries.ChartType = SeriesChartType.Line;
                     objSeries.LegendText = "Ground Water Level ";
                     lstSeriesChart3.Add(objSeries);
@@ -403,7 +403,7 @@ namespace WaterAnalyticsSolution
                     objSeries.Points.DataBindXY(e.Result, "STime", e.Result, "Quantity");
                     objSeries.MarkerStyle = MarkerStyle.Circle;
                     objSeries.MarkerSize = 7;
-                    objSeries.ToolTip = "Water Usage : #VALY{C0}";
+                    objSeries.ToolTip = "Water Usage : #VALY";
                     objSeries.ChartType = SeriesChartType.Line;
                     objSeries.LegendText = "Yearly water Consumption";
                     lstSeriesChart3.Add(objSeries);
@@ -444,7 +444,7 @@ namespace WaterAnalyticsSolution
 
 
                     quantvsTime.Series[0].Points.DataBindXY(quantRegion, "Region", quantRegion, "Quantity");
-                    quantvsTime.Series[0].ToolTip = "Water Usage : #VALY{C0}";
+                    quantvsTime.Series[0].ToolTip = "Water Usage : #VALY";
                     quantvsTime.Series[0].ChartType = SeriesChartType.Pie;
                     quantvsTime.ChartAreas[0].BackColor = Color.Transparent;
                     quantvsTime.Titles.Clear();

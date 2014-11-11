@@ -31,11 +31,14 @@ namespace WaterAnalyticsSolution
             try
             {
                 if (!IsPostBack)
-                {
+                {    
+
                     if (chkList != null && chkList.Items.Count == 0)
                     {
-
+                        txtLocation.Visible = isLocationVisible;
                         chkList.Visible = isLocationVisible;
+                        Label2.Visible = isLocationVisible;
+                        pnlLoc.Visible = isLocationVisible;
                         if (isLocationVisible)
                         {
                             WaterAnalyticsClient client = new WaterAnalyticsClient();

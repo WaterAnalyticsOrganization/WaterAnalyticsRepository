@@ -45,6 +45,14 @@
 </td>
 </tr>
 <tr>
+<td align="right">
+<asp:Label ID="lblLocation" Text="Location :" runat="server"></asp:Label>
+</td>
+<td colspan="2" align="left">
+<asp:DropDownList ID="ddlLocation" runat="server" Width="170px"></asp:DropDownList>
+</td>
+</tr>
+<tr>
 <td colspan="2">
 <asp:Button runat="server" ID="btnGrndVsUsageFetch" Text="Go" OnClick="btnGround_Click"/>
 </td>

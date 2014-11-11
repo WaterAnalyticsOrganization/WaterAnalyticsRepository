@@ -177,7 +177,7 @@ namespace WaterAnalyticsSolution
                 quantperpersonvsTime.Series[0].XValueMember = "STime";
                 quantperpersonvsTime.Series[0].YValueMembers = "Quantity";
 
-                quantperpersonvsTime.Series[0].ToolTip = "Water Usage : #VALY{C0}";
+                quantperpersonvsTime.Series[0].ToolTip = "Water Usage : #VALY";
                 quantperpersonvsTime.Series[0].ChartType = SeriesChartType.Line;
 
                 quantperpersonvsTime.Titles.Clear();
@@ -256,7 +256,7 @@ namespace WaterAnalyticsSolution
                 quantvsTime.Series[0].XValueMember = "STime";
                 quantvsTime.Series[0].YValueMembers = "Quantity";
 
-                quantvsTime.Series[0].ToolTip = "Water Usage : #VALY{C0}";
+                quantvsTime.Series[0].ToolTip = "Water Usage : #VALY";
                 quantvsTime.Series[0].ChartType = SeriesChartType.Line;
 
                 quantvsTime.Titles.Clear();
