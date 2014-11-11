@@ -183,12 +183,12 @@ namespace WaterAnalyticsService
     public class GroundWaterDetail
     {
 
-        int stime;
+        DateTime stime;
         string locationName;
         decimal quantity;
 
         [DataMember]
-        public int Stime
+        public DateTime Stime
         {
             get { return stime; }
             set { stime = value; }
