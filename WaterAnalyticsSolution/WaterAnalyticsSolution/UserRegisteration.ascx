@@ -8,7 +8,7 @@
 <asp:Label ID="lblSensorId" runat="server" Text="Sensor ID :"></asp:Label>
 </td>
 <td align="left">
-<asp:TextBox ID="txtSensorId" runat="server"  ></asp:TextBox>
+<asp:TextBox ID="txtSensorId" runat="server"  Width="155px"  ></asp:TextBox>
 </td>
 </tr>
 <%--<tr>
@@ -26,16 +26,18 @@
 <asp:Label ID="lblpwd" runat="server" Text="Password :"></asp:Label>
 </td>
 <td  align="left">
-<asp:TextBox ID="txtpwd" runat="server" TextMode="Password"></asp:TextBox>
+<asp:TextBox ID="txtpwd" runat="server" TextMode="Password"  Width="160px"></asp:TextBox>
 </td>
 </tr>
 <tr>
 <td></td>
 <td align="right" >
+<asp:Panel runat="server" Wrap="false">
 <asp:Label ID="lblcnfmpwd" runat="server" Text="Confirm Password :"></asp:Label>
+</asp:Panel>
 </td>
 <td  align="left">
-<asp:TextBox ID="txtcnmpwd" runat="server" TextMode="Password"></asp:TextBox>
+<asp:TextBox ID="txtcnmpwd" runat="server" TextMode="Password"  Width="160px"></asp:TextBox>
 </td>
 </tr>
 <tr>
@@ -44,7 +46,7 @@
 <asp:Label ID="lblfname" runat="server" Text="FirstName :"></asp:Label>
 </td>
 <td  align="left">
-<asp:TextBox ID="txtfname" runat="server"></asp:TextBox>
+<asp:TextBox ID="txtfname" runat="server"  Width="155px"></asp:TextBox>
 </td>
 </tr>
 <tr>
@@ -53,7 +55,7 @@
 <asp:Label ID="lbllname" runat="server" Text="LastName :"></asp:Label>
 </td>
 <td  align="left">
-<asp:TextBox ID="txtlname" runat="server"></asp:TextBox>
+<asp:TextBox ID="txtlname" runat="server"  Width="155px"></asp:TextBox>
 </td>
 </tr>
 <tr>
@@ -62,7 +64,7 @@
 <asp:Label ID="lblemail" runat="server" Text="Email :"></asp:Label>
 </td>
 <td  align="left">
-<asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
+<asp:TextBox ID="txtEmail" runat="server"  Width="155px"></asp:TextBox>
 </td>
 </tr>
 <%--<tr>
@@ -85,7 +87,7 @@
 </tr>--%>
 <tr>
 
-<td align="center" colspan="3"><asp:Button ID="btnsubmit" runat="server" Text="Submit"/>
+<td align="right" colspan="3"><asp:Button ID="btnsubmit" runat="server" Text="Submit"/>
 </td>
 </tr>
 <tr>

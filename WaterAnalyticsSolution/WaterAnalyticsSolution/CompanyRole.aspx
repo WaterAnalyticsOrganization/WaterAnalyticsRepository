@@ -4,9 +4,12 @@
 <%@ Register Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" tagPrefix="ajax" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="Stylesheet" href="Styles/InputStyle.css" type="text/css" media="screen" />
+
 </asp:Content>
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder1" runat="server" >
 <ajax:ToolkitScriptManager ID="toolkit1" runat="server"></ajax:ToolkitScriptManager>
+<asp:UpdatePanel ID="updPanel" runat="server">
+    <ContentTemplate>
     <table style="width:980px; background-color:#F4FFFF;">
 <tr>
 <td>
@@ -39,14 +42,6 @@
 </td>
 <td>
 <asp:DropDownList ID="ddlEndYear" runat="server" Width="170px" Height="25px"></asp:DropDownList>
-</td>
-</tr>
-<tr>
-<td align="right">
-<asp:Label ID="lblLocation" Text="Location :" runat="server"></asp:Label>
-</td>
-<td colspan="2" align="left">
-<asp:DropDownList ID="ddlLocation" runat="server" Width="170px"></asp:DropDownList>
 </td>
 </tr>
 <tr>
@@ -97,4 +92,7 @@
 </td>
 </tr>
 </table>
+</ContentTemplate>
+</asp:UpdatePanel>
+
 </asp:Content>

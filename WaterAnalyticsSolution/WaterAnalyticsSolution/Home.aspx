@@ -7,11 +7,11 @@
  </asp:Content>
  <asp:content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1"  runat="server">
    <ajax:ToolkitScriptManager ID="toolkit1" runat="server"></ajax:ToolkitScriptManager>
-   <table style="width:980px; background-color:#F4FFFF;">
+   <table style="width:980px; background-color:#F4FFFF; overflow:hidden">
    <tr>
    <td>
-    <asp:Panel ID="Panel1" runat="server">
-     <div style="float:left; width:45%; min-height:600px;">
+    <asp:Panel ID="Panel1" runat="server" ScrollBars="None">
+     <div style="float:left; min-height:600px; overflow:hidden">
      <ajax:Accordion ID="Accordion1" runat="server" HeaderCssClass="accordionHeader" 
             HeaderSelectedCssClass="accordionHeaderSelected"
             ContentCssClass="accordionContent"  
@@ -23,7 +23,10 @@
      <ajax:AccordionPane ID="AccPaneLogin" runat="server">
      
      <Header>
-     Login to View Your Water Consumption Details 
+        <asp:Panel ID="Panel2" runat="server" HorizontalAlign ="Left">
+          <asp:Label ID="Label1" runat ="server" Text="Login to View Your Water Consumption Details"></asp:Label>
+          </asp:Panel>  
+      
      </Header>
      <Content>
      <login:control runat="server" ID="login" />
@@ -31,7 +34,7 @@
      </ajax:AccordionPane>
      </Panes>
     </ajax:Accordion> 
-    <ajax:Accordion ID="Accordion2" runat="server" HeaderCssClass="accordionHeader" 
+     <ajax:Accordion ID="Accordion2" runat="server" HeaderCssClass="accordionHeader" 
             HeaderSelectedCssClass="accordionHeaderSelected"
             ContentCssClass="accordionContent"  
             FadeTransitions="true" SelectedIndex="1"
@@ -41,7 +44,9 @@
             <Panes>
       <ajax:AccordionPane ID="AccPanelSignUp" runat="server">
      <Header>
-      New User ? Please sign up here !
+     <asp:Panel runat="server" HorizontalAlign ="Left">
+          <asp:Label ID="lblSignup" runat ="server" Text=" New User ? Please sign up here !"></asp:Label>
+          </asp:Panel>     
      </Header>
      <Content>
      

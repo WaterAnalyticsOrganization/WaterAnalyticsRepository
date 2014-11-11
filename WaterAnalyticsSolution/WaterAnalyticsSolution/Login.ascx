@@ -9,7 +9,7 @@
 <asp:Label ID="lblSensorId" runat="server" Text="Sensor ID :"></asp:Label>
 </td>
 <td align="left">
-<asp:TextBox ID="txtSensorId" runat="server"  ></asp:TextBox>
+<asp:TextBox ID="txtSensorId" runat="server" Width="145px"  ></asp:TextBox>
 </td>
 </tr>
 <tr>
@@ -17,14 +17,14 @@
 <asp:Label ID="lblPassword" runat="server" Text="Password :"></asp:Label>
 </td>
 <td align="left">
-<asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox>
+<asp:TextBox ID="txtPassword" runat="server" TextMode="Password"  Width="155px"></asp:TextBox>
 </td>
 </tr>
 <tr>
 </tr>
 <br />
 <tr>
-<td colspan="2" align="center">
+<td colspan="2" align="right">
 <asp:Button ID="btnSignIn" runat="server" text="Sign In" OnClick="btnSignIn_Click"/>
 <br />
     <asp:Label ID="lblErrorMessage" runat="server" Text=""></asp:Label>
