@@ -20,18 +20,18 @@ namespace WaterAnalyticsService
         #region Private Properties
 
         static string connectionStr = ConfigurationManager.ConnectionStrings["WaterAnalytics"].ConnectionString;
-        SqlConnection connection = null;
+        SqlConnection connection = new SqlConnection(connectionStr);
         SqlCommand command = null;
         int isAuth=0;
         DataTable dt = null;
         IndividualAddress obj = null;
         SqlDataAdapter daDetails = null;
         int result=0;
-        Collection<WaterQuant> myList = null;
-        Collection<WaterQuantLocation> waterQuantLocationList = null;
-        Collection<LocationDetails> locationDetailsList = null;
-        Collection<GroundWaterDetail> groundWaterList = null;
-        Collection<ZoneDetails> zoneDetailsList = null;
+        List<WaterQuant> myList = null;
+        List<WaterQuantLocation> waterQuantLocationList = null;
+        List<LocationDetails> locationDetailsList = null;
+        List<GroundWaterDetail> groundWaterList = null;
+        List<ZoneDetails> zoneDetailsList = null;
 
         #endregion
 
@@ -145,7 +145,7 @@ namespace WaterAnalyticsService
         /// <param name="from">From Date</param>
         /// <param name="to">To Date</param>
         /// <returns></returns>
-        public Collection<WaterQuant> GetWaterQuantByUserId(int UserID, int ind, DateTime from, DateTime To)
+        public List<WaterQuant> GetWaterQuantByUserId(int UserID, int ind, DateTime from, DateTime To)
         {
             try
             {
@@ -159,7 +159,7 @@ namespace WaterAnalyticsService
                 connection.Open();
                 daDetails = new SqlDataAdapter(command);
                 daDetails.Fill(dt);
-                myList = (Collection<WaterQuant>)DataFiller.ConvertTo<WaterQuant>(dt);
+                 myList = (List<WaterQuant>)DataFiller.ConvertTo<WaterQuant>(dt);
             }
             catch (Exception ex)
             {
@@ -180,7 +180,7 @@ namespace WaterAnalyticsService
         /// <param name="from">From Date</param>
         /// <param name="to">To Date</param>
         /// <returns></returns>
-        public Collection<WaterQuantLocation> GetWaterQuantByLocation(string Location, int ind, DateTime from, DateTime to)
+        public List<WaterQuantLocation> GetWaterQuantByLocation(string Location, int ind, DateTime from, DateTime to)
         {
             try
             {
@@ -196,7 +196,7 @@ namespace WaterAnalyticsService
                 daDetails = new SqlDataAdapter(command);
                 daDetails.Fill(dt);
 
-                waterQuantLocationList = (Collection<WaterQuantLocation>)DataFiller.ConvertTo<WaterQuantLocation>(dt);
+                waterQuantLocationList = (List<WaterQuantLocation>)DataFiller.ConvertTo<WaterQuantLocation>(dt);
             }
             catch (Exception ex)
             {
@@ -217,7 +217,7 @@ namespace WaterAnalyticsService
         /// <param name="from">From Date</param>
         /// <param name="to">To Date</param>
         /// <returns></returns>
-        public Collection<WaterQuant> GetWaterQuantPerPerson(int UserID, int ind, DateTime from, DateTime to)
+        public List<WaterQuant> GetWaterQuantPerPerson(int UserID, int ind, DateTime from, DateTime to)
         {
             try
             {
@@ -233,7 +233,7 @@ namespace WaterAnalyticsService
                 SqlDataAdapter daDetails = new SqlDataAdapter(command);
                 daDetails.Fill(dt);
 
-                myList = (Collection<WaterQuant>)DataFiller.ConvertTo<WaterQuant>(dt);
+                myList = (List<WaterQuant>)DataFiller.ConvertTo<WaterQuant>(dt);
 
             }
             catch (Exception ex)
@@ -251,7 +251,7 @@ namespace WaterAnalyticsService
         /// Function to get all locations
         /// </summary>
         /// <returns></returns>
-        public Collection<LocationDetails> GetAllLocation()
+        public List<LocationDetails> GetAllLocation()
         {
             try
             {
@@ -263,7 +263,7 @@ namespace WaterAnalyticsService
                 daDetails = new SqlDataAdapter(command);
                 daDetails.Fill(dt);
 
-                locationDetailsList = (Collection<LocationDetails>)DataFiller.ConvertTo<LocationDetails>(dt);
+                locationDetailsList = (List<LocationDetails>)DataFiller.ConvertTo<LocationDetails>(dt);
 
             }
             catch (Exception ex)
@@ -285,7 +285,7 @@ namespace WaterAnalyticsService
         /// <param name="from">From Date</param>
         /// <param name="to">To Date</param>
         /// <returns>Water quantity list</returns>
-        public Collection<WaterQuantLocation> GetWaterQuantPerPersonArea(string Location, int ind, DateTime from, DateTime to)
+        public List<WaterQuantLocation> GetWaterQuantPerPersonArea(string Location, int ind, DateTime from, DateTime to)
        {
            try
            {
@@ -301,7 +301,7 @@ namespace WaterAnalyticsService
                daDetails = new SqlDataAdapter(command);
                daDetails.Fill(dt);
 
-               waterQuantLocationList = (Collection<WaterQuantLocation>)DataFiller.ConvertTo<WaterQuantLocation>(dt);
+               waterQuantLocationList = (List<WaterQuantLocation>)DataFiller.ConvertTo<WaterQuantLocation>(dt);
            }
            catch (Exception ex)
            {
@@ -321,7 +321,7 @@ namespace WaterAnalyticsService
         /// <param name="from">From Date</param>
         /// <param name="to">To Date</param>
         /// <returns></returns>
-        public Collection<GroundWaterDetail> GetGroundWaterByLocation(string Location, int from, int to)
+        public List<GroundWaterDetail> GetGroundWaterByLocation(string Location, int from, int to)
        {
            try
            {
@@ -336,7 +336,7 @@ namespace WaterAnalyticsService
                daDetails = new SqlDataAdapter(command);
                daDetails.Fill(dt);
 
-               groundWaterList = (Collection<GroundWaterDetail>)DataFiller.ConvertTo<GroundWaterDetail>(dt);
+               groundWaterList = (List<GroundWaterDetail>)DataFiller.ConvertTo<GroundWaterDetail>(dt);
            }
            catch (Exception ex)
            {
@@ -355,7 +355,7 @@ namespace WaterAnalyticsService
         /// <param name="from">From Date</param>
         /// <param name="to">To Date</param>
         /// <returns></returns>
-        public Collection<ZoneDetails> GetDataByZone(DateTime from, DateTime to)
+        public List<ZoneDetails> GetDataByZone(DateTime from, DateTime to)
        {
            try
            {
@@ -369,7 +369,7 @@ namespace WaterAnalyticsService
                daDetails = new SqlDataAdapter(command);
                daDetails.Fill(dt);
 
-               zoneDetailsList = (Collection<ZoneDetails>)DataFiller.ConvertTo<ZoneDetails>(dt);
+               zoneDetailsList = (List<ZoneDetails>)DataFiller.ConvertTo<ZoneDetails>(dt);
 
            }
            catch (Exception ex)

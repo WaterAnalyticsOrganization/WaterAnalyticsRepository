@@ -18,19 +18,19 @@ namespace WaterAnalyticsService
         int IsAuthenticated(int userId,string password);       
 
         [OperationContract]
-        Collection<WaterQuant> GetWaterQuantByUserId(int UserID, int ind, DateTime from, DateTime To);
+        List<WaterQuant> GetWaterQuantByUserId(int UserID, int ind, DateTime from, DateTime To);
 
         [OperationContract]
-        Collection<WaterQuantLocation> GetWaterQuantByLocation(string Location, int ind, DateTime from, DateTime to);
+        List<WaterQuantLocation> GetWaterQuantByLocation(string Location, int ind, DateTime from, DateTime to);
 
         [OperationContract]
-        Collection<WaterQuant> GetWaterQuantPerPerson(int UserID, int ind, DateTime from, DateTime to);
+        List<WaterQuant> GetWaterQuantPerPerson(int UserID, int ind, DateTime from, DateTime to);
 
         [OperationContract]
-        Collection<LocationDetails> GetAllLocation();
+        List<LocationDetails> GetAllLocation();
 
         [OperationContract]
-        Collection<WaterQuantLocation> GetWaterQuantPerPersonArea(string Area, int ind, DateTime from, DateTime to);
+        List<WaterQuantLocation> GetWaterQuantPerPersonArea(string Area, int ind, DateTime from, DateTime to);
 
         [OperationContract]
         int UpdateDetails(int UserID, string Name, string email, int noOfPeople);
@@ -39,10 +39,10 @@ namespace WaterAnalyticsService
         IndividualAddress GetDetails(int sensorId);
 
          [OperationContract]
-        Collection<ZoneDetails> GetDataByZone(DateTime from, DateTime to);
+        List<ZoneDetails> GetDataByZone(DateTime from, DateTime to);
 
          [OperationContract]
-         Collection<GroundWaterDetail> GetGroundWaterByLocation(string Location, int from, int to);
+         List<GroundWaterDetail> GetGroundWaterByLocation(string Location, int from, int to);
     }
 
 
