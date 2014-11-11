@@ -11,15 +11,19 @@ namespace WaterAnalyticsSolution
     public partial class Login : System.Web.UI.Page
     {
 
+        #region Private Properties
 
         WaterAnalyticsClient client = null;
+
+        #endregion
+
+        #region Events
 
         protected void Page_Load(object sender, EventArgs e)
         {
             login.btnSignInClick += new EventHandler(btnSignIn_Clicked);
             
         }
-
         protected void Page_Init(object sender, EventArgs e)
         { 
         
@@ -62,11 +66,13 @@ namespace WaterAnalyticsSolution
                 }
 
             }
-            catch { }
+            catch(Exception ex) 
+            {
+                ErrorHandler.WriteError(ex.Message);
+            }
         }
 
-       
+        #endregion
 
-        
     }
 }

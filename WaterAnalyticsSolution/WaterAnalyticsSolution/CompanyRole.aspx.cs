@@ -111,9 +111,9 @@ namespace WaterAnalyticsSolution
                   
             }
             catch (Exception ex)
-            { 
-            
-            
+            {
+
+                ErrorHandler.WriteError(ex.Message);
             }
         }
         protected void ChartWaterQuantPerPersonUsageBinding()
@@ -154,7 +154,7 @@ namespace WaterAnalyticsSolution
             }
             catch (Exception ex)
             {
-
+                ErrorHandler.WriteError(ex.Message);
 
             }
 
@@ -172,7 +172,7 @@ namespace WaterAnalyticsSolution
             }
             catch (Exception ex)
             {
-
+                ErrorHandler.WriteError(ex.Message);
 
             }
         }
@@ -188,7 +188,7 @@ namespace WaterAnalyticsSolution
             catch (Exception ex)
             {
 
-
+                ErrorHandler.WriteError(ex.Message);
             }
 
         }
@@ -206,8 +206,8 @@ namespace WaterAnalyticsSolution
 
             }
             catch (Exception ex)
-            { 
-             
+            {
+                ErrorHandler.WriteError(ex.Message);
             
             }
         
@@ -261,8 +261,8 @@ namespace WaterAnalyticsSolution
                 }
             }
             catch (Exception ex)
-            { 
-              
+            {
+                ErrorHandler.WriteError(ex.Message);
             }
         
         }
@@ -278,69 +278,83 @@ namespace WaterAnalyticsSolution
         }
         protected void BindQuantPerPersonVsTime(WaterQuantLocation[] quantVsTime)
         {
-            Series objSeries = new Series();
-            objSeries.Points.DataBindXY(quantVsTime, "STime", quantVsTime, "Quantity");
-            objSeries.MarkerStyle = MarkerStyle.Circle;
-            objSeries.MarkerSize = 7;
-            objSeries.ToolTip = "Water Usage : #VALY{C0}";
-            objSeries.ChartType = SeriesChartType.Line;
-            objSeries.LegendText = quantVsTime[0].LocationName;
-            lstSeriesChart2.Add(objSeries);
-            quantPerPersonVsTimeItems--;
-
-
-            if (quantPerPersonVsTimeItems == 0)
-                
+            try
             {
-                Chart chartQuantvsTimeLocs = (Chart)chartQuantVsTimeLocs.FindControl("chrtAnalytics");
-                chartQuantvsTimeLocs.Series.Clear();
-                chartQuantvsTimeLocs.Legends.Clear();
-                foreach (Series s in lstSeriesChart2)
-                {
-                    chartQuantvsTimeLocs.Series.Add(s);
-                    Legend lg = new Legend();
-                    lg.Docking = Docking.Bottom;
-                    lg.LegendStyle = LegendStyle.Row;
-                    lg.Name = s.LegendText;
-                    chartQuantvsTimeLocs.Legends.Add(lg);
+                Series objSeries = new Series();
+                objSeries.Points.DataBindXY(quantVsTime, "STime", quantVsTime, "Quantity");
+                objSeries.MarkerStyle = MarkerStyle.Circle;
+                objSeries.MarkerSize = 7;
+                objSeries.ToolTip = "Water Usage : #VALY{C0}";
+                objSeries.ChartType = SeriesChartType.Line;
+                objSeries.LegendText = quantVsTime[0].LocationName;
+                lstSeriesChart2.Add(objSeries);
+                quantPerPersonVsTimeItems--;
 
+
+                if (quantPerPersonVsTimeItems == 0)
+                {
+                    Chart chartQuantvsTimeLocs = (Chart)chartQuantVsTimeLocs.FindControl("chrtAnalytics");
+                    chartQuantvsTimeLocs.Series.Clear();
+                    chartQuantvsTimeLocs.Legends.Clear();
+                    foreach (Series s in lstSeriesChart2)
+                    {
+                        chartQuantvsTimeLocs.Series.Add(s);
+                        Legend lg = new Legend();
+                        lg.Docking = Docking.Bottom;
+                        lg.LegendStyle = LegendStyle.Row;
+                        lg.Name = s.LegendText;
+                        chartQuantvsTimeLocs.Legends.Add(lg);
+
+
+                    }
+
+                    chartQuantvsTimeLocs.Titles.Clear();
+                    chartQuantvsTimeLocs.Titles.Add("Water Consumption Data");
+                    chartQuantvsTimeLocs.ChartAreas[0].AxisX.Title = "Date";
+                    chartQuantvsTimeLocs.ChartAreas[0].AxisX.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
+                    chartQuantvsTimeLocs.ChartAreas[0].AxisX.TitleAlignment = StringAlignment.Center;
+                    chartQuantvsTimeLocs.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+                    chartQuantvsTimeLocs.ChartAreas[0].AxisY.Title = "Quantity (Lts)";
+                    chartQuantvsTimeLocs.ChartAreas[0].AxisY.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
+                    chartQuantvsTimeLocs.ChartAreas[0].AxisY.TitleAlignment = StringAlignment.Center;
+                    chartQuantvsTimeLocs.ChartAreas[0].AxisY.TextOrientation = TextOrientation.Rotated270;
+                    chartQuantvsTimeLocs.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
 
                 }
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.WriteError(ex.Message);
 
-                chartQuantvsTimeLocs.Titles.Clear();
-                chartQuantvsTimeLocs.Titles.Add("Water Consumption Data");
-                chartQuantvsTimeLocs.ChartAreas[0].AxisX.Title = "Date";
-                chartQuantvsTimeLocs.ChartAreas[0].AxisX.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
-                chartQuantvsTimeLocs.ChartAreas[0].AxisX.TitleAlignment = StringAlignment.Center;
-                chartQuantvsTimeLocs.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
-                chartQuantvsTimeLocs.ChartAreas[0].AxisY.Title = "Quantity (Lts)";
-                chartQuantvsTimeLocs.ChartAreas[0].AxisY.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
-                chartQuantvsTimeLocs.ChartAreas[0].AxisY.TitleAlignment = StringAlignment.Center;
-                chartQuantvsTimeLocs.ChartAreas[0].AxisY.TextOrientation = TextOrientation.Rotated270;
-                chartQuantvsTimeLocs.ChartAreas[0].AxisY.MajorGrid.Enabled = false;
-                        
             }
 
         }
         protected void client_getGroundWaterByLocationCompleted(object sender, GetGroundWaterByLocationCompletedEventArgs e)
         {
-            if (e.Result != null)
+            try
             {
-                Series objSeries = new Series();
-                objSeries.Points.DataBindXY(e.Result, "STime", e.Result, "Quantity");
-                objSeries.MarkerStyle = MarkerStyle.Circle;
-                objSeries.MarkerSize = 7;
-                objSeries.ToolTip = "Water Usage : #VALY{C0}";
-                objSeries.ChartType = SeriesChartType.Line;
-                objSeries.LegendText = "Ground Water Level ";
-                lstSeriesChart3.Add(objSeries);
-                isGroundFetch = true;
+                if (e.Result != null)
+                {
+                    Series objSeries = new Series();
+                    objSeries.Points.DataBindXY(e.Result, "STime", e.Result, "Quantity");
+                    objSeries.MarkerStyle = MarkerStyle.Circle;
+                    objSeries.MarkerSize = 7;
+                    objSeries.ToolTip = "Water Usage : #VALY{C0}";
+                    objSeries.ChartType = SeriesChartType.Line;
+                    objSeries.LegendText = "Ground Water Level ";
+                    lstSeriesChart3.Add(objSeries);
+                    isGroundFetch = true;
+                }
+                if ((isGroundFetch) && (isUsageFetch))
+                {
+                    BindChartGroungVsUsage();
+
+                }
             }
-            if ((isGroundFetch) && (isUsageFetch))
+            catch (Exception ex)
             {
-                BindChartGroungVsUsage();
-            
-            }           
+                ErrorHandler.WriteError(ex.Message);
+            }
 
         }
         protected void BindChartGroungVsUsage()
@@ -377,7 +391,7 @@ namespace WaterAnalyticsSolution
           }
             catch(Exception ex)
            {
-
+               ErrorHandler.WriteError(ex.Message);
             
             }
           }
@@ -405,9 +419,9 @@ namespace WaterAnalyticsSolution
 
             }
             catch (Exception ex)
-            { 
-            
-            
+            {
+
+                ErrorHandler.WriteError(ex.Message);
             }
         }
         protected void client_getDataByZoneCompleted(object sender, GetDataByZoneCompletedEventArgs e)
@@ -416,28 +430,36 @@ namespace WaterAnalyticsSolution
             {
                 BindQuantPerRegion(e.Result);
                
+
             }
         }
         protected void BindQuantPerRegion(ZoneDetails[] quantRegion)
         {
-            if (regionChart.FindControl("chrtAnalytics") != null)
+            try
             {
-                Chart quantvsTime = (Chart)regionChart.FindControl("chrtAnalytics");
-                quantvsTime.Series.Clear();
-                quantvsTime.DataSource = quantRegion;
-                quantvsTime.Series.Add(new Series());
+                if (regionChart.FindControl("chrtAnalytics") != null)
+                {
+                    Chart quantvsTime = (Chart)regionChart.FindControl("chrtAnalytics");
+                    quantvsTime.Series.Clear();
+                    quantvsTime.DataSource = quantRegion;
+                    quantvsTime.Series.Add(new Series());
 
-              
-                quantvsTime.Series[0].Points.DataBindXY(quantRegion, "Region", quantRegion, "Quantity");
-                quantvsTime.Series[0].ToolTip = "Water Usage : #VALY{C0}";
-                quantvsTime.Series[0].ChartType = SeriesChartType.Pie;
-                quantvsTime.ChartAreas[0].BackColor = Color.Transparent;
-                quantvsTime.Titles.Clear();
-                quantvsTime.Titles.Add("Regional Water Consumption Data");
-                
 
-                
+                    quantvsTime.Series[0].Points.DataBindXY(quantRegion, "Region", quantRegion, "Quantity");
+                    quantvsTime.Series[0].ToolTip = "Water Usage : #VALY{C0}";
+                    quantvsTime.Series[0].ChartType = SeriesChartType.Pie;
+                    quantvsTime.ChartAreas[0].BackColor = Color.Transparent;
+                    quantvsTime.Titles.Clear();
+                    quantvsTime.Titles.Add("Regional Water Consumption Data");
 
+
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.WriteError(ex.Message);
             }
           
         
@@ -452,9 +474,9 @@ namespace WaterAnalyticsSolution
 
             }
             catch (Exception ex)
-            { 
-            
-            
+            {
+
+                ErrorHandler.WriteError(ex.Message);
             }
         }
         protected void btnQuantPerPerson_Click(object sender, EventArgs e)

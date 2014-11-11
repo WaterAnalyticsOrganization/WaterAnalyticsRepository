@@ -11,10 +11,15 @@ namespace WaterAnalyticsSolution
 {
     public partial class ChartControl : System.Web.UI.UserControl
     {
+        
+        #region Private Properties
+
         public event EventHandler  ChartBindingHandler;
         public Unit Width;
-         
-           
+
+        #endregion
+
+        #region Events
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -25,9 +30,9 @@ namespace WaterAnalyticsSolution
         {
             EventHandler handler = ChartBindingHandler;
             base.OnDataBinding(e);
-            
-
-
         }
+
+        #endregion
+
     }
 }

@@ -9,9 +9,16 @@ namespace WaterAnalyticsSolution
 {
     public partial class ChartFilter : System.Web.UI.UserControl
     {
+
+        #region Private Properties
+
         public Unit Width;
         public event EventHandler btnFetchClickHandler;
         public bool isLocationVisible;
+
+        #endregion
+
+        #region Events
 
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -21,50 +28,51 @@ namespace WaterAnalyticsSolution
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            try
             {
-                if (chkList != null && chkList.Items.Count == 0)
+                if (!IsPostBack)
                 {
-
-                    chkList.Visible = isLocationVisible;
-                    if (isLocationVisible)
+                    if (chkList != null && chkList.Items.Count == 0)
                     {
-                        WaterAnalyticsClient client = new WaterAnalyticsClient();
-                        chkList.DataSource = client.GetAllLocation();
-                        if (chkList.DataSource != null)
-                        {
-                            chkList.DataTextField = "Location_name";
-                            chkList.DataValueField = "Location_Id";
-                            chkList.SelectedIndex = 0;
-                            chkList.DataBind();
-                        
-                        }
 
+                        chkList.Visible = isLocationVisible;
+                        if (isLocationVisible)
+                        {
+                            WaterAnalyticsClient client = new WaterAnalyticsClient();
+                            chkList.DataSource = client.GetAllLocation();
+                            if (chkList.DataSource != null)
+                            {
+                                chkList.DataTextField = "Location_name";
+                                chkList.DataValueField = "Location_Id";
+                                chkList.SelectedIndex = 0;
+                                chkList.DataBind();
+
+                            }
+
+
+                        }
 
                     }
 
+                    ddlXValue.DataSource = Helper.GetXValues();
+                    ddlXValue.DataTextField = "Text";
+                    ddlXValue.DataValueField = "Value";
+                    ddlXValue.SelectedIndex = 0;
+                    ddlXValue.DataBind();
                 }
-
-                ddlXValue.DataSource = Helper.GetXValues();
-                ddlXValue.DataTextField = "Text";
-                ddlXValue.DataValueField = "Value";
-                ddlXValue.SelectedIndex = 0;
-                ddlXValue.DataBind();
             }
-        }
-       
-
-
-
-
-
-
-
+            catch (Exception ex)
+            {
+                ErrorHandler.WriteError(ex.Message);
+            }
+        }      
         protected void btnFetch_Click(object sender, EventArgs e)
         {
 
             btnFetchClickHandler(sender, e);
 
         }
+
+        #endregion
     }
 }
