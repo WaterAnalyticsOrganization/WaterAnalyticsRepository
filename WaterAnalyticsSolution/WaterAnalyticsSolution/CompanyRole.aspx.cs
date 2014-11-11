@@ -13,12 +13,10 @@ namespace WaterAnalyticsSolution
     public partial class CompanyRole : System.Web.UI.Page
     {
         #region Declare Variables
-        //private WaterQuantLocation[] quantVsTime = null;
-        //private WaterQuantLocation[] quantPerPersonVsTime = null;
-       // private ZoneDetails[] quantRegion = null;
+        
         private Int32 quantVsTimeItems = 0;
         private Int32 quantPerPersonVsTimeItems = 0;
-        private Int32 quantGroundVsTimeItems = 0;
+        
         private List<Series> lstSeriesChart1 = new List<Series>();
         private List<Series> lstSeriesChart2 = new List<Series>();
         private List<Series> lstSeriesChart3 = new List<Series>();
