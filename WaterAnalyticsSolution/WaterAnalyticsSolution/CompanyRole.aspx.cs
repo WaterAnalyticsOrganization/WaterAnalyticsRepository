@@ -307,7 +307,7 @@ namespace WaterAnalyticsSolution
                     }
 
                     chartQuantvsTimeLocs.Titles.Clear();
-                    chartQuantvsTimeLocs.Titles.Add("Water Consumption Data");
+                    chartQuantvsTimeLocs.Titles.Add("Water Consumption Per Person Data");
                     chartQuantvsTimeLocs.ChartAreas[0].AxisX.Title = "Date";
                     chartQuantvsTimeLocs.ChartAreas[0].AxisX.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
                     chartQuantvsTimeLocs.ChartAreas[0].AxisX.TitleAlignment = StringAlignment.Center;
@@ -374,7 +374,7 @@ namespace WaterAnalyticsSolution
 
                 }
                 chartGroundvsUsage.Titles.Clear();
-                chartGroundvsUsage.Titles.Add("Water Consumption Data");
+                chartGroundvsUsage.Titles.Add("Ground Water &  Consumption Data Comparison");
                 chartGroundvsUsage.ChartAreas[0].AxisX.Title = "Date";
                 chartGroundvsUsage.ChartAreas[0].AxisX.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
                 chartGroundvsUsage.ChartAreas[0].AxisX.TitleAlignment = StringAlignment.Center;

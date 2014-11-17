@@ -181,7 +181,7 @@ namespace WaterAnalyticsSolution
                 quantperpersonvsTime.Series[0].ChartType = SeriesChartType.Line;
 
                 quantperpersonvsTime.Titles.Clear();
-                quantperpersonvsTime.Titles.Add("Water Consumption Data");
+                quantperpersonvsTime.Titles.Add("Water Consumption Per Person Data");
 
                 quantperpersonvsTime.Series[0].ChartType = System.Web.UI.DataVisualization.Charting.SeriesChartType.Line;
                 quantperpersonvsTime.ChartAreas[0].AxisX.Title = "Date";
@@ -190,7 +190,7 @@ namespace WaterAnalyticsSolution
                 quantperpersonvsTime.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
 
 
-                quantperpersonvsTime.ChartAreas[0].AxisY.Title = "Quantity (Lts)";
+                quantperpersonvsTime.ChartAreas[0].AxisY.Title = "Quantity Per Person (Lts)";
                 quantperpersonvsTime.ChartAreas[0].AxisY.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
                 quantperpersonvsTime.ChartAreas[0].AxisY.TitleAlignment = StringAlignment.Center;
                 quantperpersonvsTime.ChartAreas[0].AxisY.TextOrientation = TextOrientation.Rotated270;
