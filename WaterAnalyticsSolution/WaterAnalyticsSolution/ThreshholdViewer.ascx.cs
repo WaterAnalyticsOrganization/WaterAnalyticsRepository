@@ -10,17 +10,20 @@ namespace WaterAnalyticsSolution
     public partial class ThreshholdViewer : System.Web.UI.UserControl
     {
         public event EventHandler btnEditClickHandler;
-        public string txtUpdater = "Edit";
-        public bool isEditable;
+      
+
+        protected void Page_Init(object sender, EventArgs e)
+        {
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
-            btnUpdate.Text = txtUpdater;
-            txtThreshhold.ReadOnly = isEditable;
+           
         }
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
             btnEditClickHandler(sender, e);
+            
         }
     }
 }

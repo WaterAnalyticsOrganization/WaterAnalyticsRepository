@@ -9,7 +9,7 @@
 </asp:TextBox>
 </td>
 <td>
-<asp:Button runat="server" id="btnUpdate" Text="Edit" Width="40px" 
+<asp:Button runat="server" id="btnUpdate" Text="Update" Width="80px" 
         onclick="btnUpdate_Click" />
 </td>
 </tr>

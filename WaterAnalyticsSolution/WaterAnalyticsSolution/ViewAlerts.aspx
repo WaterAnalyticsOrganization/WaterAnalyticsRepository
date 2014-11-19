@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewAlerts.aspx.cs" Inherits="WaterAnalyticsSolution.ViewAlerts"  MasterPageFile="~/Site1.Master" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewAlerts.aspx.cs" Async="true" Inherits="WaterAnalyticsSolution.ViewAlerts"  MasterPageFile="~/Site1.Master" %>
 <%@ Register Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" tagPrefix="ajax" %>
 <%@ Register Src="~/ChartFilter.ascx" TagName="chartfilter" TagPrefix="filter" %>
 <%@ Register Src="~/ThreshholdViewer.ascx" TagName="threshholdviewer" TagPrefix="threshhold" %>
@@ -25,8 +25,13 @@
     </td>
     <tr>
     <td colspan="3">
-    <asp:GridView runat="server" ID="grdAlerts" HeaderStyle-Font-Bold="true" AutoGenerateColumns="true">
-    
+    <asp:GridView runat="server" ID="grdAlerts" HeaderStyle-Font-Bold="true" AutoGenerateColumns="false">
+     <Columns>
+    <asp:BoundField DataField="UserId" HeaderText="User Id" />
+    <asp:BoundField DataField="Name" HeaderText="Name" />
+    <asp:BoundField DataField="LocationName" HeaderText="Location" />
+    <asp:BoundField DataField="DefaultedCount" HeaderText="Defaulted Count" />
+    </Columns>
     </asp:GridView>
     </td>
     </tr>
