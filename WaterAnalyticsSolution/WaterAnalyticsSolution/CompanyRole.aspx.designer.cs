@@ -31,6 +31,15 @@ namespace WaterAnalyticsSolution {
         protected global::System.Web.UI.UpdatePanel updPanel;
         
         /// <summary>
+        /// lnkViewAlerts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkViewAlerts;
+        
+        /// <summary>
         /// filterQuantByTime control.
         /// </summary>
         /// <remarks>

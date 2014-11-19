@@ -74,6 +74,7 @@
     <Content Include="Styles\InputStyle.css" />
     <Content Include="Global.asax" />
     <Content Include="UserRegisteration.ascx" />
+    <Content Include="ViewAlerts.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -147,6 +148,13 @@
     </Compile>
     <Compile Include="UserRegisteration.ascx.designer.cs">
       <DependentUpon>UserRegisteration.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewAlerts.aspx.cs">
+      <DependentUpon>ViewAlerts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewAlerts.aspx.designer.cs">
+      <DependentUpon>ViewAlerts.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

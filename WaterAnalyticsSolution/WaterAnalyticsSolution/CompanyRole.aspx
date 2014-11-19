@@ -11,6 +11,11 @@
 <asp:UpdatePanel ID="updPanel" runat="server">
     <ContentTemplate>
     <table style="width:980px; background-color:#F4FFFF;">
+    <tr>
+     <td  style="text-align:left; width:980px;">
+     <asp:LinkButton runat="server" Text="View Alerts" ID="lnkViewAlerts" onclick="lnkViewAlerts_Click"></asp:LinkButton>
+     </td>
+    </tr>
 <tr>
 <td>
 <filter:chartfilter ID="filterQuantByTime" runat="server" />

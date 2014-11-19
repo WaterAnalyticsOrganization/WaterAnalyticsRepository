@@ -22,7 +22,7 @@ namespace WaterAnalyticsSolution
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            txtStartDate.Text = DateTime.Today.ToShortDateString();
+            txtStartDate.Text = DateTime.Today.AddDays(-10).ToShortDateString();
             txtEndDate.Text = DateTime.Today.ToShortDateString();
 
         }
@@ -60,7 +60,7 @@ namespace WaterAnalyticsSolution
                     ddlXValue.DataSource = Helper.GetXValues();
                     ddlXValue.DataTextField = "Text";
                     ddlXValue.DataValueField = "Value";
-                    ddlXValue.SelectedIndex = 0;
+                    ddlXValue.SelectedIndex = 1;
                     ddlXValue.DataBind();
                 }
             }

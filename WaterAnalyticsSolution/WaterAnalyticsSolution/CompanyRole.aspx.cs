@@ -43,7 +43,7 @@ namespace WaterAnalyticsSolution
             ddlEndYear.DataSource = Helper.GetYear();
             ddlEndYear.DataBind();
             ddlEndYear.SelectedIndex = Helper.GetYear().Count - 1 ;
-            txtStartDate.Text = DateTime.Today.ToShortDateString();
+            txtStartDate.Text = DateTime.Today.AddDays(-10).ToShortDateString();
             txtEndDate.Text = DateTime.Today.ToShortDateString();
             WaterAnalyticsClient client = new WaterAnalyticsClient();
             ddlLocation.DataSource = client.GetAllLocation();
@@ -493,6 +493,20 @@ namespace WaterAnalyticsSolution
             isGroundFetch = false;
             lstSeriesChart3.Clear();
             ChartGroundWaterAndUsageBinding();
+        }
+
+        protected void lnkViewAlerts_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Response.Redirect("~/ViewAlerts.aspx");
+
+            }
+            catch (Exception ex)
+            {
+                ErrorHandler.WriteError(ex.Message);
+            
+            }
         }
 
 
