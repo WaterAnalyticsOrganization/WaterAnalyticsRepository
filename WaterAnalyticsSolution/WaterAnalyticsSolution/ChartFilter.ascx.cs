@@ -15,6 +15,7 @@ namespace WaterAnalyticsSolution
         public Unit Width;
         public event EventHandler btnFetchClickHandler;
         public bool isLocationVisible;
+        public bool isXAxisVisible;
 
         #endregion
 
@@ -24,6 +25,7 @@ namespace WaterAnalyticsSolution
         {
             txtStartDate.Text = DateTime.Today.AddDays(-10).ToShortDateString();
             txtEndDate.Text = DateTime.Today.ToShortDateString();
+            isXAxisVisible = true;
 
         }
         protected void Page_Load(object sender, EventArgs e)
@@ -39,6 +41,8 @@ namespace WaterAnalyticsSolution
                         chkList.Visible = isLocationVisible;
                         Label2.Visible = isLocationVisible;
                         pnlLoc.Visible = isLocationVisible;
+                        ddlXValue.Visible = isXAxisVisible;
+                        lblXAxis.Visible = isXAxisVisible;
                         if (isLocationVisible)
                         {
                             WaterAnalyticsClient client = new WaterAnalyticsClient();
