@@ -10,51 +10,33 @@
 namespace WaterAnalyticsSolution {
     
     
-    public partial class ViewAlerts {
+    public partial class ThreshholdViewer {
         
         /// <summary>
-        /// toolkit1 control.
+        /// lblLimit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.ToolkitScriptManager toolkit1;
+        protected global::System.Web.UI.WebControls.Label lblLimit;
         
         /// <summary>
-        /// updPanel control.
+        /// txtThreshhold control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updPanel;
+        protected global::System.Web.UI.WebControls.TextBox txtThreshhold;
         
         /// <summary>
-        /// filterForAlerts control.
+        /// btnUpdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::WaterAnalyticsSolution.ChartFilter filterForAlerts;
-        
-        /// <summary>
-        /// threshhold control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::WaterAnalyticsSolution.ThreshholdViewer threshhold;
-        
-        /// <summary>
-        /// grdAlerts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdAlerts;
+        protected global::System.Web.UI.WebControls.Button btnUpdate;
     }
 }
