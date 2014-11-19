@@ -423,6 +423,87 @@ namespace WaterAnalyticsService
             }
         }
     }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AlertObject", Namespace="http://schemas.datacontract.org/2004/07/WaterAnalyticsService")]
+    public partial class AlertObject : object, System.Runtime.Serialization.IExtensibleDataObject
+    {
+        
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private int DefaultedCountField;
+        
+        private string LocationNameField;
+        
+        private string NameField;
+        
+        private int UserIdField;
+        
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
+                return this.extensionDataField;
+            }
+            set
+            {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DefaultedCount
+        {
+            get
+            {
+                return this.DefaultedCountField;
+            }
+            set
+            {
+                this.DefaultedCountField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LocationName
+        {
+            get
+            {
+                return this.LocationNameField;
+            }
+            set
+            {
+                this.LocationNameField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name
+        {
+            get
+            {
+                return this.NameField;
+            }
+            set
+            {
+                this.NameField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserId
+        {
+            get
+            {
+                return this.UserIdField;
+            }
+            set
+            {
+                this.UserIdField = value;
+            }
+        }
+    }
 }
 
 
@@ -510,6 +591,30 @@ public interface IWaterAnalytics
     System.IAsyncResult BeginGetGroundWaterByLocation(string Location, int from, int to, System.AsyncCallback callback, object asyncState);
     
     WaterAnalyticsService.GroundWaterDetail[] EndGetGroundWaterByLocation(System.IAsyncResult result);
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWaterAnalytics/GetDefaultedUsers", ReplyAction="http://tempuri.org/IWaterAnalytics/GetDefaultedUsersResponse")]
+    WaterAnalyticsService.AlertObject[] GetDefaultedUsers(string Location, System.DateTime from, System.DateTime to);
+    
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IWaterAnalytics/GetDefaultedUsers", ReplyAction="http://tempuri.org/IWaterAnalytics/GetDefaultedUsersResponse")]
+    System.IAsyncResult BeginGetDefaultedUsers(string Location, System.DateTime from, System.DateTime to, System.AsyncCallback callback, object asyncState);
+    
+    WaterAnalyticsService.AlertObject[] EndGetDefaultedUsers(System.IAsyncResult result);
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWaterAnalytics/GetWaterLimit", ReplyAction="http://tempuri.org/IWaterAnalytics/GetWaterLimitResponse")]
+    decimal GetWaterLimit();
+    
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IWaterAnalytics/GetWaterLimit", ReplyAction="http://tempuri.org/IWaterAnalytics/GetWaterLimitResponse")]
+    System.IAsyncResult BeginGetWaterLimit(System.AsyncCallback callback, object asyncState);
+    
+    decimal EndGetWaterLimit(System.IAsyncResult result);
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWaterAnalytics/UpdateWaterLimit", ReplyAction="http://tempuri.org/IWaterAnalytics/UpdateWaterLimitResponse")]
+    int UpdateWaterLimit(decimal limit);
+    
+    [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IWaterAnalytics/UpdateWaterLimit", ReplyAction="http://tempuri.org/IWaterAnalytics/UpdateWaterLimitResponse")]
+    System.IAsyncResult BeginUpdateWaterLimit(decimal limit, System.AsyncCallback callback, object asyncState);
+    
+    int EndUpdateWaterLimit(System.IAsyncResult result);
 }
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -749,6 +854,75 @@ public partial class GetGroundWaterByLocationCompletedEventArgs : System.Compone
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+public partial class GetDefaultedUsersCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+    
+    private object[] results;
+    
+    public GetDefaultedUsersCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+            base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+    
+    public WaterAnalyticsService.AlertObject[] Result
+    {
+        get
+        {
+            base.RaiseExceptionIfNecessary();
+            return ((WaterAnalyticsService.AlertObject[])(this.results[0]));
+        }
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+public partial class GetWaterLimitCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+    
+    private object[] results;
+    
+    public GetWaterLimitCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+            base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+    
+    public decimal Result
+    {
+        get
+        {
+            base.RaiseExceptionIfNecessary();
+            return ((decimal)(this.results[0]));
+        }
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+public partial class UpdateWaterLimitCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+{
+    
+    private object[] results;
+    
+    public UpdateWaterLimitCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+            base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+    
+    public int Result
+    {
+        get
+        {
+            base.RaiseExceptionIfNecessary();
+            return ((int)(this.results[0]));
+        }
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
 public partial class WaterAnalyticsClient : System.ServiceModel.ClientBase<IWaterAnalytics>, IWaterAnalytics
 {
     
@@ -812,6 +986,24 @@ public partial class WaterAnalyticsClient : System.ServiceModel.ClientBase<IWate
     
     private System.Threading.SendOrPostCallback onGetGroundWaterByLocationCompletedDelegate;
     
+    private BeginOperationDelegate onBeginGetDefaultedUsersDelegate;
+    
+    private EndOperationDelegate onEndGetDefaultedUsersDelegate;
+    
+    private System.Threading.SendOrPostCallback onGetDefaultedUsersCompletedDelegate;
+    
+    private BeginOperationDelegate onBeginGetWaterLimitDelegate;
+    
+    private EndOperationDelegate onEndGetWaterLimitDelegate;
+    
+    private System.Threading.SendOrPostCallback onGetWaterLimitCompletedDelegate;
+    
+    private BeginOperationDelegate onBeginUpdateWaterLimitDelegate;
+    
+    private EndOperationDelegate onEndUpdateWaterLimitDelegate;
+    
+    private System.Threading.SendOrPostCallback onUpdateWaterLimitCompletedDelegate;
+    
     public WaterAnalyticsClient()
     {
     }
@@ -855,6 +1047,12 @@ public partial class WaterAnalyticsClient : System.ServiceModel.ClientBase<IWate
     public event System.EventHandler<GetDataByZoneCompletedEventArgs> GetDataByZoneCompleted;
     
     public event System.EventHandler<GetGroundWaterByLocationCompletedEventArgs> GetGroundWaterByLocationCompleted;
+    
+    public event System.EventHandler<GetDefaultedUsersCompletedEventArgs> GetDefaultedUsersCompleted;
+    
+    public event System.EventHandler<GetWaterLimitCompletedEventArgs> GetWaterLimitCompleted;
+    
+    public event System.EventHandler<UpdateWaterLimitCompletedEventArgs> UpdateWaterLimitCompleted;
     
     public int IsAuthenticated(int userId, string password)
     {
@@ -1510,5 +1708,193 @@ public partial class WaterAnalyticsClient : System.ServiceModel.ClientBase<IWate
                     Location,
                     from,
                     to}, this.onEndGetGroundWaterByLocationDelegate, this.onGetGroundWaterByLocationCompletedDelegate, userState);
+    }
+    
+    public WaterAnalyticsService.AlertObject[] GetDefaultedUsers(string Location, System.DateTime from, System.DateTime to)
+    {
+        return base.Channel.GetDefaultedUsers(Location, from, to);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    public System.IAsyncResult BeginGetDefaultedUsers(string Location, System.DateTime from, System.DateTime to, System.AsyncCallback callback, object asyncState)
+    {
+        return base.Channel.BeginGetDefaultedUsers(Location, from, to, callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    public WaterAnalyticsService.AlertObject[] EndGetDefaultedUsers(System.IAsyncResult result)
+    {
+        return base.Channel.EndGetDefaultedUsers(result);
+    }
+    
+    private System.IAsyncResult OnBeginGetDefaultedUsers(object[] inValues, System.AsyncCallback callback, object asyncState)
+    {
+        string Location = ((string)(inValues[0]));
+        System.DateTime from = ((System.DateTime)(inValues[1]));
+        System.DateTime to = ((System.DateTime)(inValues[2]));
+        return this.BeginGetDefaultedUsers(Location, from, to, callback, asyncState);
+    }
+    
+    private object[] OnEndGetDefaultedUsers(System.IAsyncResult result)
+    {
+        WaterAnalyticsService.AlertObject[] retVal = this.EndGetDefaultedUsers(result);
+        return new object[] {
+                retVal};
+    }
+    
+    private void OnGetDefaultedUsersCompleted(object state)
+    {
+        if ((this.GetDefaultedUsersCompleted != null))
+        {
+            InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+            this.GetDefaultedUsersCompleted(this, new GetDefaultedUsersCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+        }
+    }
+    
+    public void GetDefaultedUsersAsync(string Location, System.DateTime from, System.DateTime to)
+    {
+        this.GetDefaultedUsersAsync(Location, from, to, null);
+    }
+    
+    public void GetDefaultedUsersAsync(string Location, System.DateTime from, System.DateTime to, object userState)
+    {
+        if ((this.onBeginGetDefaultedUsersDelegate == null))
+        {
+            this.onBeginGetDefaultedUsersDelegate = new BeginOperationDelegate(this.OnBeginGetDefaultedUsers);
+        }
+        if ((this.onEndGetDefaultedUsersDelegate == null))
+        {
+            this.onEndGetDefaultedUsersDelegate = new EndOperationDelegate(this.OnEndGetDefaultedUsers);
+        }
+        if ((this.onGetDefaultedUsersCompletedDelegate == null))
+        {
+            this.onGetDefaultedUsersCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetDefaultedUsersCompleted);
+        }
+        base.InvokeAsync(this.onBeginGetDefaultedUsersDelegate, new object[] {
+                    Location,
+                    from,
+                    to}, this.onEndGetDefaultedUsersDelegate, this.onGetDefaultedUsersCompletedDelegate, userState);
+    }
+    
+    public decimal GetWaterLimit()
+    {
+        return base.Channel.GetWaterLimit();
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    public System.IAsyncResult BeginGetWaterLimit(System.AsyncCallback callback, object asyncState)
+    {
+        return base.Channel.BeginGetWaterLimit(callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    public decimal EndGetWaterLimit(System.IAsyncResult result)
+    {
+        return base.Channel.EndGetWaterLimit(result);
+    }
+    
+    private System.IAsyncResult OnBeginGetWaterLimit(object[] inValues, System.AsyncCallback callback, object asyncState)
+    {
+        return this.BeginGetWaterLimit(callback, asyncState);
+    }
+    
+    private object[] OnEndGetWaterLimit(System.IAsyncResult result)
+    {
+        decimal retVal = this.EndGetWaterLimit(result);
+        return new object[] {
+                retVal};
+    }
+    
+    private void OnGetWaterLimitCompleted(object state)
+    {
+        if ((this.GetWaterLimitCompleted != null))
+        {
+            InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+            this.GetWaterLimitCompleted(this, new GetWaterLimitCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+        }
+    }
+    
+    public void GetWaterLimitAsync()
+    {
+        this.GetWaterLimitAsync(null);
+    }
+    
+    public void GetWaterLimitAsync(object userState)
+    {
+        if ((this.onBeginGetWaterLimitDelegate == null))
+        {
+            this.onBeginGetWaterLimitDelegate = new BeginOperationDelegate(this.OnBeginGetWaterLimit);
+        }
+        if ((this.onEndGetWaterLimitDelegate == null))
+        {
+            this.onEndGetWaterLimitDelegate = new EndOperationDelegate(this.OnEndGetWaterLimit);
+        }
+        if ((this.onGetWaterLimitCompletedDelegate == null))
+        {
+            this.onGetWaterLimitCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetWaterLimitCompleted);
+        }
+        base.InvokeAsync(this.onBeginGetWaterLimitDelegate, null, this.onEndGetWaterLimitDelegate, this.onGetWaterLimitCompletedDelegate, userState);
+    }
+    
+    public int UpdateWaterLimit(decimal limit)
+    {
+        return base.Channel.UpdateWaterLimit(limit);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    public System.IAsyncResult BeginUpdateWaterLimit(decimal limit, System.AsyncCallback callback, object asyncState)
+    {
+        return base.Channel.BeginUpdateWaterLimit(limit, callback, asyncState);
+    }
+    
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    public int EndUpdateWaterLimit(System.IAsyncResult result)
+    {
+        return base.Channel.EndUpdateWaterLimit(result);
+    }
+    
+    private System.IAsyncResult OnBeginUpdateWaterLimit(object[] inValues, System.AsyncCallback callback, object asyncState)
+    {
+        decimal limit = ((decimal)(inValues[0]));
+        return this.BeginUpdateWaterLimit(limit, callback, asyncState);
+    }
+    
+    private object[] OnEndUpdateWaterLimit(System.IAsyncResult result)
+    {
+        int retVal = this.EndUpdateWaterLimit(result);
+        return new object[] {
+                retVal};
+    }
+    
+    private void OnUpdateWaterLimitCompleted(object state)
+    {
+        if ((this.UpdateWaterLimitCompleted != null))
+        {
+            InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+            this.UpdateWaterLimitCompleted(this, new UpdateWaterLimitCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+        }
+    }
+    
+    public void UpdateWaterLimitAsync(decimal limit)
+    {
+        this.UpdateWaterLimitAsync(limit, null);
+    }
+    
+    public void UpdateWaterLimitAsync(decimal limit, object userState)
+    {
+        if ((this.onBeginUpdateWaterLimitDelegate == null))
+        {
+            this.onBeginUpdateWaterLimitDelegate = new BeginOperationDelegate(this.OnBeginUpdateWaterLimit);
+        }
+        if ((this.onEndUpdateWaterLimitDelegate == null))
+        {
+            this.onEndUpdateWaterLimitDelegate = new EndOperationDelegate(this.OnEndUpdateWaterLimit);
+        }
+        if ((this.onUpdateWaterLimitCompletedDelegate == null))
+        {
+            this.onUpdateWaterLimitCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnUpdateWaterLimitCompleted);
+        }
+        base.InvokeAsync(this.onBeginUpdateWaterLimitDelegate, new object[] {
+                    limit}, this.onEndUpdateWaterLimitDelegate, this.onUpdateWaterLimitCompletedDelegate, userState);
     }
 }

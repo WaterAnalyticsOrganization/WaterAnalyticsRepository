@@ -43,8 +43,91 @@ namespace WaterAnalyticsService
 
          [OperationContract]
          List<GroundWaterDetail> GetGroundWaterByLocation(string Location, int from, int to);
+
+         [OperationContract]
+         List<AlertObject> GetDefaultedUsers(string Location, DateTime from, DateTime to);
+
+         [OperationContract]
+         Decimal GetWaterLimit();
+
+         [OperationContract]
+         int UpdateWaterLimit(Decimal limit);
     }
 
+    [DataContract]
+    public class AlertObject
+    {       
+        int userId;
+        string name;
+        string locationName;       
+        int defaultedCount;
+
+        [DataMember]
+        public int UserId
+        {
+            get { return userId; }
+            set { userId = value; }
+        }
+
+        [DataMember]
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        [DataMember]
+        public string LocationName
+        {
+            get { return locationName; }
+            set { locationName = value; }
+        }       
+
+        [DataMember]
+        public int DefaultedCount
+        {
+            get { return defaultedCount; }
+            set { defaultedCount = value; }
+        }
+    }
+
+    [DataContract]
+    public class ConfigEntry
+    {
+        int  configID;
+        Decimal quantity;
+        String insertUser;
+        DateTime insertTime;       
+
+        [DataMember]
+        public int ConfigID
+        {
+            get { return configID; }
+            set { configID = value; }
+        }
+
+        [DataMember]
+        public Decimal Quantity
+        {
+            get { return quantity; }
+            set { quantity = value; }
+        }
+
+        [DataMember]
+        public String InsertUser
+        {
+            get { return insertUser; }
+            set { insertUser = value; }
+        }
+
+        [DataMember]
+        public DateTime InsertTime
+        {
+            get { return insertTime; }
+            set { insertTime = value; }
+        }
+
+    }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
     [DataContract]

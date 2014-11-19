@@ -32,6 +32,7 @@ namespace WaterAnalyticsService
         List<LocationDetails> locationDetailsList = null;
         List<GroundWaterDetail> groundWaterList = null;
         List<ZoneDetails> zoneDetailsList = null;
+        List<AlertObject> alertObject = null;
 
         #endregion
 
@@ -382,6 +383,96 @@ namespace WaterAnalyticsService
            }
            return zoneDetailsList;
        }
+
+        /// <summary>
+        /// Function to get defaulted users
+        /// </summary>
+        /// <param name="location">Location where data need to be fetched</param>
+        /// <param name="from">From Date</param>
+        /// <param name="to">To Date</param>
+        /// <returns></returns>
+        public List<AlertObject> GetDefaultedUsers(string location, DateTime from, DateTime to)
+        {
+            try
+            {
+                dt = new DataTable();
+                command = new SqlCommand("GetDefaultedUsers", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                if(location !=string.Empty)
+                    command.Parameters.AddWithValue("@location", location);
+                command.Parameters.AddWithValue("@from", from);
+                command.Parameters.AddWithValue("@to", to);
+
+                connection.Open();
+                daDetails = new SqlDataAdapter(command);
+                daDetails.Fill(dt);
+
+                alertObject = (List<AlertObject>)DataFiller.ConvertTo<AlertObject>(dt);
+
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Error in getting defaulted users: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return alertObject;
+        }
+
+        /// <summary>
+        /// Function to get water limit
+        /// </summary>
+        /// <returns>Limit value</returns>
+        public Decimal GetWaterLimit()
+        {
+            Decimal limit = 0;
+            try
+            {               
+                dt = new DataTable();
+                command = new SqlCommand("GetWaterLimit", connection);
+                command.CommandType = CommandType.StoredProcedure;                
+                connection.Open();
+                limit = Convert.ToDecimal(command.ExecuteScalar());               
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Error in getting water limit: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return limit;
+        }
+
+        /// <summary>
+        /// Function to update water limit
+        /// </summary>
+        /// <param name="limit">limit to be updated</param>
+        /// <returns>0 if successful, else non zero</returns>
+        public int UpdateWaterLimit(Decimal limit)
+        {
+            try
+            {
+                dt = new DataTable();
+                command = new SqlCommand("UpdateWaterLimit", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@limit", limit);               
+                connection.Open();
+                result = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException("Error in updating details: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return result;    
+        }
 
         #endregion
 
